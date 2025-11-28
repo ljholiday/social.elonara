@@ -91,7 +91,7 @@ final class ConversationController
         $conversation = $this->conversations->getBySlugOrId($slugOrId);
         $viewerId = (int)($this->auth->currentUserId() ?? 0);
         $context = $this->circles->buildContext($viewerId);
-        $memberCommunities = $context['inner']['communities'] ?? [];
+        $memberCommunities = $this->circles->memberCommunities($viewerId);
 
         if ($conversation === null || !$this->conversations->canViewerAccess($conversation, $viewerId, $memberCommunities)) {
             return [
@@ -356,7 +356,7 @@ final class ConversationController
         }
 
         $context = $this->circles->buildContext($viewerId);
-        $memberCommunities = $context['inner']['communities'] ?? [];
+        $memberCommunities = $this->circles->memberCommunities($viewerId);
         if (!$this->conversations->canViewerAccess($conversation, $viewerId, $memberCommunities)) {
             return [
                 'conversation' => null,

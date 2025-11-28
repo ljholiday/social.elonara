@@ -98,7 +98,7 @@ final class ConversationApiController
         }
 
         $context = $this->circles->buildContext($viewerId);
-        $memberCommunities = $context['inner']['communities'] ?? [];
+        $memberCommunities = $this->circles->memberCommunities($viewerId);
         if (!$this->conversations->canViewerAccess($conversation, $viewerId, $memberCommunities)) {
             return $this->error('Conversation not found', 404);
         }
