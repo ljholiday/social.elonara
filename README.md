@@ -171,6 +171,14 @@ Elonara Social takes security seriously:
 
 - https://github.com/users/ljholiday/projects/17
 
+## Monitoring
+
+- A lightweight checker is available at `scripts/health-check.sh`. It hits `/health`, parses the JSON, and exits non-zero if degraded. Cron example (every 5 minutes, default URL `https://social.elonara.com/health`):
+  ```
+  */5 * * * * HEALTH_URL=https://social.elonara.com/health /usr/bin/env bash /path/to/social.elonara/scripts/health-check.sh
+  ```
+  Cron will email output to the server account on failures; adjust `MAILTO` in crontab if needed.
+
 ## License
 
 This project is open source. See the LICENSE file for details.

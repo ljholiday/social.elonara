@@ -14,6 +14,32 @@ require_once dirname(__DIR__, 2) . '/templates/_helpers.php';
  * @return void
  */
 return static function (Router $router): void {
+    // Health check
+    $router->get('/health', static function (Request $request) {
+        $statusCode = 200;
+        $checks = ['app' => 'ok'];
+
+        try {
+            $db = app_service('database.connection');
+            $db->pdo()->query('SELECT 1');
+            $checks['database'] = 'ok';
+        } catch (\Throwable $e) {
+            error_log('Health check failed: ' . $e->getMessage());
+            $checks['database'] = 'error';
+            $statusCode = 503;
+        }
+
+        http_response_code($statusCode);
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $statusCode === 200 ? 'ok' : 'degraded',
+            'checks' => $checks,
+            'environment' => app_config('environment', 'production'),
+            'timestamp' => gmdate('c'),
+        ]);
+        return true;
+    });
+
     // Auth redirects
     $router->any('/login', static function (Request $request) {
         header('Location: /auth');
