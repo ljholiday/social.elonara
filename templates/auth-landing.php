@@ -46,6 +46,13 @@ $invitation = $invitation ?? null;
       <div class="app-card<?php echo $active === 'login' ? ' is-active' : ''; ?>">
         <div class="app-card-header">
           <h1 class="app-heading">Sign in to <?php echo e($appName); ?></h1>
+
+    <div class="app-text-muted app-text-sm">
+        <a target="_blank" href="https://elonara.com">About</a> -- 
+        <a target="_blank"  href="https://elonara.com/privacy-policy">Privacy</a> -- 
+        <a target="_blank" href="https://elonara.com/contact-elonara/">Contact</a>
+    </div>
+
           <p class="app-text-muted">Access your dashboard, events, and conversations.</p>
         </div>
         <div class="app-card-body">

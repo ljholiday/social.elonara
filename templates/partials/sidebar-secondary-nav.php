@@ -59,7 +59,9 @@ $is_logged_in = $viewer !== null;
     </div>
 
     <div class="app-text-muted app-text-sm app-text-center">
-        <a target="_blank" href="https://elonara.com/weblog">Info</a> -- <a target="_blank"  href="https://elonara.com/privacy-policy">Privacy</a> -- <a target="_blank" href="https://elonara.com/contact-elonara/">Contact</a>
+        <a target="_blank" href="https://elonara.com/weblog">Info</a> -- 
+        <a target="_blank"  href="https://elonara.com/privacy-policy">Privacy</a> -- 
+        <a target="_blank" href="https://elonara.com/contact-elonara/">Contact</a>
     </div>
 
     <?php if ($is_logged_in): ?>
