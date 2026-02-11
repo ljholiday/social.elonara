@@ -14,8 +14,8 @@ $pageTitle = 'Set New Password';
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/auth.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
 <body>
-    <div class="app-auth-container">
-        <div class="app-auth-card">
+    <div >
+        <div >
             <h1>Set New Password</h1>
             <p>Please enter your new password below.</p>
 
@@ -41,7 +41,7 @@ $pageTitle = 'Set New Password';
                            minlength="8" required>
                 </div>
 
-                <div class="app-auth-actions">
+                <div >
                     <button type="submit" class="app-btn app-btn-primary">Reset Password</button>
                 </div>
             </form>

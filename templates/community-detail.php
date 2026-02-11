@@ -3,7 +3,7 @@
 $viewer = $viewer ?? ['id' => 0, 'is_member' => false, 'is_creator' => false];
 $status = $status ?? (empty($community) ? 404 : 200);
 ?>
-<section class="app-section app-community-detail">
+<section class="app-section">
   <?php if ($status === 404 || empty($community)): ?>
     <h1 class="app-heading">Community not found</h1>
     <p class="app-text-muted">We couldn't find that community or you do not have access.</p>
@@ -35,7 +35,7 @@ $status = $status ?? (empty($community) ? 404 : 200);
           </span>
         <?php endif; ?>
       </h1>
-      <div class="app-sub">
+      <div >
         <?php
         $bits = [];
         if ($privacy !== '') {
@@ -48,20 +48,20 @@ $status = $status ?? (empty($community) ? 404 : 200);
         ?>
       </div>
       <?php if ($viewer['is_creator'] ?? false): ?>
-        <p class="app-text-accent app-mt-2">You created this community.</p>
+        <p >You created this community.</p>
       <?php elseif ($viewer['is_member'] ?? false): ?>
-        <p class="app-alert app-alert-success app-mt-2">
+        <p class="app-alert app-alert-success">
           Welcome back! You now have full access to this community.
         </p>
       <?php elseif ($privacy === 'public'): ?>
-        <p class="app-text-muted app-mt-2">You can view this community because it is public.</p>
+        <p class="app-text-muted">You can view this community because it is public.</p>
       <?php else: ?>
-        <p class="app-text-muted app-mt-2">You are viewing this community as a guest.</p>
+        <p class="app-text-muted">You are viewing this community as a guest.</p>
       <?php endif; ?>
     </header>
 
     <?php if (!empty($c->description)): ?>
-      <p class="app-body"><?= e($c->description) ?></p>
+      <p ><?= e($c->description) ?></p>
     <?php endif; ?>
 
     <?php

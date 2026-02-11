@@ -14,8 +14,8 @@ $pageTitle = 'Verification Failed';
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/auth.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
 <body>
-    <div class="app-auth-container">
-        <div class="app-auth-card">
+    <div >
+        <div >
             <h1>Email Verification Failed</h1>
             <div class="app-alert app-alert-error">
                 <?php if (!empty($errors)): ?>
@@ -26,7 +26,7 @@ $pageTitle = 'Verification Failed';
                     <p>This verification link is invalid or has expired.</p>
                 <?php endif; ?>
             </div>
-            <div class="app-auth-actions">
+            <div >
                 <a href="/auth" class="app-btn app-btn-primary">Go to Login</a>
             </div>
         </div>

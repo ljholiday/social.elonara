@@ -48,7 +48,7 @@ $shouldAutoOpen = $reply_errors !== [];
           <input type="hidden" id="reply-id" name="reply_id" value="">
           <div id="existing-image-preview" style="display: none;" class="app-form-group">
             <label class="app-form-label">Current Image</label>
-            <div class="app-reply-current-image">
+            <div >
               <img id="existing-image" src="" alt="" style="max-width: 200px; height: auto; border-radius: 4px;">
               <p id="existing-image-alt" class="app-text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;"></p>
             </div>

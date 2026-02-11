@@ -35,9 +35,9 @@ $csrf_token = $security->createNonce('app_nonce');
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/app.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
-<body class="app-body app-guest">
+<body >
 
-<div class="app-layout-guest">
+<div >
     <main class="app-main" role="main">
         <?= $content; ?>
     </main>

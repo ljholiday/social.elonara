@@ -15,7 +15,7 @@ $input = $input ?? [];
 
 <section class="app-section">
   <?php if ($u): ?>
-    <h1 class="app-heading app-mb-6">Edit Profile</h1>
+    <h1 class="app-heading">Edit Profile</h1>
 
     <div id="profile-success"></div>
 
@@ -31,13 +31,13 @@ $input = $input ?? [];
       <?php endif; ?>
     </div>
 
-    <form method="post" action="/profile/update" class="app-form app-stack" enctype="multipart/form-data" id="profile-edit-form">
+    <form method="post" action="/profile/update" class="app-form" enctype="multipart/form-data" id="profile-edit-form">
       <?php if (function_exists('app_service')): ?>
         <?php echo app_service('security.service')->nonceField('app_profile_update', 'profile_nonce'); ?>
       <?php endif; ?>
 
-      <div class="app-field">
-        <label class="app-label" for="display-name">Display Name</label>
+      <div >
+        <label  for="display-name">Display Name</label>
         <input
           type="text"
           class="app-input<?= isset($errors['display_name']) ? ' is-invalid' : '' ?>"
@@ -48,14 +48,14 @@ $input = $input ?? [];
           minlength="2"
           maxlength="100"
         >
-        <small class="app-help-text">How you want to be displayed across the site. Between 2-100 characters.</small>
+        <small >How you want to be displayed across the site. Between 2-100 characters.</small>
         <?php if (isset($errors['display_name'])): ?>
           <div class="app-field-error"><?= e($errors['display_name']) ?></div>
         <?php endif; ?>
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="bio">Bio</label>
+      <div >
+        <label  for="bio">Bio</label>
         <textarea
           class="app-textarea<?= isset($errors['bio']) ? ' is-invalid' : '' ?>"
           id="bio"
@@ -63,17 +63,17 @@ $input = $input ?? [];
           rows="4"
           maxlength="500"
         ><?= e($input['bio'] ?? '') ?></textarea>
-        <small class="app-help-text">Tell us about yourself. Maximum 500 characters.</small>
+        <small >Tell us about yourself. Maximum 500 characters.</small>
         <?php if (isset($errors['bio'])): ?>
           <div class="app-field-error"><?= e($errors['bio']) ?></div>
         <?php endif; ?>
       </div>
 
-      <div class="app-field">
-        <label class="app-label">Avatar Source</label>
-        <div class="app-radio-group app-mb-3">
+      <div >
+        <label >Avatar Source</label>
+        <div >
           <?php $avatarPref = $u->avatar_preference ?? 'auto'; ?>
-          <label class="app-radio-label">
+          <label >
             <input
               type="radio"
               name="avatar_preference"
@@ -82,7 +82,7 @@ $input = $input ?? [];
             >
             <span>Auto (use custom if available, otherwise Gravatar)</span>
           </label>
-          <label class="app-radio-label">
+          <label >
             <input
               type="radio"
               name="avatar_preference"
@@ -91,7 +91,7 @@ $input = $input ?? [];
             >
             <span>Custom avatar only</span>
           </label>
-          <label class="app-radio-label">
+          <label >
             <input
               type="radio"
               name="avatar_preference"
@@ -103,16 +103,16 @@ $input = $input ?? [];
         </div>
       </div>
 
-      <div class="app-field">
-        <label class="app-label">Avatar Image</label>
-        <div class="app-mb-3" id="avatar-preview-container">
+      <div >
+        <label >Avatar Image</label>
+        <div  id="avatar-preview-container">
           <?php if (!empty($u->avatar_url)): ?>
             <?php
               $avatarUrl = getImageUrl($u->avatar_url, 'medium', 'original');
               if ($avatarUrl):
             ?>
               <img src="<?= e($avatarUrl) ?>" alt="Current avatar" class="app-avatar app-avatar-lg" id="avatar-preview">
-              <div class="app-text-muted app-mt-1">Current avatar</div>
+              <div class="app-text-muted">Current avatar</div>
             <?php else: ?>
               <div class="app-avatar app-avatar-lg app-avatar-placeholder" id="avatar-preview">
                 <?= strtoupper(substr($u->display_name ?? $u->username ?? 'U', 0, 1)) ?>
@@ -129,7 +129,7 @@ $input = $input ?? [];
         </button>
         <input type="hidden" id="avatar-alt" name="avatar_alt" value="<?= e($input['avatar_alt'] ?? '') ?>">
         <input type="hidden" id="avatar-url" name="avatar_url_uploaded" value="">
-        <small class="app-help-text" style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library.</small>
+        <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library.</small>
         <?php if (isset($errors['avatar'])): ?>
           <div class="app-field-error"><?= e($errors['avatar']) ?></div>
         <?php endif; ?>
@@ -138,16 +138,16 @@ $input = $input ?? [];
         <?php endif; ?>
       </div>
 
-      <div class="app-field">
-        <label class="app-label">Cover Image</label>
-        <div class="app-mb-3" id="cover-preview-container">
+      <div >
+        <label >Cover Image</label>
+        <div  id="cover-preview-container">
           <?php if (!empty($u->cover_url)): ?>
             <?php
               $coverUrl = getImageUrl($u->cover_url, 'tablet', 'original');
               if ($coverUrl):
             ?>
               <img src="<?= e($coverUrl) ?>" alt="<?= e($u->cover_alt ?? 'Current cover') ?>" class="app-img" style="max-width: 400px;" id="cover-preview">
-              <div class="app-text-muted app-mt-1">Current cover image</div>
+              <div class="app-text-muted">Current cover image</div>
             <?php endif; ?>
           <?php else: ?>
             <img src="" alt="Cover preview" class="app-img" style="max-width: 400px; display: none;" id="cover-preview">
@@ -158,7 +158,7 @@ $input = $input ?? [];
         </button>
         <input type="hidden" id="cover-alt" name="cover_alt" value="<?= e($input['cover_alt'] ?? '') ?>">
         <input type="hidden" id="cover-url" name="cover_url_uploaded" value="">
-        <small class="app-help-text" style="display: block; margin-top: 0.5rem;">Click to upload a cover image or choose from your library. Recommended size: 1200x400px.</small>
+        <small  style="display: block; margin-top: 0.5rem;">Click to upload a cover image or choose from your library. Recommended size: 1200x400px.</small>
         <?php if (isset($errors['cover'])): ?>
           <div class="app-field-error"><?= e($errors['cover']) ?></div>
         <?php endif; ?>
@@ -167,13 +167,13 @@ $input = $input ?? [];
         <?php endif; ?>
       </div>
 
-      <div class="app-actions">
+      <div >
         <button type="submit" class="app-btn app-btn-primary">Save Changes</button>
         <a href="/profile/<?= e($u->username) ?>" class="app-btn app-btn-secondary">Cancel</a>
       </div>
     </form>
 
-    <hr class="app-divider app-my-6">
+    <hr class="app-divider">
 
     <?php
     // Check if Bluesky is connected
@@ -224,22 +224,22 @@ $input = $input ?? [];
 
       <?php if ($oauthEnabled): ?>
         <div class="app-card app-mb-4">
-          <div class="app-card-body app-flex app-flex-column app-gap-3">
-            <div class="app-flex app-justify-between app-items-center">
+          <div class="app-card-body app-flex app-flex-column">
+            <div class="app-flex">
               <div>
                 <div class="app-text-muted app-text-sm">OAuth Status</div>
                 <?php if ($oauthStatus['connected'] ?? false): ?>
-                  <div class="app-text-lg app-font-semibold">@<?= e($oauthStatus['handle'] ?? $credentials['handle'] ?? 'unknown') ?></div>
+                  <div class="app-text-lg">@<?= e($oauthStatus['handle'] ?? $credentials['handle'] ?? 'unknown') ?></div>
                   <?php if (!empty($oauthStatus['did'])): ?>
                     <div class="app-text-muted app-text-sm">DID: <?= e(substr((string)$oauthStatus['did'], 0, 24)) ?>...</div>
                   <?php endif; ?>
                   <?php if ($oauthStatus['needs_reauth'] ?? false): ?>
-                    <div class="app-alert app-alert-warning app-mt-3">
+                    <div class="app-alert">
                       OAuth token expired. Please reauthorize to continue posting and syncing followers.
                     </div>
                   <?php endif; ?>
                 <?php else: ?>
-                  <div class="app-text-lg app-font-semibold">Not authorized yet</div>
+                  <div class="app-text-lg">Not authorized yet</div>
                   <div class="app-text-muted app-text-sm">Authorize once to unlock verified Bluesky identity.</div>
                 <?php endif; ?>
               </div>
@@ -262,9 +262,9 @@ $input = $input ?? [];
       <?php if ($isConnected && $credentials): ?>
         <div class="app-card app-mb-4">
           <div class="app-card-body">
-            <div class="app-flex app-items-center app-gap-4">
+            <div class="app-flex app-gap-4">
               <div class="app-flex-1">
-                <div class="app-text-success app-mb-2">Connected</div>
+                <div class="app-text-success">Connected</div>
                 <div class="app-text-lg">@<?= e($credentials['handle']) ?></div>
                 <div class="app-text-muted app-text-sm">DID: <?= e(substr($credentials['did'], 0, 20)) ?>...</div>
               </div>
@@ -278,13 +278,13 @@ $input = $input ?? [];
           </div>
         </div>
       <?php else: ?>
-        <form method="post" action="/connect/bluesky" class="app-form app-stack app-card app-card-body">
+        <form method="post" action="/connect/bluesky" class="app-form app-card app-card-body">
           <?php if (function_exists('app_service')): ?>
             <?php echo app_service('security.service')->nonceField('app_nonce', 'nonce'); ?>
           <?php endif; ?>
 
-          <div class="app-field">
-            <label class="app-label" for="bluesky-identifier">Bluesky Handle or Email</label>
+          <div >
+            <label  for="bluesky-identifier">Bluesky Handle or Email</label>
             <input
               type="text"
               class="app-input"
@@ -293,11 +293,11 @@ $input = $input ?? [];
               placeholder="user.bsky.social or email@example.com"
               required
             >
-            <small class="app-help-text">Your Bluesky handle (e.g., user.bsky.social) or the email you use to log in.</small>
+            <small >Your Bluesky handle (e.g., user.bsky.social) or the email you use to log in.</small>
           </div>
 
-          <div class="app-field">
-            <label class="app-label" for="bluesky-password">App Password</label>
+          <div >
+            <label  for="bluesky-password">App Password</label>
             <input
               type="password"
               class="app-input"
@@ -305,19 +305,19 @@ $input = $input ?? [];
               name="password"
               required
             >
-            <small class="app-help-text">
+            <small >
               Create an app password at <a href="https://bsky.app/settings/app-passwords" target="_blank" rel="noopener">bsky.app/settings/app-passwords</a>. Do not use your main account password.
             </small>
           </div>
 
-          <div class="app-actions">
+          <div >
             <button type="submit" class="app-btn app-btn-primary">Connect Bluesky</button>
           </div>
         </form>
       <?php endif; ?>
     </section>
 
-    <hr class="app-divider app-my-6">
+    <hr class="app-divider">
 
     <section class="app-section">
       <h2 class="app-heading app-heading-md app-mb-4">Privacy & Blocking</h2>

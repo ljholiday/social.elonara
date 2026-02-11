@@ -45,12 +45,12 @@ $current_user_id = (int)($currentUser->id ?? 0);
 <!-- Global Image Library Modal -->
 <div
     id="image-library-modal"
-    class="app-modal app-image-library-modal"
+    class="app-modal"
     style="display: none;"
     data-user-id="<?= htmlspecialchars((string)$current_user_id, ENT_QUOTES, 'UTF-8') ?>"
 >
   <div class="app-modal-overlay"></div>
-  <div class="app-modal-content app-image-library-modal-content" style="max-width: 800px; width: 90%;">
+  <div class="app-modal-content" style="max-width: 800px; width: 90%;">
     <div class="app-modal-header">
       <h3 class="app-modal-title">Select Image</h3>
       <button type="button" class="app-btn app-btn-sm" data-dismiss-modal>&times;</button>
@@ -68,7 +68,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
 
     <div class="app-modal-body" style="min-height: 400px;">
       <!-- Upload Tab -->
-      <div class="app-tab-content" id="tab-upload" style="padding: 2rem;">
+      <div  id="tab-upload" style="padding: 2rem;">
         <div class="app-upload-area" style="border: 2px dashed #d1d5db; border-radius: 8px; padding: 3rem; text-align: center; background: #f9fafb;">
           <input
             type="file"
@@ -89,8 +89,8 @@ $current_user_id = (int)($currentUser->id ?? 0);
           <!-- Upload Preview -->
           <div class="app-upload-preview" style="display: none; margin-top: 2rem;">
             <img id="upload-preview-img" src="" alt="" style="max-width: 100%; max-height: 300px; border-radius: 8px; margin-bottom: 1rem;">
-            <div class="app-field">
-              <label class="app-label" for="upload-alt-text">Image description (required)</label>
+            <div >
+              <label  for="upload-alt-text">Image description (required)</label>
               <input
                 type="text"
                 class="app-input"
@@ -109,7 +109,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
       </div>
 
       <!-- Library Tab -->
-      <div class="app-tab-content" id="tab-library" style="display: none; padding: 2rem;">
+      <div  id="tab-library" style="display: none; padding: 2rem;">
         <div class="app-image-library-loading" style="display: none; text-align: center; padding: 2rem;">
           <p>Loading your images...</p>
         </div>
@@ -118,7 +118,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
           <p class="app-text-muted app-text-sm">Switch to the Upload tab to add images to your library.</p>
         </div>
         <div class="app-image-library-error" style="display: none; text-align: center; padding: 2rem;">
-          <p class="app-text-danger">Failed to load images. Please try again.</p>
+          <p >Failed to load images. Please try again.</p>
         </div>
         <div class="app-image-library-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
           <!-- Thumbnails will be loaded here by JavaScript -->

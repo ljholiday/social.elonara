@@ -36,7 +36,7 @@ $conversations = $conversations ?? [];
         <p class="app-text-muted">No conversations in this community yet.</p>
       </div>
     <?php else: ?>
-      <div class="app-stack app-mt-4">
+      <div class="app-mt-4">
         <?php foreach ($conversations as $conversation): $c = (object)$conversation; ?>
           <article class="app-card">
             <h3 class="app-heading-sm">

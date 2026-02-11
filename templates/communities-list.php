@@ -4,7 +4,7 @@
 
 $circle = $circle ?? 'all';
 ?>
-<section class="app-section app-communities">
+<section class="app-section">
   <h1 class="app-heading">Communities</h1>
 
   <?php
@@ -16,7 +16,7 @@ $circle = $circle ?? 'all';
   ?>
 
   <?php if (!empty($communities)) : ?>
-    <div class="app-grid app-communities-grid">
+    <div class="app-grid">
       <?php foreach ($communities as $row):
         $slug = $row['slug'] ?? (string)($row['id'] ?? '');
         $privacy = strtolower((string)($row['privacy'] ?? 'public'));
@@ -70,12 +70,12 @@ $circle = $circle ?? 'all';
     </div>
   <?php else: ?>
     <div class="app-card">
-      <div class="app-card-body app-text-center app-stack app-gap-3">
+      <div class="app-card-body app-text-center">
         <p class="app-text-muted">No communities found. Discover communities others have created or start your own!</p>
-        <div class="app-flex app-gap-2 app-justify-center app-flex-wrap">
+        <div class="app-flex app-flex-wrap">
           <a class="app-btn app-btn-primary" href="/communities/create">Create Community</a>
           <?php if ($circle !== 'all'): ?>
-            <a class="app-btn app-btn-outline" href="/communities?circle=all">Browse All Communities</a>
+            <a class="app-btn" href="/communities?circle=all">Browse All Communities</a>
           <?php endif; ?>
         </div>
       </div>

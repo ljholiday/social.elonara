@@ -14,15 +14,15 @@ $pageTitle = 'Reset Password';
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/auth.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
 <body>
-    <div class="app-auth-container">
-        <div class="app-auth-card">
+    <div >
+        <div >
             <h1>Reset Your Password</h1>
 
             <?php if (isset($message)): ?>
                 <div class="app-alert app-alert-success">
                     <?php echo htmlspecialchars($message); ?>
                 </div>
-                <div class="app-auth-actions">
+                <div >
                     <a href="/auth" class="app-btn app-btn-primary">Return to Login</a>
                 </div>
             <?php else: ?>
@@ -44,7 +44,7 @@ $pageTitle = 'Reset Password';
                                required>
                     </div>
 
-                    <div class="app-auth-actions">
+                    <div >
                         <button type="submit" class="app-btn app-btn-primary">Send Reset Link</button>
                         <a href="/auth" class="app-link">Back to Login</a>
                     </div>

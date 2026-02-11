@@ -36,7 +36,7 @@ $events = $events ?? [];
         <p class="app-text-muted">No events in this community yet.</p>
       </div>
     <?php else: ?>
-      <div class="app-stack app-mt-4">
+      <div class="app-mt-4">
         <?php foreach ($events as $event): $ev = (object)$event; ?>
           <article class="app-card">
             <h3 class="app-heading-sm">

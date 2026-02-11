@@ -17,7 +17,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
   data-community-id="<?= e((string)($community['id'] ?? 0)) ?>"
   data-community-action-nonce="<?= htmlspecialchars($communityActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
   <?php if ($statusCode === 404 || empty($community)): ?>
-    <div class="app-text-center app-p-6">
+    <div class="app-text-center">
       <h1 class="app-heading">Community not found</h1>
       <p class="app-text-muted">We couldn’t find that community or it may have been removed.</p>
       <p class="app-mt-4">
@@ -25,7 +25,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
       </p>
     </div>
   <?php elseif ($statusCode === 403): ?>
-    <div class="app-text-center app-p-6">
+    <div class="app-text-center">
       <h1 class="app-heading">Access denied</h1>
       <p class="app-text-muted">You do not have permission to manage this community.</p>
       <p class="app-mt-4">
@@ -54,7 +54,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
 
     <?php if ($tab === 'members'): ?>
       <section class="app-section">
-        <div class="app-flex app-flex-between app-align-center app-flex-wrap app-gap-3 app-mb-4">
+        <div class="app-flex app-flex-between app-flex-wrap app-mb-4">
           <h2 class="app-heading app-heading-md">Members</h2>
           <p class="app-text-muted">Total members: <strong><?= e((string)$memberCount) ?></strong></p>
         </div>
@@ -88,7 +88,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
                     } else {
                         ob_start();
                         ?>
-                        <select class="app-form-input app-form-input-sm"
+                        <select class="app-form-input"
                           onchange="changeMemberRole(<?= e((string)$memberId) ?>, this.value, <?= e((string)$communityId) ?>)">
                           <option value="member"<?= $role === 'member' ? ' selected' : '' ?>>Member</option>
                           <option value="moderator"<?= $role === 'moderator' ? ' selected' : '' ?>>Moderator</option>
@@ -135,7 +135,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
         include __DIR__ . '/partials/invitation-section.php';
       ?>
 
-      <hr class="app-divider app-my-6">
+      <hr class="app-divider">
 
       <div class="app-section">
         <div class="app-section-header">

@@ -32,7 +32,7 @@ if (empty($tabs) || !is_array($tabs)) {
            aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>">
             <?php echo htmlspecialchars($label); ?>
             <?php if ($badge_count !== null) : ?>
-                <span class="app-badge app-badge-sm"><?php echo intval($badge_count); ?></span>
+                <span class="app-badge"><?php echo intval($badge_count); ?></span>
             <?php endif; ?>
         </a>
     <?php endforeach; ?>

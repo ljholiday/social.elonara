@@ -78,7 +78,7 @@ function app_field_value(array $source, string $key): string
 
 <?php if ($errors): ?>
     <div class="app-alert app-alert-error app-mb-4">
-        <ul class="app-list app-list-unstyled app-text-left">
+        <ul >
             <?php foreach ($errors as $error): ?>
                 <li><?= htmlspecialchars((string)$error); ?></li>
             <?php endforeach; ?>
@@ -92,7 +92,7 @@ function app_field_value(array $source, string $key): string
     </div>
 <?php endif; ?>
 
-<div class="app-section app-mb-6">
+<div class="app-section">
     <div class="app-card">
         <?php if ($featuredImage !== ''): ?>
             <div class="app-card-image">
@@ -105,9 +105,9 @@ function app_field_value(array $source, string $key): string
         </div>
 
         <div class="app-card-body">
-            <div class="app-event-meta app-mb-4">
+            <div class="app-mb-4">
                 <?php if ($eventDate): ?>
-                    <div class="app-flex app-items-center app-gap-2 app-mb-2">
+                    <div class="app-flex">
                         <strong><?= htmlspecialchars(date_fmt($eventDate, 'l, F j, Y')); ?></strong>
                         <?php if ($eventTime): ?>
                             <span><?= htmlspecialchars($eventTime); ?></span>
@@ -115,14 +115,14 @@ function app_field_value(array $source, string $key): string
                     </div>
                 <?php endif; ?>
                 <?php if ($venueInfo): ?>
-                    <div class="app-flex app-items-center app-gap-2 app-mb-2">
+                    <div class="app-flex">
                         <span><?= htmlspecialchars($venueInfo); ?></span>
                     </div>
                 <?php endif; ?>
             </div>
 
             <?php if ($description): ?>
-                <div class="app-event-description app-text-muted">
+                <div class="app-text-muted">
                     <?= nl2br(htmlspecialchars($description)); ?>
                 </div>
             <?php endif; ?>
@@ -136,13 +136,13 @@ function app_field_value(array $source, string $key): string
         <p class="app-text-muted">Use the form below to update your RSVP. You can revisit this link any time to make changes.</p>
     </div>
 
-    <form method="post" class="app-form app-stack-md" data-guest-rsvp-form="1">
+    <form method="post" class="app-form" data-guest-rsvp-form="1">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token); ?>">
         <input type="hidden" name="nonce" value="<?= htmlspecialchars($nonce); ?>">
 
         <div class="app-form-group">
             <label class="app-form-label">RSVP</label>
-            <div class="app-flex app-flex-wrap app-gap-3">
+            <div class="app-flex app-flex-wrap">
                 <label>
                     <input type="radio" name="rsvp_status" value="yes" <?= $selectedStatus === 'yes' ? 'checked' : ''; ?> required>
                     <span class="app-btn app-btn-lg app-btn-primary">Yes, I'll be there</span>
@@ -158,10 +158,10 @@ function app_field_value(array $source, string $key): string
             </div>
         </div>
 
-        <div class="app-rsvp-details" data-rsvp-details>
+        <div  data-rsvp-details>
             <div class="app-form-group">
                 <label class="app-form-label" for="guest_name">
-                    Your name <?= $selectedStatus === 'no' ? '' : '<span class="app-required">*</span>'; ?>
+                    Your name <?= $selectedStatus === 'no' ? '' : '<span >*</span>'; ?>
                 </label>
                 <input
                     type="text"
@@ -186,18 +186,18 @@ function app_field_value(array $source, string $key): string
             </div>
 
             <?php if ($isBluesky): ?>
-                <p class="app-text-xs app-text-muted app-mb-4">Invited via Bluesky (<?= htmlspecialchars((string)$guest['email']); ?>)</p>
+                <p class="app-text-muted app-mb-4">Invited via Bluesky (<?= htmlspecialchars((string)$guest['email']); ?>)</p>
             <?php endif; ?>
 
             <?php if ($allowPlusOnes): ?>
                 <div class="app-form-group">
                     <label class="app-form-label">Plus One</label>
                     <div class="app-flex app-gap-4 app-flex-wrap">
-                        <label class="app-flex app-gap-2 app-items-center">
+                        <label class="app-flex">
                             <input type="radio" name="plus_one" value="0" <?= ((int)($formValues['plus_one'] ?? 0) === 0) ? 'checked' : ''; ?>>
                             <span>Just me</span>
                         </label>
-                        <label class="app-flex app-gap-2 app-items-center">
+                        <label class="app-flex">
                             <input type="radio" name="plus_one" value="1" <?= ((int)($formValues['plus_one'] ?? 0) === 1) ? 'checked' : ''; ?>>
                             <span>I'm bringing someone</span>
                         </label>
@@ -243,7 +243,7 @@ function app_field_value(array $source, string $key): string
 
         <div class="app-form-actions">
             <button type="submit" class="app-btn app-btn-primary app-btn-lg">Save RSVP</button>
-            <a href="/events" class="app-btn app-btn-link">Browse other events</a>
+            <a href="/events" class="app-btn">Browse other events</a>
         </div>
     </form>
 </div>

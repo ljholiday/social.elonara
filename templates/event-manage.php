@@ -19,7 +19,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
   data-event-id="<?= e((string)($event['id'] ?? 0)) ?>"
   data-event-action-nonce="<?= htmlspecialchars($eventActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
   <?php if ($status === 404 || empty($event)): ?>
-    <div class="app-text-center app-p-6">
+    <div class="app-text-center">
       <h1 class="app-heading">Event not found</h1>
       <p class="app-text-muted">Either this event does not exist or you do not have permission to manage it.</p>
       <p class="app-mt-4">
@@ -27,7 +27,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
       </p>
     </div>
   <?php elseif ($status === 403): ?>
-    <div class="app-text-center app-p-6">
+    <div class="app-text-center">
       <h1 class="app-heading">Access denied</h1>
       <p class="app-text-muted">You do not have permission to manage this event.</p>
       <p class="app-mt-4">
@@ -55,7 +55,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
     <header class="app-mb-4">
       <h1 class="app-heading app-heading-lg"><?= e($title) ?></h1>
       <?php if (!empty($eventDate)): ?>
-        <div class="app-sub">
+        <div >
           <?php if (!empty($event['end_date'])): ?>
             <?= e(date_fmt((string)$eventDate, 'F j, Y \a\t g:i A')) ?> - <?= e(date_fmt((string)$event['end_date'], 'F j, Y \a\t g:i A')) ?>
           <?php else: ?>
@@ -69,15 +69,15 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
       <section class="app-grid app-gap-4">
         <article class="app-card">
           <div class="app-card-body">
-            <h2 class="app-heading app-heading-sm app-mb-2">Event status</h2>
-            <p class="app-text-muted app-mb-0">
+            <h2 class="app-heading app-heading-sm">Event status</h2>
+            <p class="app-text-muted">
               Status: <strong><?= e(ucfirst((string)($event['event_status'] ?? 'active'))) ?></strong>
             </p>
           </div>
         </article>
         <article class="app-card">
           <div class="app-card-body">
-            <h2 class="app-heading app-heading-sm app-mb-2">Privacy</h2>
+            <h2 class="app-heading app-heading-sm">Privacy</h2>
             <p class="app-text-muted app-mb-4">Current privacy: <strong><?= e($privacy) ?></strong></p>
             <a class="app-btn app-btn-secondary" href="/events/<?= e($slug !== '' ? $slug : (string)$eventId) ?>/edit">
               Update privacy
@@ -86,8 +86,8 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
         </article>
         <article class="app-card">
           <div class="app-card-body">
-            <h2 class="app-heading app-heading-sm app-mb-2">Guest summary</h2>
-            <p class="app-text-muted app-mb-1">
+            <h2 class="app-heading app-heading-sm">Guest summary</h2>
+            <p class="app-text-muted">
               Confirmed guests: <strong><?= e((string)($guest_summary['confirmed'] ?? 0)) ?></strong>
             </p>
             <p class="app-text-muted app-mb-4">
@@ -101,9 +101,9 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
       </section>
     <?php elseif ($tab === 'guests'): ?>
       <section class="app-section">
-        <div class="app-flex app-flex-between app-align-center app-flex-wrap app-gap-3 app-mb-4">
+        <div class="app-flex app-flex-between app-flex-wrap app-mb-4">
           <h2 class="app-heading app-heading-md">Event guests</h2>
-          <div class="app-flex app-gap-3 app-align-center">
+          <div class="app-flex">
             <div class="app-text-muted">
               Total guests:
               <strong id="event-guest-total"><?= e((string)($guest_summary['total'] ?? 0)) ?></strong>
@@ -138,7 +138,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
       include __DIR__ . '/partials/invitation-section.php';
       ?>
 
-      <hr class="app-divider app-my-6">
+      <hr class="app-divider">
 
       <div class="app-section">
         <div class="app-section-header">

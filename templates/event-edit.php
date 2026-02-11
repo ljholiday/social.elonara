@@ -73,7 +73,7 @@ $showRecurrenceMonthly = $recurrenceType === 'monthly' || isset($errors['monthly
 $showMonthlyDate = ($recurrenceType === 'monthly' && $monthlyType === 'date') || isset($errors['monthly_day_number']);
 $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekday') || isset($errors['monthly_week']) || isset($errors['monthly_weekday']);
 ?>
-<section class="app-section app-event-edit">
+<section class="app-section">
   <?php if (!$event): ?>
     <h1 class="app-heading">Event not found</h1>
     <p class="app-text-muted">We couldn’t find that event.</p>
@@ -92,9 +92,9 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
       </div>
     <?php endif; ?>
 
-    <form method="post" action="/events/<?= e($event['slug'] ?? '') ?>/edit" class="app-form app-stack" enctype="multipart/form-data">
-      <div class="app-field">
-        <label class="app-label" for="title">Title</label>
+    <form method="post" action="/events/<?= e($event['slug'] ?? '') ?>/edit" class="app-form" enctype="multipart/form-data">
+      <div >
+        <label  for="title">Title</label>
         <input
           class="app-input<?= isset($errors['title']) ? ' is-invalid' : '' ?>"
           type="text"
@@ -105,8 +105,8 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         >
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="event_date">Start Date &amp; Time</label>
+      <div >
+        <label  for="event_date">Start Date &amp; Time</label>
         <input
           class="app-input<?= isset($errors['event_date']) ? ' is-invalid' : '' ?>"
           type="datetime-local"
@@ -114,11 +114,11 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
           name="event_date"
           value="<?= e($input['event_date'] ?? '') ?>"
         >
-        <p class="app-field-help">Leave blank for TBD. Default time is 6:00 PM.</p>
+        <p >Leave blank for TBD. Default time is 6:00 PM.</p>
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="end_date">End Date &amp; Time</label>
+      <div >
+        <label  for="end_date">End Date &amp; Time</label>
         <input
           class="app-input<?= isset($errors['end_date']) ? ' is-invalid' : '' ?>"
           type="datetime-local"
@@ -126,11 +126,11 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
           name="end_date"
           value="<?= e($input['end_date'] ?? '') ?>"
         >
-        <p class="app-field-help">Optional. Leave blank for single-day event.</p>
+        <p >Optional. Leave blank for single-day event.</p>
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="recurrence_type">Repeats</label>
+      <div >
+        <label  for="recurrence_type">Repeats</label>
         <select
           class="app-input"
           id="recurrence_type"
@@ -140,11 +140,11 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
             <option value="<?= e($value) ?>"<?= $recurrenceType === $value ? ' selected' : '' ?>><?= e($label) ?></option>
           <?php endforeach; ?>
         </select>
-        <p class="app-field-help">Choose how often this event repeats.</p>
+        <p >Choose how often this event repeats.</p>
       </div>
 
-      <div class="app-field app-recurrence-section" data-recurrence-section="interval"<?= $showRecurrenceInterval ? '' : ' style="display:none;"' ?>>
-        <label class="app-label" for="recurrence_interval">Repeat every</label>
+      <div class="app-recurrence-section" data-recurrence-section="interval"<?= $showRecurrenceInterval ? '' : ' style="display:none;"' ?>>
+        <label  for="recurrence_interval">Repeat every</label>
         <div class="app-recurrence-interval">
           <input
             class="app-input app-recurrence-interval-input<?= isset($errors['recurrence_interval']) ? ' is-invalid' : '' ?>"
@@ -157,17 +157,17 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
           >
           <span class="app-text-muted" id="recurrence_interval_suffix"><?= e($recurrenceIntervalSuffix) ?></span>
         </div>
-        <p class="app-field-help">Common choices are every 1, 2, or 4 intervals.</p>
+        <p >Common choices are every 1, 2, or 4 intervals.</p>
         <?php if (isset($errors['recurrence_interval'])): ?>
           <div class="app-field-error"><?= e($errors['recurrence_interval']) ?></div>
         <?php endif; ?>
       </div>
 
-      <div class="app-field app-recurrence-section" data-recurrence-section="weekly"<?= $showRecurrenceWeekly ? '' : ' style="display:none;"' ?>>
-        <span class="app-label">Repeat on</span>
+      <div class="app-recurrence-section" data-recurrence-section="weekly"<?= $showRecurrenceWeekly ? '' : ' style="display:none;"' ?>>
+        <span >Repeat on</span>
         <div class="app-recurrence-weekdays">
           <?php foreach ($weekdayShortLabels as $dayKey => $dayLabel): ?>
-            <label class="app-checkbox app-recurrence-weekday">
+            <label class="app-recurrence-weekday">
               <input
                 type="checkbox"
                 name="recurrence_days[]"
@@ -183,20 +183,20 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         <?php endif; ?>
       </div>
 
-      <div class="app-field app-recurrence-section" data-recurrence-section="monthly"<?= $showRecurrenceMonthly ? '' : ' style="display:none;"' ?>>
-        <label class="app-label">Monthly pattern</label>
-        <div class="app-radio-group app-recurrence-monthly-type">
-          <label class="app-radio-label">
+      <div class="app-recurrence-section" data-recurrence-section="monthly"<?= $showRecurrenceMonthly ? '' : ' style="display:none;"' ?>>
+        <label >Monthly pattern</label>
+        <div class="app-recurrence-monthly-type">
+          <label >
             <input type="radio" name="monthly_type" value="date"<?= $monthlyType === 'date' ? ' checked' : '' ?>>
             <span>On day</span>
           </label>
-          <label class="app-radio-label">
+          <label >
             <input type="radio" name="monthly_type" value="weekday"<?= $monthlyType === 'weekday' ? ' checked' : '' ?>>
             <span>On the</span>
           </label>
         </div>
         <div class="app-recurrence-monthly-mode" data-monthly-mode="date"<?= $showMonthlyDate ? '' : ' style="display:none;"' ?>>
-          <label class="app-label" for="monthly_day_number">Day of month</label>
+          <label  for="monthly_day_number">Day of month</label>
           <input
             class="app-input<?= isset($errors['monthly_day_number']) ? ' is-invalid' : '' ?>"
             type="number"
@@ -213,7 +213,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         <div class="app-recurrence-monthly-mode" data-monthly-mode="weekday"<?= $showMonthlyWeekday ? '' : ' style="display:none;"' ?>>
           <div class="app-recurrence-monthly-grid">
             <div class="app-recurrence-monthly-cell">
-              <label class="app-label" for="monthly_week">Week</label>
+              <label  for="monthly_week">Week</label>
               <select
                 class="app-input<?= isset($errors['monthly_week']) ? ' is-invalid' : '' ?>"
                 id="monthly_week"
@@ -229,7 +229,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
               <?php endif; ?>
             </div>
             <div class="app-recurrence-monthly-cell">
-              <label class="app-label" for="monthly_weekday">Weekday</label>
+              <label  for="monthly_weekday">Weekday</label>
               <select
                 class="app-input<?= isset($errors['monthly_weekday']) ? ' is-invalid' : '' ?>"
                 id="monthly_weekday"
@@ -248,8 +248,8 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         </div>
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="location">Location</label>
+      <div >
+        <label  for="location">Location</label>
         <input
           class="app-input<?= isset($errors['location']) ? ' is-invalid' : '' ?>"
           type="text"
@@ -258,11 +258,11 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
           value="<?= e($input['location'] ?? '') ?>"
           placeholder="Enter event location"
         >
-        <p class="app-field-help">Optional. e.g., "Central Park" or "123 Main St, City"</p>
+        <p >Optional. e.g., "Central Park" or "123 Main St, City"</p>
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="description">Description</label>
+      <div >
+        <label  for="description">Description</label>
         <textarea
           class="app-textarea"
           id="description"
@@ -271,16 +271,16 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         ><?= e($input['description'] ?? '') ?></textarea>
       </div>
 
-      <div class="app-field">
-        <label class="app-label">Featured Image</label>
-        <div class="app-mb-3" id="featured-image-preview-container">
+      <div >
+        <label >Featured Image</label>
+        <div  id="featured-image-preview-container">
           <?php if (!empty($event['featured_image'])): ?>
             <?php
               $featuredUrl = getImageUrl($event['featured_image'], 'mobile', 'original');
               if ($featuredUrl):
             ?>
               <img src="<?= e($featuredUrl) ?>" alt="<?= e($event['featured_image_alt'] ?? 'Current featured image') ?>" class="app-img" style="max-width: 400px;" id="featured-image-preview">
-              <div class="app-text-muted app-mt-1">Current featured image</div>
+              <div class="app-text-muted">Current featured image</div>
             <?php else: ?>
               <img src="" alt="Featured image preview" class="app-img" style="max-width: 400px; display: none;" id="featured-image-preview">
             <?php endif; ?>
@@ -293,7 +293,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         </button>
         <input type="hidden" id="featured-image-alt" name="featured_image_alt" value="<?= e($input['featured_image_alt'] ?? '') ?>">
         <input type="hidden" id="featured-image-url" name="featured_image_url_uploaded" value="">
-        <small class="app-help-text" style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library. Recommended size: 1200x630px.</small>
+        <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library. Recommended size: 1200x630px.</small>
         <?php if (isset($errors['featured_image'])): ?>
           <div class="app-field-error"><?= e($errors['featured_image']) ?></div>
         <?php endif; ?>
@@ -302,16 +302,16 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         <?php endif; ?>
       </div>
 
-      <div class="app-actions">
+      <div >
         <button type="submit" class="app-btn app-btn-primary">Save Changes</button>
         <a class="app-btn" href="/events/<?= e($event['slug'] ?? '') ?>">Cancel</a>
       </div>
     </form>
 
-    <div class="app-danger-zone app-mt-6">
+    <div class="app-danger-zone">
       <h2 class="app-heading-sm">Danger Zone</h2>
       <p class="app-text-muted">Deleting an event cannot be undone.</p>
-      <form method="post" action="/events/<?= e($event['slug'] ?? '') ?>/delete" class="app-inline-form" onsubmit="return confirm('Delete this event?');">
+      <form method="post" action="/events/<?= e($event['slug'] ?? '') ?>/delete"  onsubmit="return confirm('Delete this event?');">
         <button type="submit" class="app-btn app-btn-danger">Delete Event</button>
       </form>
     </div>

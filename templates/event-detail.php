@@ -1,4 +1,4 @@
-<section class="app-section app-event-detail">
+<section class="app-section">
   <?php if (empty($event)): ?>
     <h1 class="app-heading">Event not found</h1>
     <p class="app-text-muted">We couldn’t find that event.</p>
@@ -52,7 +52,7 @@
       </div>
     <?php endif; ?>
     <?php if (!empty($e->description)): ?>
-      <p class="app-body"><?= e($e->description) ?></p>
+      <p ><?= e($e->description) ?></p>
     <?php endif; ?>
   <?php endif; ?>
 </section>

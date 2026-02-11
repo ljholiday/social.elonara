@@ -1,4 +1,4 @@
-<section class="app-section app-conversation-detail">
+<section class="app-section">
   <?php if (empty($conversation)): ?>
     <h1 class="app-heading">Conversation not found</h1>
     <p class="app-text-muted">We couldn’t find that conversation.</p>
@@ -30,7 +30,7 @@
       }
     ?>
     <?php if (!empty($c->content)): ?>
-      <div class="app-body app-mt-4">
+      <div class="app-mt-4">
         <?= nl2br(e($c->content)) ?>
       </div>
     <?php endif; ?>
@@ -44,10 +44,10 @@
       include __DIR__ . '/partials/meta-row.php';
     ?>
 
-    <section class="app-section app-mt-6">
+    <section class="app-section">
       <h2 class="app-heading-sm">Replies</h2>
       <?php if (!empty($replies)): ?>
-        <div class="app-stack">
+        <div >
           <?php
           $conversationService = function_exists('app_service') ? app_service('conversation.service') : null;
           foreach ($replies as $reply):
@@ -110,7 +110,7 @@
               </div>
               <div class="app-card-body">
                 <?php if (!empty($r->image_url)): ?>
-                  <div class="app-reply-image app-mb-3">
+                  <div class="app-reply-image">
                     <?php
                       $url_data = $r->image_url;
                       $alt = $r->image_alt ?? '';

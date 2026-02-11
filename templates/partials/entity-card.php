@@ -61,7 +61,7 @@ switch ($entity_type) {
         <!-- Header: Title and Badges -->
         <div class="app-flex app-flex-between app-mb-4">
             <div class="app-flex-1">
-                <h3 class="app-heading app-heading-sm app-mb-2">
+                <h3 class="app-heading app-heading-sm">
                     <a href="<?php echo htmlspecialchars($url); ?>" class="app-text-primary">
                         <?php echo htmlspecialchars($title); ?>
                     </a>
@@ -69,7 +69,7 @@ switch ($entity_type) {
 
                 <!-- Date/Time Information -->
                 <?php if (!empty($date_info)) : ?>
-                    <div class="app-text-muted app-mb-2">
+                    <div class="app-text-muted">
                         <?php echo htmlspecialchars($date_info); ?>
                         <?php if (!empty($time_info)) : ?>
                             <?php echo htmlspecialchars($time_info); ?>
@@ -79,7 +79,7 @@ switch ($entity_type) {
 
                 <!-- Entity-specific meta info -->
                 <?php if ($entity_type === 'event' && !empty($entity->venue_info)) : ?>
-                    <div class="app-text-muted app-mb-2">
+                    <div class="app-text-muted">
                         <?php echo htmlspecialchars($entity->venue_info); ?>
                     </div>
                 <?php endif; ?>
@@ -138,7 +138,7 @@ switch ($entity_type) {
         <?php endif; ?>
 
         <?php if (!empty($actions)) : ?>
-            <div class="app-flex app-gap-2 app-flex-wrap">
+            <div class="app-flex app-flex-wrap">
                 <?php foreach ($actions as $action) : ?>
                     <a href="<?php echo htmlspecialchars($action['url'] ?? '#'); ?>"
                        class="app-btn app-btn-sm <?php echo htmlspecialchars($action['class'] ?? ''); ?>">

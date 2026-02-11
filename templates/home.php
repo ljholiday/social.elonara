@@ -10,8 +10,8 @@ $communities = $my_communities ?? [];
 $conversations = $recent_conversations ?? [];
 ?>
 
-<section class="app-section app-dashboard">
-  <div class="app-container app-stack app-gap-6">
+<section class="app-section">
+  <div >
 
 
     <header>
@@ -20,14 +20,14 @@ $conversations = $recent_conversations ?? [];
 
     </header>
 
-    <section class="app-stack app-gap-3">
-      <div class="app-flex app-flex-between app-items-center">
+    <section >
+      <div class="app-flex app-flex-between">
         <h2 class="app-heading app-heading-md">Upcoming events</h2>
         <a class="app-link" href="/events">View all events →</a>
       </div>
       <?php if ($events === []): ?>
         <div class="app-card">
-          <div class="app-card-body app-text-center app-stack app-gap-3">
+          <div class="app-card-body app-text-center">
             <p class="app-text-muted">No events on your calendar yet.</p>
             <a class="app-btn app-btn-secondary" href="/events/create">Plan your first event</a>
           </div>
@@ -55,7 +55,7 @@ $conversations = $recent_conversations ?? [];
               $actions = [];
               ob_start();
               ?>
-              <a class="app-btn app-btn-sm app-btn-outline" href="<?= e($eventUrl); ?>">View details</a>
+              <a class="app-btn app-btn-sm" href="<?= e($eventUrl); ?>">View details</a>
               <?php
               $actions[] = ob_get_clean();
 
@@ -74,14 +74,14 @@ $conversations = $recent_conversations ?? [];
       <?php endif; ?>
     </section>
 
-    <section class="app-stack app-gap-3">
-      <div class="app-flex app-flex-between app-items-center">
+    <section >
+      <div class="app-flex app-flex-between">
         <h2 class="app-heading app-heading-md">Your communities</h2>
         <a class="app-link" href="/communities">Browse communities →</a>
       </div>
       <?php if ($communities === []): ?>
         <div class="app-card">
-          <div class="app-card-body app-text-center app-stack app-gap-3">
+          <div class="app-card-body app-text-center">
             <p class="app-text-muted">You haven’t joined any communities yet.</p>
             <a class="app-btn app-btn-secondary" href="/communities">Discover communities</a>
           </div>
@@ -120,7 +120,7 @@ $conversations = $recent_conversations ?? [];
               $actions = [];
               ob_start();
               ?>
-              <a class="app-btn app-btn-sm app-btn-outline" href="<?= e($communityUrl); ?>">View community</a>
+              <a class="app-btn app-btn-sm" href="<?= e($communityUrl); ?>">View community</a>
               <?php
               $actions[] = ob_get_clean();
 
@@ -139,14 +139,14 @@ $conversations = $recent_conversations ?? [];
       <?php endif; ?>
     </section>
 
-    <section class="app-stack app-gap-3">
-      <div class="app-flex app-flex-between app-items-center">
+    <section >
+      <div class="app-flex app-flex-between">
         <h2 class="app-heading app-heading-md">Recent conversations</h2>
         <a class="app-link" href="/conversations">Go to conversations →</a>
       </div>
       <?php if ($conversations === []): ?>
         <div class="app-card">
-          <div class="app-card-body app-text-center app-stack app-gap-3">
+          <div class="app-card-body app-text-center">
             <p class="app-text-muted">No conversations yet. Start the first one!</p>
             <a class="app-btn app-btn-secondary" href="/conversations/create">Start a conversation</a>
           </div>
@@ -176,7 +176,7 @@ $conversations = $recent_conversations ?? [];
               $actions = [];
               ob_start();
               ?>
-              <a class="app-btn app-btn-sm app-btn-outline" href="<?= e($conversationUrl); ?>">Open conversation</a>
+              <a class="app-btn app-btn-sm" href="<?= e($conversationUrl); ?>">Open conversation</a>
               <?php
               $actions[] = ob_get_clean();
 

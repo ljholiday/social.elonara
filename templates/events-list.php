@@ -4,7 +4,7 @@
 
 $filter = $filter ?? 'all';
 ?>
-<section class="app-section app-events">
+<section class="app-section">
   <h1 class="app-heading">Upcoming Events</h1>
 
   <?php
@@ -16,7 +16,7 @@ $filter = $filter ?? 'all';
   ?>
 
   <?php if (!empty($events)) : ?>
-    <div class="app-grid app-events-grid">
+    <div class="app-grid">
       <?php foreach ($events as $row):
         $slug = $row['slug'] ?? (string)($row['id'] ?? '');
         $privacy = strtolower((string)($row['privacy'] ?? 'public'));
@@ -63,12 +63,12 @@ $filter = $filter ?? 'all';
     </div>
   <?php else: ?>
     <div class="app-card">
-      <div class="app-card-body app-text-center app-stack app-gap-3">
+      <div class="app-card-body app-text-center">
         <?php if ($filter === 'my'): ?>
           <p class="app-text-muted">You don't have any upcoming events yet. Plan your first event or check out what others are organizing!</p>
-          <div class="app-flex app-gap-2 app-justify-center app-flex-wrap">
+          <div class="app-flex app-flex-wrap">
             <a class="app-btn app-btn-primary" href="/events/create">Create Event</a>
-            <a class="app-btn app-btn-outline" href="/events?filter=all">Browse All Events</a>
+            <a class="app-btn" href="/events?filter=all">Browse All Events</a>
           </div>
         <?php else: ?>
           <p class="app-text-muted">No events found. Be the first to create one!</p>

@@ -6,7 +6,7 @@ $contextLabel = (string)($context['label'] ?? '');
 $contextLabelHtml = (string)($context['label_html'] ?? '');
 $contextAllowed = (bool)($context['allowed'] ?? false);
 ?>
-<section class="app-section app-conversation-create">
+<section class="app-section">
   <h1 class="app-heading">Start Conversation</h1>
 
   <?php if ($contextLabel !== '' || $contextLabelHtml !== ''): ?>
@@ -30,7 +30,7 @@ $contextAllowed = (bool)($context['allowed'] ?? false);
     </div>
   <?php endif; ?>
 
-  <form method="post" action="/conversations/create" class="app-form app-stack">
+  <form method="post" action="/conversations/create" class="app-form">
     <?php if (!empty($context['community_id'])): ?>
       <input type="hidden" name="community_id" value="<?= (int)$context['community_id']; ?>">
     <?php endif; ?>
@@ -44,8 +44,8 @@ $contextAllowed = (bool)($context['allowed'] ?? false);
       <input type="hidden" name="event" value="<?= e((string)$context['event_slug']); ?>">
     <?php endif; ?>
 
-    <div class="app-field">
-      <label class="app-label" for="title">Title</label>
+    <div >
+      <label  for="title">Title</label>
       <input
         class="app-input<?= isset($errors['title']) ? ' is-invalid' : '' ?>"
         type="text"
@@ -56,8 +56,8 @@ $contextAllowed = (bool)($context['allowed'] ?? false);
       >
     </div>
 
-    <div class="app-field">
-      <label class="app-label" for="content">Content</label>
+    <div >
+      <label  for="content">Content</label>
       <textarea
         class="app-textarea<?= isset($errors['content']) ? ' is-invalid' : '' ?>"
         id="content"
@@ -67,7 +67,7 @@ $contextAllowed = (bool)($context['allowed'] ?? false);
       ><?= e($input['content'] ?? '') ?></textarea>
     </div>
 
-    <div class="app-actions">
+    <div >
       <button type="submit" class="app-btn app-btn-primary"<?= $contextAllowed ? '' : ' disabled' ?>>Publish Conversation</button>
       <a class="app-btn" href="/conversations">Cancel</a>
     </div>

@@ -54,9 +54,9 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
 
         <div class="app-modal-body">
             <?php if ($needsReauth): ?>
-                <div class="app-alert app-alert-warning app-mb-4">
+                <div class="app-alert app-mb-4">
                     Your Bluesky authorization expired. Please reauthorize before inviting followers.
-                    <div class="app-mt-3">
+                    <div >
                         <?php $reauthQuery = http_build_query(['redirect' => '/profile/edit#bluesky', 'reauthorize' => 1]); ?>
                         <a class="app-btn app-btn-sm app-btn-secondary" href="/auth/bluesky/start?<?= htmlspecialchars($reauthQuery, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">
                             Reauthorize via Bluesky
@@ -66,7 +66,7 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
             <?php endif; ?>
             <?php if ($isConnected): ?>
                 <div class="app-mb-4">
-                    <div class="app-flex app-items-center app-gap-2 app-mb-3">
+                    <div class="app-flex">
                         <input
                             type="text"
                             id="follower-search"
@@ -85,7 +85,7 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
                         </button>
                     </div>
 
-                    <div class="app-flex app-items-center app-justify-between app-text-sm app-text-muted">
+                    <div class="app-flex app-text-sm app-text-muted">
                         <div>
                             <span id="selected-count">0</span> selected
                         </div>
@@ -93,20 +93,20 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
                     </div>
                 </div>
 
-                <div id="follower-loading" class="app-text-center app-py-6" style="display: none;">
-                    <div class="app-spinner app-mb-2"></div>
+                <div id="follower-loading" class="app-text-center" style="display: none;">
+                    <div class="app-spinner"></div>
                     <div class="app-text-muted">Loading followers...</div>
                 </div>
 
                 <div id="follower-error" class="app-alert app-alert-error" style="display: none;"></div>
 
-                <div id="follower-empty" class="app-text-center app-py-6 app-text-muted" style="display: none;">
+                <div id="follower-empty" class="app-text-center app-text-muted" style="display: none;">
                     No followers found. Click "Sync" to fetch your Bluesky followers.
                 </div>
 
                 <div id="follower-list" class="app-follower-list"></div>
             <?php else: ?>
-                <div class="app-text-center app-py-6">
+                <div class="app-text-center">
                     <p class="app-text-muted app-mb-4">
                         Connect your Bluesky account to load your followers and invite them directly.
                     </p>
@@ -119,17 +119,17 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
 
         <div class="app-modal-footer">
             <?php if ($isConnected): ?>
-                <div class="app-flex app-gap-3 app-flex-wrap">
+                <div class="app-flex app-flex-wrap">
                     <button type="button" class="app-btn app-btn-primary" id="invite-selected-btn" disabled>
                         Invite Selected
                     </button>
                     <button type="button" class="app-btn" data-close-bluesky-modal>Cancel</button>
-                    <button type="button" class="app-btn app-btn-link app-text-muted" data-bluesky-manage-button>
+                    <button type="button" class="app-btn app-text-muted" data-bluesky-manage-button>
                         Manage Bluesky Connection
                     </button>
                 </div>
             <?php else: ?>
-                <div class="app-flex app-gap-3 app-flex-wrap">
+                <div class="app-flex app-flex-wrap">
                     <button type="button" class="app-btn app-btn-primary" data-bluesky-connect-button>
                         Connect Bluesky
                     </button>

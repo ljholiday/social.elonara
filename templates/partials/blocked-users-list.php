@@ -23,10 +23,10 @@ $blocked_users = $blocked_users ?? [];
 <?php if (empty($blocked_users)): ?>
     <p class="app-text-muted">You haven't blocked anyone yet.</p>
 <?php else: ?>
-    <div class="app-stack">
+    <div >
         <?php foreach ($blocked_users as $blockedUser): ?>
             <div class="app-card">
-                <div class="app-card-body app-flex app-gap app-flex-between app-items-center">
+                <div class="app-card-body app-flex app-gap app-flex-between">
                     <div class="app-flex app-gap">
                         <?php
                         // Create user object for member-display partial
@@ -41,7 +41,7 @@ $blocked_users = $blocked_users ?? [];
                         $args = ['avatar_size' => 48, 'show_actions' => false];
                         include __DIR__ . '/member-display.php';
                         ?>
-                        <div class="app-flex app-flex-col app-gap-sm">
+                        <div class="app-flex">
                             <?php if (!empty($blockedUser['created_at'])): ?>
                                 <span class="app-text-muted app-text-sm">
                                     Blocked <?= e(date_fmt($blockedUser['created_at'])) ?>

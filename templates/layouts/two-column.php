@@ -47,7 +47,7 @@ $csrf_token = $security->createNonce('app_nonce', $userId);
 <body>
 
 <?php if ($breadcrumbs): ?>
-<div class="app-text-muted mb-4">
+<div class="app-text-muted">
     <?php
     $breadcrumb_parts = [];
     foreach ($breadcrumbs as $crumb) {

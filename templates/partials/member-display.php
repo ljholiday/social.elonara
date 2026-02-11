@@ -110,7 +110,7 @@ if ($args['avatar_size'] >= 56) {
 <div class="<?= htmlspecialchars($args['class'], ENT_QUOTES, 'UTF-8') ?> app-flex app-gap">
     <?php if ($args['show_avatar']): ?>
         <?php if ($args['link_profile'] && $profile_url): ?>
-            <a href="<?= htmlspecialchars($profile_url, ENT_QUOTES, 'UTF-8') ?>" class="app-avatar-link">
+            <a href="<?= htmlspecialchars($profile_url, ENT_QUOTES, 'UTF-8') ?>" >
                 <div class="<?= $avatar_class ?>">
                     <img src="<?= htmlspecialchars($avatar_url, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($display_name, ENT_QUOTES, 'UTF-8') ?>">
                 </div>

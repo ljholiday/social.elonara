@@ -34,7 +34,7 @@ $activity = $recent_activity ?? [];
   <?php elseif ($u): ?>
 
     <!-- Profile Header with Cover -->
-    <div class="app-profile-card app-mb-6">
+    <div class="app-profile-card">
       <?php if (!empty($u->cover_url)): ?>
         <div class="app-profile-cover" role="img" aria-label="<?= e($u->cover_alt ?? 'Cover image') ?>">
           <?php
@@ -92,7 +92,7 @@ $activity = $recent_activity ?? [];
         <p class="app-text-muted">@<?= e($u->username) ?></p>
 
         <?php if (!empty($u->bio)): ?>
-          <p class="app-mt-3"><?= nl2br(e($u->bio)) ?></p>
+          <p ><?= nl2br(e($u->bio)) ?></p>
         <?php endif; ?>
 
         <?php
@@ -103,7 +103,7 @@ $activity = $recent_activity ?? [];
           if ($identityMetaItems !== []):
               $items = $identityMetaItems;
         ?>
-          <div class="app-mt-3">
+          <div >
             <?php include __DIR__ . '/partials/meta-row.php'; ?>
           </div>
         <?php endif; ?>
@@ -117,7 +117,7 @@ $activity = $recent_activity ?? [];
     </div>
 
     <!-- Stats -->
-    <div class="app-card app-mb-6">
+    <div class="app-card">
       <div class="app-card-body">
         <?php
           $profileStatsItems = [
@@ -133,21 +133,21 @@ $activity = $recent_activity ?? [];
 
     <!-- Recent Activity -->
     <div class="app-card">
-      <h2 class="app-heading-sm app-mb-3">Recent Activity</h2>
+      <h2 class="app-heading-sm">Recent Activity</h2>
       <?php if (!empty($activity)): ?>
-        <div class="app-stack">
+        <div >
           <?php foreach ($activity as $item): $a = (object)$item; ?>
             <div class="app-activity-item">
               <?php if ($a->type === 'conversation'): ?>
-                <div class="app-activity-type app-activity-type-conversation">
-                  <div class="app-activity-action">Started a conversation</div>
-                  <a href="/conversations/<?= e($a->slug) ?>" class="app-link app-activity-title"><?= e($a->title) ?></a>
+                <div >
+                  <div >Started a conversation</div>
+                  <a href="/conversations/<?= e($a->slug) ?>" class="app-link"><?= e($a->title) ?></a>
                   <div class="app-activity-time"><?= date_fmt($a->created_at) ?></div>
                 </div>
               <?php elseif ($a->type === 'reply'): ?>
-                <div class="app-activity-type app-activity-type-reply">
-                  <div class="app-activity-action">Replied to</div>
-                  <a href="/conversations/<?= e($a->conversation_slug) ?>" class="app-link app-activity-title"><?= e($a->title) ?></a>
+                <div >
+                  <div >Replied to</div>
+                  <a href="/conversations/<?= e($a->conversation_slug) ?>" class="app-link"><?= e($a->title) ?></a>
                   <div class="app-activity-time"><?= date_fmt($a->created_at) ?></div>
                 </div>
               <?php endif; ?>

@@ -14,20 +14,20 @@ $displayMessage = $message !== ''
     : ($success ? 'Invitation accepted successfully.' : 'We were unable to process this invitation.');
 ?>
 
-<div class="app-section app-max-w-lg app-mx-auto app-text-center">
+<div class="app-section app-text-center">
     <div class="app-card">
-        <div class="app-card-body app-p-6">
+        <div class="app-card-body">
             <h1 class="app-heading app-heading-lg">
                 <?php echo $success ? 'Invitation Accepted' : 'Join Invitation'; ?>
             </h1>
 
-            <p class="app-text-muted app-mt-3">
+            <p class="app-text-muted">
                 <?php echo htmlspecialchars($displayMessage, ENT_QUOTES, 'UTF-8'); ?>
             </p>
 
             <?php if ($success) : ?>
                 <?php if ($redirectUrl !== null) : ?>
-                    <div class="app-mt-5">
+                    <div >
                         <a class="app-btn app-btn-primary" href="<?php echo htmlspecialchars($redirectUrl, ENT_QUOTES, 'UTF-8'); ?>">
                             Continue to Community
                         </a>
@@ -36,19 +36,19 @@ $displayMessage = $message !== ''
 
                 <?php if ($needsBlueskyLink && $connectUrl !== null) : ?>
                     <div class="app-mt-4">
-                        <p class="app-text-muted app-mt-2">
+                        <p class="app-text-muted">
                             Want to unlock Bluesky-powered features like cross-posting and follower invites?
                         </p>
-                        <a class="app-btn app-btn-secondary app-mt-3" href="<?php echo htmlspecialchars($connectUrl, ENT_QUOTES, 'UTF-8'); ?>">
+                        <a class="app-btn app-btn-secondary" href="<?php echo htmlspecialchars($connectUrl, ENT_QUOTES, 'UTF-8'); ?>">
                             Connect Your Bluesky Account
                         </a>
-                        <p class="app-text-muted app-mt-2 app-text-sm">
+                        <p class="app-text-muted app-text-sm">
                             Connecting your Bluesky account lets you post to Bluesky from Elonara and invite your followers to events and communities.
                         </p>
                     </div>
                 <?php endif; ?>
             <?php elseif (!$success && $needsBlueskyLink && $connectUrl !== null) : ?>
-                <div class="app-mt-5">
+                <div >
                     <a class="app-btn app-btn-primary" href="<?php echo htmlspecialchars($connectUrl, ENT_QUOTES, 'UTF-8'); ?>">
                         Connect Bluesky
                     </a>

@@ -3,7 +3,7 @@ $errors = $errors ?? [];
 $input = $input ?? ['title' => '', 'content' => ''];
 $conversation = $conversation ?? null;
 ?>
-<section class="app-section app-conversation-edit">
+<section class="app-section">
   <?php if (!$conversation): ?>
     <h1 class="app-heading">Conversation not found</h1>
     <p class="app-text-muted">We couldn’t find that conversation.</p>
@@ -22,9 +22,9 @@ $conversation = $conversation ?? null;
       </div>
     <?php endif; ?>
 
-    <form method="post" action="/conversations/<?= e($conversation['slug'] ?? '') ?>/edit" class="app-form app-stack">
-      <div class="app-field">
-        <label class="app-label" for="title">Title</label>
+    <form method="post" action="/conversations/<?= e($conversation['slug'] ?? '') ?>/edit" class="app-form">
+      <div >
+        <label  for="title">Title</label>
         <input
           class="app-input<?= isset($errors['title']) ? ' is-invalid' : '' ?>"
           type="text"
@@ -35,8 +35,8 @@ $conversation = $conversation ?? null;
         >
       </div>
 
-      <div class="app-field">
-        <label class="app-label" for="content">Content</label>
+      <div >
+        <label  for="content">Content</label>
         <textarea
           class="app-textarea<?= isset($errors['content']) ? ' is-invalid' : '' ?>"
           id="content"
@@ -46,16 +46,16 @@ $conversation = $conversation ?? null;
         ><?= e($input['content'] ?? '') ?></textarea>
       </div>
 
-      <div class="app-actions">
+      <div >
         <button type="submit" class="app-btn app-btn-primary">Save Changes</button>
         <a class="app-btn" href="/conversations/<?= e($conversation['slug'] ?? '') ?>">Cancel</a>
       </div>
     </form>
 
-    <div class="app-danger-zone app-mt-6">
+    <div class="app-danger-zone">
       <h2 class="app-heading-sm">Danger Zone</h2>
       <p class="app-text-muted">Deleting a conversation cannot be undone.</p>
-      <form method="post" action="/conversations/<?= e($conversation['slug'] ?? '') ?>/delete" class="app-inline-form" onsubmit="return confirm('Delete this conversation?');">
+      <form method="post" action="/conversations/<?= e($conversation['slug'] ?? '') ?>/delete"  onsubmit="return confirm('Delete this conversation?');">
         <button type="submit" class="app-btn app-btn-danger">Delete Conversation</button>
       </form>
     </div>

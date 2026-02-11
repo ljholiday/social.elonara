@@ -23,7 +23,7 @@ $members = $members ?? [];
         <p class="app-text-muted">No members in this community yet.</p>
       </div>
     <?php else: ?>
-      <div class="app-stack app-mt-4">
+      <div class="app-mt-4">
         <?php foreach ($members as $member):
           $user = (object)[
               'id' => $member['user_id'] ?? null,

@@ -6,11 +6,11 @@
 $circle = $circle ?? 'all';
 $pagination = $pagination ?? ['page' => 1, 'per_page' => 20, 'has_more' => false, 'next_page' => null];
 ?>
-<section class="app-section app-conversations">
+<section class="app-section">
   <h1 class="app-heading">Conversations</h1>
 
   <?php if (!empty($conversations)): ?>
-    <div id="app-convo-list" class="app-stack">
+    <div id="app-convo-list" >
       <?php foreach ($conversations as $row):
         $slug = (string)($row['slug'] ?? '');
         if ($slug === '') {
@@ -81,12 +81,12 @@ $pagination = $pagination ?? ['page' => 1, 'per_page' => 20, 'has_more' => false
   <?php else: ?>
     <div id="app-convo-list">
       <div class="app-card">
-        <div class="app-card-body app-text-center app-stack app-gap-3">
+        <div class="app-card-body app-text-center">
           <p class="app-text-muted">No conversations found. Start a discussion and connect with your community!</p>
-          <div class="app-flex app-gap-2 app-justify-center app-flex-wrap">
+          <div class="app-flex app-flex-wrap">
             <a class="app-btn app-btn-primary" href="/conversations/create">Start Conversation</a>
             <?php if ($circle !== 'all'): ?>
-              <a class="app-btn app-btn-outline" href="/conversations?circle=all">Browse All Conversations</a>
+              <a class="app-btn" href="/conversations?circle=all">Browse All Conversations</a>
             <?php endif; ?>
           </div>
         </div>
