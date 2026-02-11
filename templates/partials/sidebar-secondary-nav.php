@@ -23,12 +23,12 @@ $is_logged_in = $viewer !== null;
 
     <div class="app-sidebar-nav">
         <?php if ($is_logged_in): ?>
-            <a href="/events/create" class="app-btn app-btn-secondary app-btn-block">
-                Create Event
-            </a>
-
             <a href="/communities/create" class="app-btn app-btn-secondary app-btn-block">
                 Create Community
+            </a>
+
+            <a href="/events/create" class="app-btn app-btn-secondary app-btn-block">
+                Create Event
             </a>
 
             <a href="/profile" class="app-btn app-btn-secondary app-btn-block">

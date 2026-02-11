@@ -22,48 +22,50 @@ $conversations = $recent_conversations ?? [];
 
     <section >
       <div class="app-flex app-flex-between">
-        <h2 class="app-heading app-heading-md">Upcoming events</h2>
-        <a class="app-link" href="/events">View all events →</a>
+        <h2 class="app-heading app-heading-md">Recent conversations</h2>
+        <a class="app-link" href="/conversations">Go to conversations →</a>
       </div>
-      <?php if ($events === []): ?>
+      <?php if ($conversations === []): ?>
         <div class="app-card">
           <div class="app-card-body app-text-center">
-            <p class="app-text-muted">No events on your calendar yet.</p>
-            <a class="app-btn app-btn-secondary" href="/events/create">Plan your first event</a>
+            <p class="app-text-muted">No conversations yet. Start the first one!</p>
+            <a class="app-btn app-btn-secondary" href="/conversations/create">Start a conversation</a>
           </div>
         </div>
       <?php else: ?>
         <div data-invitations-list>
-          <?php foreach ($events as $event): ?>
+          <?php foreach ($conversations as $conversation): ?>
             <?php
-              $eventSlug = $event['slug'] ?? (string)($event['id'] ?? '');
-              $eventUrl = '/events/' . $eventSlug;
-              $eventTitle = $event['context_label'] ?? $event['title'] ?? 'Untitled event';
-              $eventDate = !empty($event['event_date']) ? date_fmt($event['event_date'], 'M j, Y • g:i A') : '';
-              $eventDescription = !empty($event['description']) ? app_truncate_words($event['description'], 24) : '';
-              $badge = app_visibility_badge($event['privacy'] ?? null, $event['community_privacy'] ?? null);
+              $conversationSlug = $conversation['slug'] ?? (string)($conversation['id'] ?? '');
+              $conversationUrl = '/conversations/' . $conversationSlug;
+              $conversationTitle = $conversation['context_label'] ?? $conversation['title'] ?? 'Conversation';
+              $conversationBadge = app_visibility_badge($conversation['privacy'] ?? $conversation['community_privacy'] ?? null);
+              $conversationExcerpt = !empty($conversation['excerpt'])
+                ? app_truncate_words($conversation['excerpt'], 28)
+                : (!empty($conversation['content']) ? app_truncate_words($conversation['content'], 28) : '');
+              $startedAt = !empty($conversation['created_at']) ? app_time_ago($conversation['created_at']) : '';
 
               $badges = [];
-              if (!empty($badge['label'])) {
-                  $badges[] = ['label' => $badge['label'], 'class' => $badge['class']];
+              if (!empty($conversationBadge['label'])) {
+                  $badges[] = ['label' => $conversationBadge['label'], 'class' => $conversationBadge['class']];
               }
 
-              $bodyHtml = $eventDescription !== ''
-                  ? '<div class="app-text-muted app-text-sm">' . htmlspecialchars($eventDescription, ENT_QUOTES, 'UTF-8') . '</div>'
+              $bodyHtml = $conversationExcerpt !== ''
+                  ? '<small class="app-text-muted">' . htmlspecialchars($conversationExcerpt, ENT_QUOTES, 'UTF-8') . '</small>'
                   : '';
 
               $actions = [];
               ob_start();
               ?>
-              <a class="app-btn app-btn-sm" href="<?= e($eventUrl); ?>">View details</a>
+              <a class="app-btn app-btn-sm" href="<?= e($conversationUrl); ?>">Open conversation</a>
               <?php
               $actions[] = ob_get_clean();
 
               $card = [
                   'badges' => $badges,
-                  'title' => $eventTitle,
-                  'title_url' => $eventUrl,
-                  'subtitle' => $eventDate,
+                  'title' => $conversationTitle,
+                  'title_url' => $conversationUrl,
+                  'subtitle' => $startedAt !== '' ? 'Started ' . $startedAt : null,
                   'body_html' => $bodyHtml,
                   'actions' => $actions,
               ];
@@ -141,50 +143,48 @@ $conversations = $recent_conversations ?? [];
 
     <section >
       <div class="app-flex app-flex-between">
-        <h2 class="app-heading app-heading-md">Recent conversations</h2>
-        <a class="app-link" href="/conversations">Go to conversations →</a>
+        <h2 class="app-heading app-heading-md">Upcoming events</h2>
+        <a class="app-link" href="/events">View all events →</a>
       </div>
-      <?php if ($conversations === []): ?>
+      <?php if ($events === []): ?>
         <div class="app-card">
           <div class="app-card-body app-text-center">
-            <p class="app-text-muted">No conversations yet. Start the first one!</p>
-            <a class="app-btn app-btn-secondary" href="/conversations/create">Start a conversation</a>
+            <p class="app-text-muted">No events on your calendar yet.</p>
+            <a class="app-btn app-btn-secondary" href="/events/create">Plan your first event</a>
           </div>
         </div>
       <?php else: ?>
         <div data-invitations-list>
-          <?php foreach ($conversations as $conversation): ?>
+          <?php foreach ($events as $event): ?>
             <?php
-              $conversationSlug = $conversation['slug'] ?? (string)($conversation['id'] ?? '');
-              $conversationUrl = '/conversations/' . $conversationSlug;
-              $conversationTitle = $conversation['context_label'] ?? $conversation['title'] ?? 'Conversation';
-              $conversationBadge = app_visibility_badge($conversation['privacy'] ?? $conversation['community_privacy'] ?? null);
-              $conversationExcerpt = !empty($conversation['excerpt'])
-                ? app_truncate_words($conversation['excerpt'], 28)
-                : (!empty($conversation['content']) ? app_truncate_words($conversation['content'], 28) : '');
-              $startedAt = !empty($conversation['created_at']) ? app_time_ago($conversation['created_at']) : '';
+              $eventSlug = $event['slug'] ?? (string)($event['id'] ?? '');
+              $eventUrl = '/events/' . $eventSlug;
+              $eventTitle = $event['context_label'] ?? $event['title'] ?? 'Untitled event';
+              $eventDate = !empty($event['event_date']) ? date_fmt($event['event_date'], 'M j, Y • g:i A') : '';
+              $eventDescription = !empty($event['description']) ? app_truncate_words($event['description'], 24) : '';
+              $badge = app_visibility_badge($event['privacy'] ?? null, $event['community_privacy'] ?? null);
 
               $badges = [];
-              if (!empty($conversationBadge['label'])) {
-                  $badges[] = ['label' => $conversationBadge['label'], 'class' => $conversationBadge['class']];
+              if (!empty($badge['label'])) {
+                  $badges[] = ['label' => $badge['label'], 'class' => $badge['class']];
               }
 
-              $bodyHtml = $conversationExcerpt !== ''
-                  ? '<small class="app-text-muted">' . htmlspecialchars($conversationExcerpt, ENT_QUOTES, 'UTF-8') . '</small>'
+              $bodyHtml = $eventDescription !== ''
+                  ? '<div class="app-text-muted app-text-sm">' . htmlspecialchars($eventDescription, ENT_QUOTES, 'UTF-8') . '</div>'
                   : '';
 
               $actions = [];
               ob_start();
               ?>
-              <a class="app-btn app-btn-sm" href="<?= e($conversationUrl); ?>">Open conversation</a>
+              <a class="app-btn app-btn-sm" href="<?= e($eventUrl); ?>">View details</a>
               <?php
               $actions[] = ob_get_clean();
 
               $card = [
                   'badges' => $badges,
-                  'title' => $conversationTitle,
-                  'title_url' => $conversationUrl,
-                  'subtitle' => $startedAt !== '' ? 'Started ' . $startedAt : null,
+                  'title' => $eventTitle,
+                  'title_url' => $eventUrl,
+                  'subtitle' => $eventDate,
                   'body_html' => $bodyHtml,
                   'actions' => $actions,
               ];
