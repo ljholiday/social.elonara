@@ -20,7 +20,7 @@ if (empty($sidebar_content)) {
 
 <!-- Mobile Menu Modal -->
 <div id="mobile-menu-modal" class="app-mobile-menu-modal" style="display: none;">
-  <div class="app-modal-overlay" data-close-mobile-menu></div>
+  <div class="app-modal-overlay" data-modal-overlay data-close-mobile-menu></div>
   <div class="app-modal-content">
     <div class="app-modal-header">
       <h3 class="app-modal-title">Menu</h3>

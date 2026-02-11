@@ -17,16 +17,16 @@ $appName = (string)app_config('app.name', 'Elonara Social');
     <a href="/" class="app-logo-link" aria-label="<?= htmlspecialchars($appName, ENT_QUOTES, 'UTF-8'); ?> Home">
         <img src="<?= htmlspecialchars($assetBase . '/icons/logo-100.png', ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($appName, ENT_QUOTES, 'UTF-8'); ?>" class="app-logo">
     </a>
-    <a href="/events" class="app-main-nav-item<?= str_contains($current_path, '/events') ? ' active' : ''; ?>">
+    <a href="/events" class="app-main-nav-item" data-main-nav-item>
         Events
     </a>
-    <a href="/conversations" class="app-main-nav-item<?= str_contains($current_path, '/conversations') ? ' active' : ''; ?>">
+    <a href="/conversations" class="app-main-nav-item" data-main-nav-item>
         Conversation
     </a>
-    <a href="/communities" class="app-main-nav-item<?= str_contains($current_path, '/communities') ? ' active' : ''; ?>">
+    <a href="/communities" class="app-main-nav-item" data-main-nav-item>
         Community
     </a>
-    <button type="button" class="app-mobile-menu-toggle app-main-nav-item" id="mobile-menu-toggle" aria-label="Open menu">
+    <button type="button" class="app-mobile-menu-toggle app-main-nav-item" id="mobile-menu-toggle" aria-label="Open menu" data-main-nav-item>
         <span class="app-hamburger-icon">
             <span></span>
             <span></span>

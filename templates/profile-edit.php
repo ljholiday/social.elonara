@@ -50,7 +50,7 @@ $input = $input ?? [];
         >
         <small >How you want to be displayed across the site. Between 2-100 characters.</small>
         <?php if (isset($errors['display_name'])): ?>
-          <div class="app-field-error"><?= e($errors['display_name']) ?></div>
+          <div data-field-error><?= e($errors['display_name']) ?></div>
         <?php endif; ?>
       </div>
 
@@ -65,7 +65,7 @@ $input = $input ?? [];
         ><?= e($input['bio'] ?? '') ?></textarea>
         <small >Tell us about yourself. Maximum 500 characters.</small>
         <?php if (isset($errors['bio'])): ?>
-          <div class="app-field-error"><?= e($errors['bio']) ?></div>
+          <div data-field-error><?= e($errors['bio']) ?></div>
         <?php endif; ?>
       </div>
 
@@ -131,10 +131,10 @@ $input = $input ?? [];
         <input type="hidden" id="avatar-url" name="avatar_url_uploaded" value="">
         <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library.</small>
         <?php if (isset($errors['avatar'])): ?>
-          <div class="app-field-error"><?= e($errors['avatar']) ?></div>
+          <div data-field-error><?= e($errors['avatar']) ?></div>
         <?php endif; ?>
         <?php if (isset($errors['avatar_alt'])): ?>
-          <div class="app-field-error"><?= e($errors['avatar_alt']) ?></div>
+          <div data-field-error><?= e($errors['avatar_alt']) ?></div>
         <?php endif; ?>
       </div>
 
@@ -160,10 +160,10 @@ $input = $input ?? [];
         <input type="hidden" id="cover-url" name="cover_url_uploaded" value="">
         <small  style="display: block; margin-top: 0.5rem;">Click to upload a cover image or choose from your library. Recommended size: 1200x400px.</small>
         <?php if (isset($errors['cover'])): ?>
-          <div class="app-field-error"><?= e($errors['cover']) ?></div>
+          <div data-field-error><?= e($errors['cover']) ?></div>
         <?php endif; ?>
         <?php if (isset($errors['cover_alt'])): ?>
-          <div class="app-field-error"><?= e($errors['cover_alt']) ?></div>
+          <div data-field-error><?= e($errors['cover_alt']) ?></div>
         <?php endif; ?>
       </div>
 

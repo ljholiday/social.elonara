@@ -25,7 +25,7 @@ runOnReady(function () {
     });
 
     // Highlight the active navigation item on desktop.
-    const navItems = document.querySelectorAll('.app-main-nav-item');
+    const navItems = document.querySelectorAll('[data-main-nav-item]');
     navItems.forEach((item) => {
         if (item.href && window.location.pathname.includes(item.href.split('/').pop() ?? '')) {
             item.classList.add('active');

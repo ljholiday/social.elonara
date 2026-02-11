@@ -13,7 +13,7 @@
         return; // Modal not on this page
     }
 
-    const modalOverlay = modal.querySelector('.app-modal-overlay');
+    const modalOverlay = modal.querySelector('[data-modal-overlay]');
     const dismissButtons = modal.querySelectorAll('[data-dismiss-modal]');
     const grid = modal.querySelector('[data-image-library-grid]');
     const loadingEl = modal.querySelector('[data-image-library-loading]');

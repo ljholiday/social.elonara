@@ -59,10 +59,10 @@ $input = $input ?? ['name' => '', 'description' => '', 'privacy' => 'public'];
       <input type="hidden" id="cover-image-url" name="cover_image_url_uploaded" value="">
       <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library. Recommended size: 1200x400px.</small>
       <?php if (isset($errors['cover_image'])): ?>
-        <div class="app-field-error"><?= e($errors['cover_image']) ?></div>
+        <div data-field-error><?= e($errors['cover_image']) ?></div>
       <?php endif; ?>
       <?php if (isset($errors['cover_image_alt'])): ?>
-        <div class="app-field-error"><?= e($errors['cover_image_alt']) ?></div>
+        <div data-field-error><?= e($errors['cover_image_alt']) ?></div>
       <?php endif; ?>
     </div>
 

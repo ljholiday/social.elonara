@@ -15,7 +15,7 @@
 		const modal = document.createElement('div');
 		modal.className = 'app-modal';
 		modal.innerHTML = `
-			<div class="app-modal-overlay"></div>
+			<div class="app-modal-overlay" data-modal-overlay></div>
 			<div class="app-modal-content">
 				<div class="app-modal-header">
 					<h3 class="app-modal-title">${escapeHtml(title)}</h3>
@@ -35,7 +35,7 @@
 
 		// Close handlers
 		const closeButtons = modal.querySelectorAll('[data-dismiss="modal"]');
-		const overlay = modal.querySelector('.app-modal-overlay');
+		const overlay = modal.querySelector('[data-modal-overlay]');
 
 		closeButtons.forEach(btn => {
 			btn.addEventListener('click', function() {

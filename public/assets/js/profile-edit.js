@@ -97,7 +97,7 @@
      */
     function showErrors(errors) {
         // Clear existing field errors
-        const fieldErrors = form.querySelectorAll('.app-field-error');
+        const fieldErrors = form.querySelectorAll('[data-field-error]');
         fieldErrors.forEach(el => el.remove());
 
         const invalidInputs = form.querySelectorAll('.is-invalid');
@@ -124,7 +124,7 @@
                 input.classList.add('is-invalid');
 
                 const errorDiv = document.createElement('div');
-                errorDiv.className = 'app-field-error';
+                errorDiv.setAttribute('data-field-error', 'true');
                 errorDiv.textContent = errors[fieldName];
                 input.parentNode.appendChild(errorDiv);
             }
@@ -142,7 +142,7 @@
             successContainer.innerHTML = '';
         }
 
-        const fieldErrors = form.querySelectorAll('.app-field-error');
+        const fieldErrors = form.querySelectorAll('[data-field-error]');
         fieldErrors.forEach(el => el.remove());
 
         const invalidInputs = form.querySelectorAll('.is-invalid');

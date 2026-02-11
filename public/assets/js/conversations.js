@@ -5,7 +5,7 @@
 (function() {
 	'use strict';
 
-	const nav = document.querySelector('.app-nav');
+	const nav = document.querySelector('[data-conversations-nav]');
 	const list = document.getElementById('app-convo-list');
 	const circleStatus = document.getElementById('app-circle-status');
 

@@ -67,7 +67,7 @@ $csrf_token = $security->createNonce('app_nonce', $userId);
         <?php include __DIR__ . '/../partials/main-nav.php'; ?>
 
         <?php if ($nav_items): ?>
-        <div class="app-nav">
+        <div class="app-nav" data-conversations-nav>
             <?php foreach ($nav_items as $nav_item): ?>
                 <?php if (!empty($nav_item['type']) && $nav_item['type'] === 'button'): ?>
                     <button type="button"

@@ -45,7 +45,7 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
     data-action-nonce="<?= htmlspecialchars($bluesky_nonce, ENT_QUOTES, 'UTF-8'); ?>"
     style="display: none;"
 >
-    <div class="app-modal-overlay" data-close-bluesky-modal></div>
+    <div class="app-modal-overlay" data-modal-overlay data-close-bluesky-modal></div>
     <div class="app-modal-content app-modal-lg">
         <div class="app-modal-header">
             <h3 class="app-modal-title">Invite Bluesky Followers</h3>

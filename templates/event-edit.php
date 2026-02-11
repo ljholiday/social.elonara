@@ -159,7 +159,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         </div>
         <p >Common choices are every 1, 2, or 4 intervals.</p>
         <?php if (isset($errors['recurrence_interval'])): ?>
-          <div class="app-field-error"><?= e($errors['recurrence_interval']) ?></div>
+          <div data-field-error><?= e($errors['recurrence_interval']) ?></div>
         <?php endif; ?>
       </div>
 
@@ -179,7 +179,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
           <?php endforeach; ?>
         </div>
         <?php if (isset($errors['recurrence_days'])): ?>
-          <div class="app-field-error"><?= e($errors['recurrence_days']) ?></div>
+          <div data-field-error><?= e($errors['recurrence_days']) ?></div>
         <?php endif; ?>
       </div>
 
@@ -207,7 +207,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
             value="<?= e($monthlyDayNumber) ?>"
           >
           <?php if (isset($errors['monthly_day_number'])): ?>
-            <div class="app-field-error"><?= e($errors['monthly_day_number']) ?></div>
+            <div data-field-error><?= e($errors['monthly_day_number']) ?></div>
           <?php endif; ?>
         </div>
         <div class="app-recurrence-monthly-mode" data-monthly-mode="weekday"<?= $showMonthlyWeekday ? '' : ' style="display:none;"' ?>>
@@ -225,7 +225,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
                 <?php endforeach; ?>
               </select>
               <?php if (isset($errors['monthly_week'])): ?>
-                <div class="app-field-error"><?= e($errors['monthly_week']) ?></div>
+                <div data-field-error><?= e($errors['monthly_week']) ?></div>
               <?php endif; ?>
             </div>
             <div class="app-recurrence-monthly-cell">
@@ -241,7 +241,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
                 <?php endforeach; ?>
               </select>
               <?php if (isset($errors['monthly_weekday'])): ?>
-                <div class="app-field-error"><?= e($errors['monthly_weekday']) ?></div>
+                <div data-field-error><?= e($errors['monthly_weekday']) ?></div>
               <?php endif; ?>
             </div>
           </div>
@@ -295,10 +295,10 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         <input type="hidden" id="featured-image-url" name="featured_image_url_uploaded" value="">
         <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library. Recommended size: 1200x630px.</small>
         <?php if (isset($errors['featured_image'])): ?>
-          <div class="app-field-error"><?= e($errors['featured_image']) ?></div>
+          <div data-field-error><?= e($errors['featured_image']) ?></div>
         <?php endif; ?>
         <?php if (isset($errors['featured_image_alt'])): ?>
-          <div class="app-field-error"><?= e($errors['featured_image_alt']) ?></div>
+          <div data-field-error><?= e($errors['featured_image_alt']) ?></div>
         <?php endif; ?>
       </div>
 

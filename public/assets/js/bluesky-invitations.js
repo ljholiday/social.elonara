@@ -38,7 +38,7 @@
 
     const openButtons = document.querySelectorAll('[data-open-bluesky-modal]');
     const closeBtns = modal.querySelectorAll('[data-close-bluesky-modal]');
-    const overlay = modal.querySelector('.app-modal-overlay');
+    const overlay = modal.querySelector('[data-modal-overlay]');
     const searchInput = document.getElementById('follower-search');
     const syncBtn = document.getElementById('sync-followers-btn');
     const inviteBtn = document.getElementById('invite-selected-btn');

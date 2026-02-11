@@ -8,7 +8,7 @@
 
 	const openBtn = document.querySelector('[data-open-reply-modal]');
 	const closeBtns = modal.querySelectorAll('[data-dismiss-modal]');
-	const overlay = modal.querySelector('.app-modal-overlay');
+	const overlay = modal.querySelector('[data-modal-overlay]');
 	const form = document.getElementById('reply-form');
 	const modalTitle = document.getElementById('reply-modal-title');
 	const submitBtn = document.getElementById('reply-submit-btn');

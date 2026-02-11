@@ -23,7 +23,7 @@ $shouldAutoOpen = $reply_errors !== [];
     data-auto-open="<?= $shouldAutoOpen ? '1' : '0'; ?>"
     data-conversation-slug="<?= e($c->slug ?? '') ?>"
 >
-  <div class="app-modal-overlay"></div>
+  <div class="app-modal-overlay" data-modal-overlay></div>
   <div class="app-modal-content">
     <div class="app-modal-header">
       <h3 class="app-modal-title" id="reply-modal-title">Add Reply</h3>

@@ -49,7 +49,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
     style="display: none;"
     data-user-id="<?= htmlspecialchars((string)$current_user_id, ENT_QUOTES, 'UTF-8') ?>"
 >
-  <div class="app-modal-overlay"></div>
+  <div class="app-modal-overlay" data-modal-overlay></div>
   <div class="app-modal-content" style="max-width: 800px; width: 90%;">
     <div class="app-modal-header">
       <h3 class="app-modal-title">Select Image</h3>
@@ -98,7 +98,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
                 placeholder="Describe this image for accessibility"
                 style="max-width: 500px; margin: 0 auto;"
               >
-              <div class="app-field-error" id="upload-alt-error" style="display: none;"></div>
+              <div data-field-error id="upload-alt-error" style="display: none;"></div>
             </div>
             <div style="margin-top: 1.5rem;">
               <button type="button" class="app-btn app-btn-primary" id="upload-submit-btn">Upload & Select</button>
