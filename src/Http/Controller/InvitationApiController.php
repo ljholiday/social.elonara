@@ -594,7 +594,7 @@ final class InvitationApiController
                 } else {
                     ob_start();
                     ?>
-                    <select class="app-form-input app-form-input-sm"
+                    <select class="app-form-input"
                       onchange="changeMemberRole(<?= htmlspecialchars((string)$memberId) ?>, this.value, <?= htmlspecialchars((string)$communityId) ?>)">
                       <option value="member"<?= $role === 'member' ? ' selected' : '' ?>>Member</option>
                       <option value="moderator"<?= $role === 'moderator' ? ' selected' : '' ?>>Moderator</option>

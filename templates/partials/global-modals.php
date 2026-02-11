@@ -58,10 +58,10 @@ $current_user_id = (int)($currentUser->id ?? 0);
 
     <!-- Tabs -->
     <div class="app-tabs" style="border-bottom: 1px solid #e5e7eb;">
-      <button type="button" class="app-tab-btn app-tab-active" data-tab="upload" style="padding: 0.75rem 1.5rem; border: none; background: none; cursor: pointer; border-bottom: 2px solid #3b82f6; font-weight: 500;">
+      <button type="button" data-tab-button data-tab="upload" data-active="true" style="padding: 0.75rem 1.5rem; border: none; background: none; cursor: pointer; border-bottom: 2px solid #3b82f6; font-weight: 500;">
         Upload
       </button>
-      <button type="button" class="app-tab-btn" data-tab="library" style="padding: 0.75rem 1.5rem; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; color: #6b7280;">
+      <button type="button" data-tab-button data-tab="library" style="padding: 0.75rem 1.5rem; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; color: #6b7280;">
         Library
       </button>
     </div>
@@ -69,14 +69,14 @@ $current_user_id = (int)($currentUser->id ?? 0);
     <div class="app-modal-body" style="min-height: 400px;">
       <!-- Upload Tab -->
       <div  id="tab-upload" style="padding: 2rem;">
-        <div class="app-upload-area" style="border: 2px dashed #d1d5db; border-radius: 8px; padding: 3rem; text-align: center; background: #f9fafb;">
+        <div data-upload-area style="border: 2px dashed #d1d5db; border-radius: 8px; padding: 3rem; text-align: center; background: #f9fafb;">
           <input
             type="file"
             id="modal-file-input"
             accept="image/jpeg,image/png,image/gif,image/webp"
             style="display: none;"
           >
-          <div class="app-upload-prompt">
+          <div data-upload-prompt>
             <svg style="width: 64px; height: 64px; margin: 0 auto 1rem; color: #9ca3af;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
             </svg>
@@ -87,7 +87,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
           </div>
 
           <!-- Upload Preview -->
-          <div class="app-upload-preview" style="display: none; margin-top: 2rem;">
+          <div data-upload-preview style="display: none; margin-top: 2rem;">
             <img id="upload-preview-img" src="" alt="" style="max-width: 100%; max-height: 300px; border-radius: 8px; margin-bottom: 1rem;">
             <div >
               <label  for="upload-alt-text">Image description (required)</label>
@@ -110,17 +110,17 @@ $current_user_id = (int)($currentUser->id ?? 0);
 
       <!-- Library Tab -->
       <div  id="tab-library" style="display: none; padding: 2rem;">
-        <div class="app-image-library-loading" style="display: none; text-align: center; padding: 2rem;">
+        <div data-image-library-loading style="display: none; text-align: center; padding: 2rem;">
           <p>Loading your images...</p>
         </div>
-        <div class="app-image-library-empty" style="display: none; text-align: center; padding: 2rem;">
+        <div data-image-library-empty style="display: none; text-align: center; padding: 2rem;">
           <p class="app-text-muted">No images found in your library.</p>
           <p class="app-text-muted app-text-sm">Switch to the Upload tab to add images to your library.</p>
         </div>
-        <div class="app-image-library-error" style="display: none; text-align: center; padding: 2rem;">
+        <div data-image-library-error style="display: none; text-align: center; padding: 2rem;">
           <p >Failed to load images. Please try again.</p>
         </div>
-        <div class="app-image-library-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
+        <div data-image-library-grid style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
           <!-- Thumbnails will be loaded here by JavaScript -->
         </div>
       </div>

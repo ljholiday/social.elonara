@@ -13,7 +13,8 @@ $communityActionNonce = $securityService->createNonce('app_community_action', $v
 $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewer_id);
 
 ?>
-<section class="app-section app-community-manage"
+<section class="app-section"
+  data-entity-manage="community"
   data-community-id="<?= e((string)($community['id'] ?? 0)) ?>"
   data-community-action-nonce="<?= htmlspecialchars($communityActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
   <?php if ($statusCode === 404 || empty($community)): ?>
@@ -59,7 +60,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
           <p class="app-text-muted">Total members: <strong><?= e((string)$memberCount) ?></strong></p>
         </div>
 
-        <div id="community-members-table" class="app-invitations-list">
+        <div id="community-members-table" class="app-member-list">
           <?php if (empty($members)): ?>
             <div class="app-text-center app-text-muted">No members yet.</div>
           <?php else: ?>

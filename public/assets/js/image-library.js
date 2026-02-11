@@ -15,22 +15,22 @@
 
     const modalOverlay = modal.querySelector('.app-modal-overlay');
     const dismissButtons = modal.querySelectorAll('[data-dismiss-modal]');
-    const grid = modal.querySelector('.app-image-library-grid');
-    const loadingEl = modal.querySelector('.app-image-library-loading');
-    const emptyEl = modal.querySelector('.app-image-library-empty');
-    const errorEl = modal.querySelector('.app-image-library-error');
+    const grid = modal.querySelector('[data-image-library-grid]');
+    const loadingEl = modal.querySelector('[data-image-library-loading]');
+    const emptyEl = modal.querySelector('[data-image-library-empty]');
+    const errorEl = modal.querySelector('[data-image-library-error]');
 
     // Tab elements
-    const tabButtons = modal.querySelectorAll('.app-tab-btn');
+    const tabButtons = modal.querySelectorAll('[data-tab-button]');
     const uploadTab = document.getElementById('tab-upload');
     const libraryTab = document.getElementById('tab-library');
 
     // Upload elements
-    const uploadArea = modal.querySelector('.app-upload-area');
+    const uploadArea = modal.querySelector('[data-upload-area]');
     const fileInput = document.getElementById('modal-file-input');
     const selectFileBtn = document.getElementById('select-file-btn');
-    const uploadPrompt = modal.querySelector('.app-upload-prompt');
-    const uploadPreview = modal.querySelector('.app-upload-preview');
+    const uploadPrompt = modal.querySelector('[data-upload-prompt]');
+    const uploadPreview = modal.querySelector('[data-upload-preview]');
     const uploadPreviewImg = document.getElementById('upload-preview-img');
     const uploadAltText = document.getElementById('upload-alt-text');
     const uploadAltError = document.getElementById('upload-alt-error');
@@ -88,7 +88,11 @@
         // Update tab buttons
         tabButtons.forEach(btn => {
             const isActive = btn.dataset.tab === tabName;
-            btn.classList.toggle('app-tab-active', isActive);
+            if (isActive) {
+                btn.setAttribute('data-active', 'true');
+            } else {
+                btn.removeAttribute('data-active');
+            }
             btn.style.borderBottomColor = isActive ? '#3b82f6' : 'transparent';
             btn.style.color = isActive ? '' : '#6b7280';
             btn.style.fontWeight = isActive ? '500' : '400';

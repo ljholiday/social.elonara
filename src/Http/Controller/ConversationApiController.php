@@ -243,7 +243,7 @@ final class ConversationApiController
         }
 
         ob_start();
-        echo '<div class="app-stack">';
+        echo '<div>';
         foreach ($rows as $reply) {
             $r = (object)$reply;
             echo '<article class="app-card" id="reply-' . htmlspecialchars((string)($r->id ?? '')) . '">';

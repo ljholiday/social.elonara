@@ -186,18 +186,18 @@ function getCSRFToken() {
 }
 
 function getInvitationsWrapper() {
-    return document.querySelector('.app-invitations-wrapper');
+    return document.querySelector('[data-invitations-wrapper]');
 }
 
 function getEntityActionNonce(entityType) {
     if (entityType === 'community') {
-        const section = document.querySelector('.app-community-manage');
+        const section = document.querySelector('[data-entity-manage="community"]');
         if (section && section.dataset.communityActionNonce) {
             return section.dataset.communityActionNonce;
         }
     }
     if (entityType === 'event') {
-        const section = document.querySelector('.app-event-manage');
+        const section = document.querySelector('[data-entity-manage="event"]');
         if (section && section.dataset.eventActionNonce) {
             return section.dataset.eventActionNonce;
         }
@@ -240,8 +240,8 @@ function updateInvitationsWrapperMeta(entityType, entityId, nonce) {
 
     if (nonce && entityType) {
         const section = entityType === 'community'
-            ? document.querySelector('.app-community-manage')
-            : document.querySelector('.app-event-manage');
+            ? document.querySelector('[data-entity-manage="community"]')
+            : document.querySelector('[data-entity-manage="event"]');
         if (section) {
             if (entityType === 'community') {
                 section.dataset.communityActionNonce = nonce;
@@ -369,7 +369,7 @@ function initInvitationCopy() {
         return fallback || null;
     }
 
-    document.querySelectorAll('.app-copy-invitation-link, .app-copy-invitation-url').forEach(button => {
+    document.querySelectorAll('[data-invitation-copy="link"], [data-invitation-copy="url"]').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
 
@@ -392,7 +392,7 @@ function initInvitationCopy() {
         });
     });
 
-    document.querySelectorAll('.app-copy-invitation-with-message').forEach(button => {
+    document.querySelectorAll('[data-invitation-copy="with-message"]').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
 
@@ -757,14 +757,14 @@ function renderInvitationsList(invitations, entityType) {
         });
     }).join('');
 
-    return `<div class="app-invitations-list">${cards}</div>`;
+    return `<div data-invitations-list>${cards}</div>`;
 }
 
 /**
  * Attach invitation action handlers (cancel/resend)
  */
 function attachInvitationActionHandlers(entityType, entityId, cancelNonce = '') {
-    const containers = document.querySelectorAll('.app-invitations-list');
+    const containers = document.querySelectorAll('[data-invitations-list]');
     if (!containers.length) {
         return;
     }

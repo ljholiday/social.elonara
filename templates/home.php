@@ -33,7 +33,7 @@ $conversations = $recent_conversations ?? [];
           </div>
         </div>
       <?php else: ?>
-        <div class="app-invitations-list">
+        <div data-invitations-list>
           <?php foreach ($events as $event): ?>
             <?php
               $eventSlug = $event['slug'] ?? (string)($event['id'] ?? '');
@@ -87,7 +87,7 @@ $conversations = $recent_conversations ?? [];
           </div>
         </div>
       <?php else: ?>
-        <div class="app-invitations-list">
+        <div data-invitations-list>
           <?php foreach ($communities as $community): ?>
             <?php
               $communitySlug = $community['slug'] ?? (string)($community['id'] ?? '');
@@ -152,7 +152,7 @@ $conversations = $recent_conversations ?? [];
           </div>
         </div>
       <?php else: ?>
-        <div class="app-invitations-list">
+        <div data-invitations-list>
           <?php foreach ($conversations as $conversation): ?>
             <?php
               $conversationSlug = $conversation['slug'] ?? (string)($conversation['id'] ?? '');

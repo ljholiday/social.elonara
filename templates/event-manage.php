@@ -15,7 +15,8 @@ $securityService = app_service('security.service');
 $eventActionNonce = $securityService->createNonce('app_event_action', $viewerId);
 $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewerId);
 ?>
-<section class="app-section app-event-manage"
+<section class="app-section"
+  data-entity-manage="event"
   data-event-id="<?= e((string)($event['id'] ?? 0)) ?>"
   data-event-action-nonce="<?= htmlspecialchars($eventActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
   <?php if ($status === 404 || empty($event)): ?>
@@ -117,7 +118,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
         <div id="event-guests-section"
           data-event-id="<?= e((string)$eventId) ?>"
           data-event-action-nonce="<?= htmlspecialchars($eventActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
-          <div id="event-guests-body" class="app-invitations-list"></div>
+          <div id="event-guests-body"></div>
         </div>
 
         <div id="event-guests-empty" class="app-text-center app-p-4" style="display:none;">

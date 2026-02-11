@@ -48,7 +48,7 @@ $share_url = $invite_url !== '' ? $invite_url : '/' . $entity_type . 's';
 					<input type="text" class="app-form-input app-flex-1" id="invitation-link"
 						   value="<?php echo htmlspecialchars($share_url, ENT_QUOTES, 'UTF-8'); ?>"
 						   readonly>
-					<button type="button" class="app-btn app-copy-invitation-link"
+					<button type="button" class="app-btn" data-invitation-copy="link"
 						data-url="<?php echo htmlspecialchars($share_url, ENT_QUOTES, 'UTF-8'); ?>">
 						Copy
 					</button>
@@ -60,7 +60,7 @@ $share_url = $invite_url !== '' ? $invite_url : '/' . $entity_type . 's';
 				<textarea class="app-form-textarea" id="custom-message" rows="3"
 						  placeholder="Add a personal message to include when sharing..."></textarea>
 				<div >
-					<button type="button" class="app-btn app-copy-invitation-with-message">
+					<button type="button" class="app-btn" data-invitation-copy="with-message">
 						Copy Link with Message
 					</button>
 				</div>
@@ -94,7 +94,7 @@ $share_url = $invite_url !== '' ? $invite_url : '/' . $entity_type . 's';
 	<?php if ($show_pending) : ?>
     <div >
         <h4 class="app-heading app-heading-sm">Pending Invitations</h4>
-        <div class="app-invitations-wrapper"
+        <div data-invitations-wrapper
              data-entity-type="<?php echo htmlspecialchars($entity_type, ENT_QUOTES, 'UTF-8'); ?>"
              data-entity-id="<?php echo (int)$entity_id; ?>"
              data-cancel-nonce="<?php echo htmlspecialchars($cancel_nonce, ENT_QUOTES, 'UTF-8'); ?>">
