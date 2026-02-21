@@ -41,7 +41,11 @@ final class HomeController
         $viewerEmail = $viewer->email ?? null;
 
         $events = $viewerId > 0
-            ? $this->events->listMine($viewerId, $viewerEmail, 5)
+            ? $this->events->listMineUpcoming($viewerId, $viewerEmail, 5)
+            : [];
+
+        $pastEvents = $viewerId > 0
+            ? $this->events->listMinePast($viewerId, $viewerEmail, 6)
             : [];
 
         $context = $this->circles->buildContext($viewerId);
@@ -60,6 +64,16 @@ final class HomeController
             return $event;
         }, $events);
 
+        $pastEvents = array_map(function (array $event): array {
+            $path = ContextBuilder::event($event, $this->communities);
+            $plain = ContextLabel::renderPlain($path);
+            $html = ContextLabel::render($path);
+            $event['context_path'] = $path;
+            $event['context_label'] = $plain !== '' ? $plain : (string)($event['title'] ?? '');
+            $event['context_label_html'] = $html !== '' ? $html : htmlspecialchars((string)($event['title'] ?? ''), ENT_QUOTES, 'UTF-8');
+            return $event;
+        }, $pastEvents);
+
         $recentConversations = array_map(function (array $conversation): array {
             $path = ContextBuilder::conversation($conversation, $this->communities, $this->events);
             $plain = ContextLabel::renderPlain($path);
@@ -73,6 +87,7 @@ final class HomeController
         return [
             'viewer' => $viewer,
             'upcoming_events' => $events,
+            'past_events' => $pastEvents,
             'my_communities' => $communities,
             'recent_conversations' => $recentConversations,
         ];

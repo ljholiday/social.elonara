@@ -47,9 +47,11 @@ final class EventController
         $viewerEmail = $this->auth->currentUserEmail();
 
         if ($filter === 'my') {
-            $events = $viewerId > 0 ? $this->events->listMine($viewerId, $viewerEmail) : [];
+            $events = $viewerId > 0 ? $this->events->listMineUpcoming($viewerId, $viewerEmail) : [];
+            $pastEvents = $viewerId > 0 ? $this->events->listMinePast($viewerId, $viewerEmail) : [];
         } else {
-            $events = $this->events->listRecent();
+            $events = $this->events->listUpcoming();
+            $pastEvents = $this->events->listPast();
         }
 
         $events = array_map(function (array $event): array {
@@ -62,8 +64,19 @@ final class EventController
             return $event;
         }, $events);
 
+        $pastEvents = array_map(function (array $event): array {
+            $path = ContextBuilder::event($event, $this->communities);
+            $plain = ContextLabel::renderPlain($path);
+            $html = ContextLabel::render($path);
+            $event['context_path'] = $path;
+            $event['context_label'] = $plain !== '' ? $plain : (string)($event['title'] ?? '');
+            $event['context_label_html'] = $html !== '' ? $html : htmlspecialchars((string)($event['title'] ?? ''), ENT_QUOTES, 'UTF-8');
+            return $event;
+        }, $pastEvents);
+
         return [
             'events' => $events,
+            'past_events' => $pastEvents,
             'filter' => $filter,
         ];
     }

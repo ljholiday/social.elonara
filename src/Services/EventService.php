@@ -48,6 +48,50 @@ final class EventService
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * List upcoming events, soonest first.
+     *
+     * @param int $limit Max rows to return.
+     * @return array<int, array<string, mixed>>
+     */
+    public function listUpcoming(int $limit = 20): array
+    {
+        $sql = "SELECT id, title, event_date, end_date, location, slug, description, privacy,
+                       featured_image, featured_image_alt
+                FROM events
+                WHERE COALESCE(end_date, event_date) >= CURDATE()
+                ORDER BY event_date ASC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * List past events, most recent first.
+     *
+     * @param int $limit Max rows to return.
+     * @return array<int, array<string, mixed>>
+     */
+    public function listPast(int $limit = 20): array
+    {
+        $sql = "SELECT id, title, event_date, end_date, location, slug, description, privacy,
+                       featured_image, featured_image_alt
+                FROM events
+                WHERE COALESCE(end_date, event_date) < CURDATE()
+                ORDER BY event_date DESC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function countAll(): int
     {
         $stmt = $this->db->pdo()->query('SELECT COUNT(*) FROM events');
@@ -162,6 +206,82 @@ final class EventService
         } else {
             $stmt->bindValue(':viewer_email', '', PDO::PARAM_STR);
         }
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function listMineUpcoming(int $viewerId, ?string $viewerEmail = null, int $limit = 20): array
+    {
+        if ($viewerId <= 0) {
+            return [];
+        }
+
+        $email = $viewerEmail !== null ? trim($viewerEmail) : $this->lookupUserEmail($viewerId);
+
+        $sql = "SELECT DISTINCT e.id, e.title, e.event_date, e.end_date, e.location, e.slug, e.description, e.privacy,
+                       e.community_id, e.featured_image, e.featured_image_alt,
+                       com.name AS community_name, com.slug AS community_slug
+                FROM events e
+                LEFT JOIN guests g ON g.event_id = e.id
+                LEFT JOIN communities com ON e.community_id = com.id
+                WHERE e.event_status = 'active'
+                  AND e.status = 'active'
+                  AND COALESCE(e.end_date, e.event_date) >= CURDATE()
+                  AND (
+                        e.author_id = :viewer_author
+                        OR g.converted_user_id = :viewer_guest
+                        OR g.email = :viewer_email
+                    )
+                ORDER BY e.event_date ASC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':viewer_author', $viewerId, PDO::PARAM_INT);
+        $stmt->bindValue(':viewer_guest', $viewerId, PDO::PARAM_INT);
+        $stmt->bindValue(':viewer_email', $email ?? '', PDO::PARAM_STR);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function listMinePast(int $viewerId, ?string $viewerEmail = null, int $limit = 20): array
+    {
+        if ($viewerId <= 0) {
+            return [];
+        }
+
+        $email = $viewerEmail !== null ? trim($viewerEmail) : $this->lookupUserEmail($viewerId);
+
+        $sql = "SELECT DISTINCT e.id, e.title, e.event_date, e.end_date, e.location, e.slug, e.description, e.privacy,
+                       e.community_id, e.featured_image, e.featured_image_alt,
+                       com.name AS community_name, com.slug AS community_slug
+                FROM events e
+                LEFT JOIN guests g ON g.event_id = e.id
+                LEFT JOIN communities com ON e.community_id = com.id
+                WHERE e.event_status = 'active'
+                  AND e.status = 'active'
+                  AND COALESCE(e.end_date, e.event_date) < CURDATE()
+                  AND (
+                        e.author_id = :viewer_author
+                        OR g.converted_user_id = :viewer_guest
+                        OR g.email = :viewer_email
+                    )
+                ORDER BY e.event_date DESC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':viewer_author', $viewerId, PDO::PARAM_INT);
+        $stmt->bindValue(':viewer_guest', $viewerId, PDO::PARAM_INT);
+        $stmt->bindValue(':viewer_email', $email ?? '', PDO::PARAM_STR);
         $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
         $stmt->execute();
 

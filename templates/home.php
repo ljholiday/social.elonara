@@ -1,11 +1,13 @@
 <?php
 /** @var object $viewer */
 /** @var array<int,array<string,mixed>> $upcoming_events */
+/** @var array<int,array<string,mixed>> $past_events */
 /** @var array<int,array<string,mixed>> $my_communities */
 /** @var array<int,array<string,mixed>> $recent_conversations */
 
 $viewerName = e($viewer->display_name ?? $viewer->username ?? 'Friend');
 $events = $upcoming_events ?? [];
+$pastEvents = $past_events ?? [];
 $communities = $my_communities ?? [];
 $conversations = $recent_conversations ?? [];
 ?>
@@ -191,6 +193,55 @@ $conversations = $recent_conversations ?? [];
               include __DIR__ . '/partials/member-card.php';
             ?>
           <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($pastEvents !== []): ?>
+        <div class="app-mt-4">
+          <button type="button" class="app-btn app-btn-secondary app-btn-block" data-toggle-past-events>
+            Show past events
+          </button>
+          <div data-past-events style="display: none;">
+            <div class="app-text-muted app-text-sm app-text-center app-mb-4">Past events</div>
+            <div data-invitations-list>
+              <?php foreach ($pastEvents as $event): ?>
+                <?php
+                  $eventSlug = $event['slug'] ?? (string)($event['id'] ?? '');
+                  $eventUrl = '/events/' . $eventSlug;
+                  $eventTitle = $event['context_label'] ?? $event['title'] ?? 'Untitled event';
+                  $eventDate = !empty($event['event_date']) ? date_fmt($event['event_date'], 'M j, Y • g:i A') : '';
+                  $eventDescription = !empty($event['description']) ? app_truncate_words($event['description'], 24) : '';
+                  $badge = app_visibility_badge($event['privacy'] ?? null, $event['community_privacy'] ?? null);
+
+                  $badges = [];
+                  if (!empty($badge['label'])) {
+                      $badges[] = ['label' => $badge['label'], 'class' => $badge['class']];
+                  }
+
+                  $bodyHtml = $eventDescription !== ''
+                      ? '<div class="app-text-muted app-text-sm">' . htmlspecialchars($eventDescription, ENT_QUOTES, 'UTF-8') . '</div>'
+                      : '';
+
+                  $actions = [];
+                  ob_start();
+                  ?>
+                  <a class="app-btn app-btn-sm" href="<?= e($eventUrl); ?>">View details</a>
+                  <?php
+                  $actions[] = ob_get_clean();
+
+                  $card = [
+                      'badges' => $badges,
+                      'title' => $eventTitle,
+                      'title_url' => $eventUrl,
+                      'subtitle' => $eventDate,
+                      'body_html' => $bodyHtml,
+                      'actions' => $actions,
+                  ];
+                  include __DIR__ . '/partials/member-card.php';
+                ?>
+              <?php endforeach; ?>
+            </div>
+          </div>
         </div>
       <?php endif; ?>
     </section>

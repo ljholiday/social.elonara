@@ -34,6 +34,7 @@ runOnReady(function () {
 
     initializeSearch();
     initializeMobileMenu();
+    initializePastEventsToggle();
 });
 
 /**
@@ -201,5 +202,27 @@ function initializeMobileMenu() {
         if (event.key === 'Escape' && modal.style.display === 'block') {
             closeMobileMenu();
         }
+    });
+}
+
+function initializePastEventsToggle() {
+    const toggles = document.querySelectorAll('[data-toggle-past-events]');
+    if (!toggles.length) {
+        return;
+    }
+
+    toggles.forEach((toggle) => {
+        const container = toggle.parentElement?.querySelector('[data-past-events]');
+        if (!container) {
+            return;
+        }
+
+        toggle.addEventListener('click', () => {
+            const isHidden = container.style.display === 'none' || container.style.display === '';
+            if (isHidden) {
+                container.style.display = 'block';
+                toggle.outerHTML = '<div class="app-text-muted app-text-sm app-text-center app-mb-4">Past events</div>';
+            }
+        });
     });
 }
