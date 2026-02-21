@@ -13,6 +13,7 @@ dev/
 config/config.php
 config/database.php
 config/security_salts.php
+config/config_backup.php
 .env
 *.env
 assets/css/dev.css
