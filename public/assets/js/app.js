@@ -91,7 +91,7 @@ function initializeSearch() {
 
                 if (item.badge_label) {
                     const badge = document.createElement('span');
-                    badge.className = item.badge_class ?? 'app-badge';
+                    badge.className = 'app-badge ' + (item.badge_class ?? 'app-badge-secondary');
                     badge.textContent = item.badge_label;
                     meta.appendChild(badge);
                 }

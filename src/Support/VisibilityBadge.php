@@ -22,14 +22,14 @@ final class VisibilityBadge
             return [
                 'status' => 'public',
                 'label' => 'Public',
-                'class' => 'app-badge app-badge-public',
+                'class' => 'app-badge-public',
             ];
         }
 
         return [
             'status' => 'private',
             'label' => 'Private',
-            'class' => 'app-badge app-badge-private',
+            'class' => 'app-badge-private',
         ];
     }
 }

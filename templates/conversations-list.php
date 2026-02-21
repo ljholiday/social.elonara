@@ -52,7 +52,7 @@ $pagination = $pagination ?? ['page' => 1, 'per_page' => 20, 'has_more' => false
 
         $badges[] = [
             'label' => ucfirst($privacy),
-            'class' => $privacy === 'private' ? 'app-badge-secondary' : 'app-badge-success',
+            'class' => $privacy === 'private' ? 'app-badge-private' : 'app-badge-public',
         ];
 
         $replyCount = (int)($row['reply_count'] ?? 0);

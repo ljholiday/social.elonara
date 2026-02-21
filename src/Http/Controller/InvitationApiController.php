@@ -581,10 +581,10 @@ final class InvitationApiController
             $roleClass = $role === 'admin' ? 'primary' : ($role === 'moderator' ? 'secondary' : 'secondary');
 
             $badges = [
-                ['label' => ucfirst($role), 'class' => 'app-badge app-badge-' . $roleClass],
+                ['label' => ucfirst($role), 'class' => 'app-badge-' . $roleClass],
             ];
             if ($isSelf) {
-                $badges[] = ['label' => 'You', 'class' => 'app-badge app-badge-secondary'];
+                $badges[] = ['label' => 'You', 'class' => 'app-badge-secondary'];
             }
 
             $actions = [];
@@ -698,8 +698,8 @@ final class InvitationApiController
             };
             $invitationUrl = $this->buildEventInvitationUrl((string)($guest['rsvp_token'] ?? ''));
 
-            echo '<div class="app-invitation-item" id="guest-' . htmlspecialchars((string)($guest['id'] ?? '')) . '">';
-            echo '<div class="app-invitation-badges">';
+            echo '<div class="app-card-item" id="guest-' . htmlspecialchars((string)($guest['id'] ?? '')) . '">';
+            echo '<div class="app-card-badges">';
             echo '<span class="app-badge app-badge-' . $statusClass . '">' . htmlspecialchars($statusLabel) . '</span>';
             $source = (string)($guest['invitation_source'] ?? 'direct');
             $sourceLabel = ucfirst($source);
@@ -711,7 +711,7 @@ final class InvitationApiController
             $primaryLabel = $guestName !== '' ? $guestName : $guestEmail;
             $secondaryLabel = $guestName !== '' ? $guestEmail : '';
 
-            echo '<div class="app-invitation-details">';
+            echo '<div class="app-card-details">';
             echo '<h4>' . htmlspecialchars($primaryLabel) . '</h4>';
             if ($secondaryLabel !== '') {
                 echo '<div class="app-text-muted">' . htmlspecialchars($secondaryLabel) . '</div>';
@@ -727,7 +727,7 @@ final class InvitationApiController
             }
             echo '</div>';
 
-            echo '<div class="app-invitation-actions">';
+            echo '<div class="app-card-actions">';
             echo '<button type="button" class="app-btn app-btn-sm app-btn-secondary" onclick="copyInvitationUrl(' . json_encode($invitationUrl) . ')">Copy Link</button>';
             if (in_array($status, ['pending', 'maybe'], true)) {
                 echo '<button type="button" class="app-btn app-btn-sm app-btn-secondary resend-event-invitation" data-invitation-id="' . htmlspecialchars((string)($guest['id'] ?? '')) . '" data-invitation-action="resend">Resend Email</button>';

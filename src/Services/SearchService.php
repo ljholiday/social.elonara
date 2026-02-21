@@ -14,10 +14,10 @@ final class SearchService
      * @var array<string,array{label:string,badge_class:string}>
      */
     private const TYPE_META = [
-        'event' => ['label' => 'Event', 'badge_class' => 'app-badge app-badge-event'],
-        'community' => ['label' => 'Community', 'badge_class' => 'app-badge app-badge-community'],
-        'conversation' => ['label' => 'Conversation', 'badge_class' => 'app-badge app-badge-conversation'],
-        'member' => ['label' => 'Member', 'badge_class' => 'app-badge app-badge-member'],
+        'event' => ['label' => 'Event', 'badge_class' => 'app-badge-event'],
+        'community' => ['label' => 'Community', 'badge_class' => 'app-badge-community'],
+        'conversation' => ['label' => 'Conversation', 'badge_class' => 'app-badge-conversation'],
+        'member' => ['label' => 'Member', 'badge_class' => 'app-badge-member'],
     ];
 
     public function __construct(private Database $database)
@@ -93,7 +93,7 @@ final class SearchService
             $type = (string)($row['entity_type'] ?? 'content');
             $meta = self::TYPE_META[$type] ?? [
                 'label' => ucfirst($type !== '' ? $type : 'Result'),
-                'badge_class' => 'app-badge',
+                'badge_class' => 'app-badge-secondary',
             ];
 
             $title = (string)$row['title'];

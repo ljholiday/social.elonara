@@ -208,7 +208,7 @@ final class ConversationApiController
 
             $badges[] = [
                 'label' => ucfirst($privacy),
-                'class' => $privacy === 'private' ? 'app-badge-secondary' : 'app-badge-success',
+                'class' => $privacy === 'private' ? 'app-badge-private' : 'app-badge-public',
             ];
 
             $replyCount = (int)($row['reply_count'] ?? 0);

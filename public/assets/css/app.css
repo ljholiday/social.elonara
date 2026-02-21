@@ -1763,6 +1763,12 @@ body.app-modal-open {
     justify-content: flex-end;
 }
 
+.app-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
 @media (max-width: 768px) {
     .app-card-item {
         flex-direction: column;
