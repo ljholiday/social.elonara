@@ -71,7 +71,7 @@ $currentQuery = $searchQuery !== '' ? ['q' => $searchQuery] : [];
         <div class="admin-user-card">
           <div class="admin-user-header">
             <div>
-              <div class="admin-user-name"><?= htmlspecialchars((string)($user['display_name'] ?? '')); ?></div>
+              <div class="app-text-md app-font-bold"><?= htmlspecialchars((string)($user['display_name'] ?? '')); ?></div>
               <?php if ($status !== ''): ?>
                 <span class="admin-user-status"><?= htmlspecialchars(strtoupper($status)); ?></span>
               <?php endif; ?>

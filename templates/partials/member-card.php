@@ -41,15 +41,15 @@ foreach ($attributes as $attrName => $value) {
         '="' . htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8') . '"';
 }
 
-$classAttribute = 'app-invitation-item';
+$classAttribute = 'app-card-item';
 if ($extraClass !== '') {
     $classAttribute .= ' ' . htmlspecialchars($extraClass, ENT_QUOTES, 'UTF-8');
 }
 ?>
 <div class="<?= $classAttribute ?>"<?= $attrString ?>>
-  <div class="app-invitation-content">
+  <div class="app-card-content">
     <?php if ($title !== ''): ?>
-      <strong class="app-invitation-title">
+      <strong class="app-text-md app-font-semibold">
         <?php if ($titleUrl !== null && $titleUrl !== ''): ?>
           <a href="<?= htmlspecialchars((string)$titleUrl, ENT_QUOTES, 'UTF-8'); ?>" class="app-text-primary">
             <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>
@@ -78,21 +78,26 @@ if ($extraClass !== '') {
     <?php endif; ?>
 
     <?php if ($bodyHtml !== ''): ?>
-      <div class="app-invitation-body"><?= $bodyHtml ?></div>
+      <div class="app-card-body-text"><?= $bodyHtml ?></div>
     <?php endif; ?>
   </div>
 
   <?php if ($badges !== [] || $actions !== []): ?>
-    <div class="app-invitation-aside">
+    <div class="app-card-aside">
       <?php if ($badges !== []): ?>
-        <div class="app-invitation-badges">
+        <div class="app-card-badges">
           <?php foreach ($badges as $badge): ?>
             <?php
               $badgeLabel = isset($badge['label']) ? (string)$badge['label'] : '';
               if ($badgeLabel === '') {
                   continue;
               }
-              $badgeClass = isset($badge['class']) ? (string)$badge['class'] : 'app-badge-secondary';
+              $badgeClass = trim((string)($badge['class'] ?? 'app-badge-secondary'));
+              $badgeClass = preg_replace('/\\bapp-badge\\b/', '', $badgeClass);
+              $badgeClass = trim(preg_replace('/\\s+/', ' ', (string)$badgeClass));
+              if ($badgeClass === '') {
+                  $badgeClass = 'app-badge-secondary';
+              }
             ?>
             <span class="app-badge <?= htmlspecialchars($badgeClass, ENT_QUOTES, 'UTF-8'); ?>">
               <?= htmlspecialchars($badgeLabel, ENT_QUOTES, 'UTF-8'); ?>
@@ -102,7 +107,7 @@ if ($extraClass !== '') {
       <?php endif; ?>
 
       <?php if ($actions !== []): ?>
-        <div class="app-invitation-actions">
+        <div class="app-card-actions">
           <?php foreach ($actions as $actionHtml): ?>
             <?= $actionHtml ?>
           <?php endforeach; ?>

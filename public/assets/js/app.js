@@ -97,7 +97,7 @@ function initializeSearch() {
                 }
 
                 const icon = document.createElement('span');
-                icon.className = 'app-search-result-icon';
+                icon.className = 'app-text-lg app-leading-none';
                 icon.textContent = '>';
                 meta.appendChild(icon);
 

@@ -142,13 +142,13 @@ $activity = $recent_activity ?? [];
                 <div >
                   <div >Started a conversation</div>
                   <a href="/conversations/<?= e($a->slug) ?>" class="app-link"><?= e($a->title) ?></a>
-                  <div class="app-activity-time"><?= date_fmt($a->created_at) ?></div>
+                  <div class="app-text-sm app-text-muted"><?= date_fmt($a->created_at) ?></div>
                 </div>
               <?php elseif ($a->type === 'reply'): ?>
                 <div >
                   <div >Replied to</div>
                   <a href="/conversations/<?= e($a->conversation_slug) ?>" class="app-link"><?= e($a->title) ?></a>
-                  <div class="app-activity-time"><?= date_fmt($a->created_at) ?></div>
+                  <div class="app-text-sm app-text-muted"><?= date_fmt($a->created_at) ?></div>
                 </div>
               <?php endif; ?>
             </div>

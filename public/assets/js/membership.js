@@ -81,14 +81,14 @@ function handleInvitationAcceptance() {
  */
 function showInvitationStatus(message, type) {
     // Remove any existing status messages
-    const existing = document.querySelector('.app-invitation-status');
+    const existing = document.querySelector('.app-card-status');
     if (existing) {
         existing.remove();
     }
 
     // Create status message
     const statusDiv = document.createElement('div');
-    statusDiv.className = 'app-invitation-status app-alert app-alert-' + type;
+    statusDiv.className = 'app-card-status app-alert app-alert-' + type;
     statusDiv.textContent = message;
     statusDiv.style.position = 'fixed';
     statusDiv.style.top = '20px';
@@ -325,20 +325,20 @@ function renderInviteCard(options = {}) {
 
     const asideBlocks = [];
     if (badgesHtml) {
-        asideBlocks.push(`<div class="app-invitation-badges">${badgesHtml}</div>`);
+        asideBlocks.push(`<div class="app-card-badges">${badgesHtml}</div>`);
     }
     if (actionsHtml) {
-        asideBlocks.push(`<div class="app-invitation-actions">${actionsHtml}</div>`);
+        asideBlocks.push(`<div class="app-card-actions">${actionsHtml}</div>`);
     }
 
     const asideHtml = asideBlocks.length > 0
-        ? `<div class="app-invitation-aside">${asideBlocks.join('')}</div>`
+        ? `<div class="app-card-aside">${asideBlocks.join('')}</div>`
         : '';
 
     return `
-        <div class="app-invitation-item${cardClass}"${attrString}>
-            <div class="app-invitation-content">
-                ${titleHtml ? `<strong class="app-invitation-title">${titleHtml}</strong>` : ''}
+        <div class="app-card-item${cardClass}"${attrString}>
+            <div class="app-card-content">
+                ${titleHtml ? `<strong class="app-text-md app-font-semibold">${titleHtml}</strong>` : ''}
                 ${subtitleHtml}
                 ${metaHtml}
                 ${bodyHtml || ''}
@@ -726,7 +726,7 @@ function renderInvitationsList(invitations, entityType) {
             { label: statusLabel, class: statusClass },
         ];
         if (isBluesky) {
-            badges.push({ label: 'Bluesky', class: 'app-badge app-badge-secondary' });
+            badges.push({ label: 'Bluesky', class: 'app-badge-secondary' });
         }
 
         const actions = [
@@ -1010,7 +1010,7 @@ function renderEventGuestRow(guest) {
         { label: statusLabel, class: statusClass },
     ];
     if (isBluesky) {
-        badges.push({ label: 'Bluesky', class: 'app-badge app-badge-secondary' });
+        badges.push({ label: 'Bluesky', class: 'app-badge-secondary' });
     }
 
     const actions = [
@@ -1198,15 +1198,15 @@ function mapStatusBadgeClass(status) {
     switch (status) {
         case 'confirmed':
         case 'accepted':
-            return 'app-badge app-badge-success';
+            return 'app-badge-success';
         case 'declined':
         case 'cancelled':
-            return 'app-badge app-badge-danger';
+            return 'app-badge-danger';
         case 'maybe':
-            return 'app-badge app-badge-warning';
+            return 'app-badge-warning';
         case 'pending':
         default:
-            return 'app-badge app-badge-secondary';
+            return 'app-badge-secondary';
     }
 }
 

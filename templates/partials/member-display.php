@@ -28,10 +28,12 @@ $defaults = [
     'show_name'      => true,
     'link_profile'   => true,
     'show_actions'   => false,
+    'name_class'     => 'app-font-medium',
     'class'          => 'app-member-display',
 ];
 
 $args = isset($args) ? array_merge($defaults, $args) : $defaults;
+$nameClass = trim((string)$args['name_class']);
 
 // Ensure we have a user object
 if (!isset($user) || !is_object($user)) {
@@ -125,11 +127,11 @@ if ($args['avatar_size'] >= 56) {
     <div>
         <?php if ($args['show_name']): ?>
             <?php if ($args['link_profile'] && $profile_url): ?>
-                <a href="<?= htmlspecialchars($profile_url, ENT_QUOTES, 'UTF-8') ?>" class="app-member-name app-link">
+                <a href="<?= htmlspecialchars($profile_url, ENT_QUOTES, 'UTF-8') ?>" class="<?= htmlspecialchars(trim('app-link ' . $nameClass), ENT_QUOTES, 'UTF-8') ?>">
                     <?= htmlspecialchars($display_name, ENT_QUOTES, 'UTF-8') ?>
                 </a>
             <?php else: ?>
-                <span class="app-member-name"><?= htmlspecialchars($display_name, ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="<?= htmlspecialchars($nameClass, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($display_name, ENT_QUOTES, 'UTF-8') ?></span>
             <?php endif; ?>
         <?php endif; ?>
 

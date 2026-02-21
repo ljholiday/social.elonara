@@ -37,7 +37,7 @@ if ($items === []) {
 }
 
 $class = trim((string)($class ?? ''));
-$rowClass = 'app-meta-row';
+$rowClass = 'app-meta-row app-text-sm app-text-muted';
 if ($class !== '') {
     $rowClass .= ' ' . htmlspecialchars($class, ENT_QUOTES, 'UTF-8');
 }
@@ -45,7 +45,7 @@ if ($class !== '') {
 <div class="<?= $rowClass ?>">
   <?php foreach ($items as $index => $item): ?>
     <?php if ($index > 0): ?>
-      <span class="app-meta-separator" aria-hidden="true">·</span>
+      <span aria-hidden="true">·</span>
     <?php endif; ?>
     <?php
       $text = trim((string)($item['text'] ?? ''));
@@ -68,20 +68,20 @@ if ($class !== '') {
         <span class="app-meta-icon"><?= $icon ?></span>
       <?php endif; ?>
       <?php if ($hasLink): ?>
-        <a href="<?= htmlspecialchars($href, ENT_QUOTES, 'UTF-8'); ?>" class="app-meta-link">
+        <a href="<?= htmlspecialchars($href, ENT_QUOTES, 'UTF-8'); ?>" class="app-link-muted">
       <?php endif; ?>
         <?php if ($contentText !== ''): ?>
-          <span class="<?= $emphasize ? 'app-meta-text is-strong' : 'app-meta-text'; ?>">
+          <span class="<?= $emphasize ? 'app-font-semibold app-text-default' : ''; ?>">
             <?= htmlspecialchars($contentText, ENT_QUOTES, 'UTF-8'); ?>
           </span>
         <?php else: ?>
           <?php if ($contentLabel !== ''): ?>
-            <span class="app-meta-label<?= $emphasize ? ' is-strong' : ''; ?>">
+            <span class="app-text-xs app-text-uppercase app-tracking-wide<?= $emphasize ? ' app-font-semibold app-text-default' : ''; ?>">
               <?= htmlspecialchars($contentLabel, ENT_QUOTES, 'UTF-8'); ?>
             </span>
           <?php endif; ?>
           <?php if ($contentValue !== ''): ?>
-            <span class="app-meta-value<?= $emphasize ? ' is-strong' : ''; ?>">
+            <span class="<?= $emphasize ? 'app-font-semibold app-text-default' : ''; ?>">
               <?= htmlspecialchars($contentValue, ENT_QUOTES, 'UTF-8'); ?>
             </span>
           <?php endif; ?>

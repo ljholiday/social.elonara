@@ -72,7 +72,12 @@
                       'avatar_url' => $r->author_avatar_url ?? null,
                       'avatar_preference' => $r->author_avatar_preference ?? 'auto'
                   ];
-                  $args = ['avatar_size' => 32, 'class' => 'app-member-display-inline', 'show_actions' => true];
+                  $args = [
+                      'avatar_size' => 32,
+                      'class' => 'app-member-display-inline',
+                      'show_actions' => true,
+                      'name_class' => 'app-font-semibold'
+                  ];
                   include __DIR__ . '/partials/member-display.php';
                   ?>
                   <?php if (!empty($r->created_at)): ?>

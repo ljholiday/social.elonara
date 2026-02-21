@@ -35,7 +35,7 @@ if (empty($entity_type) || empty($entity_id)) {
 
 <!-- Danger Zone -->
 <div class="app-danger-zone">
-    <h4 class="app-danger-zone-title app-heading app-heading-sm">Danger Zone</h4>
+    <h4 class="app-heading app-heading-sm app-text-danger app-font-semibold">Danger Zone</h4>
     <p class="app-text-muted app-mb-4">
         <?php echo htmlspecialchars($delete_message); ?>
         <?php if ($blocker_count > 0 && $blocker_message) : ?>
