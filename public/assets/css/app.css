@@ -39,6 +39,10 @@
     --app-success: #10b981;
     --app-success-light: #d1fae5;
     --app-success-border: #6ee7b7;
+    --app-visibility-public: #3b82f6;
+    --app-visibility-public-light: #dbeafe;
+    --app-visibility-private: #ef4444;
+    --app-visibility-private-light: #fee2e2;
     --app-danger: #ef4444;
     --app-danger-light: #fef2f2;
     --app-danger-border: #fecaca;
@@ -832,13 +836,13 @@ a:focus {
 }
 
 .app-badge-public {
-    background-color: var(--app-info-light);
-    color: var(--app-info);
+    background-color: var(--app-visibility-public-light);
+    color: var(--app-visibility-public);
 }
 
 .app-badge-private {
-    background-color: var(--app-danger-light);
-    color: var(--app-danger);
+    background-color: var(--app-visibility-private-light);
+    color: var(--app-visibility-private);
 }
 
 
