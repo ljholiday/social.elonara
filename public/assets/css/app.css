@@ -31,6 +31,7 @@
 :root {
     --app-primary: #667eea;
     --app-primary-dark: #5a67d8;
+    --app-primary-light: #e0e7ff;
     --app-text: #1f2937;
     --app-text-muted: #6b7280;
     --app-surface: #ffffff;
@@ -826,8 +827,8 @@ a:focus {
 }
 
 .app-badge-secondary {
-    background-color: var(--app-text-muted);
-    color: white;
+    background-color: var(--app-primary-light);
+    color: var(--app-primary-dark);
 }
 
 .app-badge-success {
