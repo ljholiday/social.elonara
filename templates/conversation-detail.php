@@ -81,7 +81,10 @@
                   include __DIR__ . '/partials/member-display.php';
                   ?>
                   <?php if (!empty($r->created_at)): ?>
-                    <span class="app-text-muted"> · <?= e(date_fmt($r->created_at)) ?></span>
+                    <?php
+                      $items = [['text' => date_fmt($r->created_at)]];
+                      include __DIR__ . '/partials/meta-row.php';
+                    ?>
                   <?php endif; ?>
                 </div>
                 <?php
