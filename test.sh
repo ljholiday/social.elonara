@@ -16,6 +16,13 @@ fi
 
 failed=0
 
+echo "Running class token lint..."
+python3 scripts/check-class-tokens.py
+if [ $? -ne 0 ]; then
+    failed=1
+fi
+echo
+
 # Run each test
 for test_file in tests/*.php; do
     if [[ "$test_file" == *"debug"* ]]; then

@@ -93,11 +93,11 @@ if ($extraClass !== '') {
                   continue;
               }
               $badgeClass = trim((string)($badge['class'] ?? 'app-badge-secondary'));
-              $badgeClass = preg_replace('/\\bapp-badge\\b/', '', $badgeClass);
-              $badgeClass = trim(preg_replace('/\\s+/', ' ', (string)$badgeClass));
-              if ($badgeClass === '') {
-                  $badgeClass = 'app-badge-secondary';
-              }
+              $classTokens = preg_split('/\\s+/', $badgeClass) ?: [];
+              $classTokens = array_values(array_filter($classTokens, static function (string $token): bool {
+                  return $token !== '' && $token !== 'app-badge';
+              }));
+              $badgeClass = $classTokens !== [] ? implode(' ', $classTokens) : 'app-badge-secondary';
             ?>
             <span class="app-badge <?= htmlspecialchars($badgeClass, ENT_QUOTES, 'UTF-8'); ?>">
               <?= htmlspecialchars($badgeLabel, ENT_QUOTES, 'UTF-8'); ?>
