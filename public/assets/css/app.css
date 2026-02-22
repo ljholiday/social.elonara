@@ -82,6 +82,13 @@ html, body {
     overflow: hidden;
 }
 
+html.app-page-form,
+body.app-page-form {
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+}
+
 h1 {
 }
 
