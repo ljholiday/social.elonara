@@ -202,7 +202,6 @@ $conversations = $recent_conversations ?? [];
             Show past events
           </button>
           <div data-past-events style="display: none;">
-            <div class="app-text-muted app-text-sm app-text-center app-mb-4">Past events</div>
             <div data-invitations-list>
               <?php foreach ($pastEvents as $event): ?>
                 <?php

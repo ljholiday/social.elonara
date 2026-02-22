@@ -86,7 +86,6 @@ $past_events = $past_events ?? [];
         Show past events
       </button>
       <div data-past-events style="display: none;">
-        <div class="app-text-muted app-text-sm app-text-center app-mb-4">Past events</div>
         <div class="app-grid">
           <?php foreach ($past_events as $row):
             $slug = $row['slug'] ?? (string)($row['id'] ?? '');

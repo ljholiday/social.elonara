@@ -217,11 +217,17 @@ function initializePastEventsToggle() {
             return;
         }
 
+        const showLabel = 'Show past events';
+        const hideLabel = 'Close past events';
+
         toggle.addEventListener('click', () => {
             const isHidden = container.style.display === 'none' || container.style.display === '';
             if (isHidden) {
                 container.style.display = 'block';
-                toggle.outerHTML = '<div class="app-text-muted app-text-sm app-text-center app-mb-4">Past events</div>';
+                toggle.textContent = hideLabel;
+            } else {
+                container.style.display = 'none';
+                toggle.textContent = showLabel;
             }
         });
     });
