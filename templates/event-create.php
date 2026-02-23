@@ -288,7 +288,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
     <div class="app-form-group">
       <label class="app-form-label">Featured Image</label>
       <div id="featured-image-preview-container" class="app-mb-4">
-        <img src="" alt="Featured image preview" class="app-img" style="max-width: 400px; display: none;" id="featured-image-preview">
+        <img src="" alt="Featured image preview" class="app-img app-image-preview app-hidden" id="featured-image-preview">
       </div>
       <button type="button" class="app-btn app-btn-secondary" onclick="window.appOpenImageLibrary({ imageType: 'featured', targetPreview: 'featured-image-preview', targetAltInput: 'featured-image-alt', targetUrlInput: 'featured-image-url' })">
         Select Image

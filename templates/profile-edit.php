@@ -146,11 +146,11 @@ $input = $input ?? [];
               $coverUrl = getImageUrl($u->cover_url, 'tablet', 'original');
               if ($coverUrl):
             ?>
-              <img src="<?= e($coverUrl) ?>" alt="<?= e($u->cover_alt ?? 'Current cover') ?>" class="app-img" style="max-width: 400px;" id="cover-preview">
+              <img src="<?= e($coverUrl) ?>" alt="<?= e($u->cover_alt ?? 'Current cover') ?>" class="app-img app-image-preview" id="cover-preview">
               <div class="app-text-muted">Current cover image</div>
             <?php endif; ?>
           <?php else: ?>
-            <img src="" alt="Cover preview" class="app-img" style="max-width: 400px; display: none;" id="cover-preview">
+            <img src="" alt="Cover preview" class="app-img app-image-preview app-hidden" id="cover-preview">
           <?php endif; ?>
         </div>
         <button type="button" class="app-btn app-btn-primary" onclick="window.appOpenImageLibrary({ imageType: 'cover', targetPreview: 'cover-preview', targetAltInput: 'cover-alt', targetUrlInput: 'cover-url' })">

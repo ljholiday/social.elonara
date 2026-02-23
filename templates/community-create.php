@@ -47,17 +47,17 @@ $input = $input ?? ['name' => '', 'description' => '', 'privacy' => 'public'];
       ><?= e($input['description'] ?? '') ?></textarea>
     </div>
 
-    <div >
+    <div class="app-form-group">
       <label class="app-form-label">Cover Image</label>
-      <div  id="cover-image-preview-container">
-        <img src="" alt="Cover image preview" class="app-img" style="max-width: 400px; display: none;" id="cover-image-preview">
+      <div id="cover-image-preview-container" class="app-mb-4">
+        <img src="" alt="Cover image preview" class="app-img app-image-preview app-hidden" id="cover-image-preview">
       </div>
-      <button type="button" class="app-btn app-btn-primary" onclick="window.appOpenImageLibrary({ imageType: 'cover', targetPreview: 'cover-image-preview', targetAltInput: 'cover-image-alt', targetUrlInput: 'cover-image-url' })">
+      <button type="button" class="app-btn app-btn-secondary" onclick="window.appOpenImageLibrary({ imageType: 'cover', targetPreview: 'cover-image-preview', targetAltInput: 'cover-image-alt', targetUrlInput: 'cover-image-url' })">
         Select Image
       </button>
       <input type="hidden" id="cover-image-alt" name="cover_image_alt" value="<?= e($input['cover_image_alt'] ?? '') ?>">
       <input type="hidden" id="cover-image-url" name="cover_image_url_uploaded" value="">
-      <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library. Recommended size: 1200x400px.</small>
+      <small class="app-form-help">Click to upload a new image or choose from your library. Recommended size: 1200x400px.</small>
       <?php if (isset($errors['cover_image'])): ?>
         <div data-field-error><?= e($errors['cover_image']) ?></div>
       <?php endif; ?>

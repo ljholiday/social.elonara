@@ -271,29 +271,29 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
         ><?= e($input['description'] ?? '') ?></textarea>
       </div>
 
-      <div >
+      <div class="app-form-group">
         <label class="app-form-label">Featured Image</label>
-        <div  id="featured-image-preview-container">
+        <div id="featured-image-preview-container" class="app-mb-4">
           <?php if (!empty($event['featured_image'])): ?>
             <?php
               $featuredUrl = getImageUrl($event['featured_image'], 'mobile', 'original');
               if ($featuredUrl):
             ?>
-              <img src="<?= e($featuredUrl) ?>" alt="<?= e($event['featured_image_alt'] ?? 'Current featured image') ?>" class="app-img" style="max-width: 400px;" id="featured-image-preview">
+              <img src="<?= e($featuredUrl) ?>" alt="<?= e($event['featured_image_alt'] ?? 'Current featured image') ?>" class="app-img app-image-preview" id="featured-image-preview">
               <div class="app-text-muted">Current featured image</div>
             <?php else: ?>
-              <img src="" alt="Featured image preview" class="app-img" style="max-width: 400px; display: none;" id="featured-image-preview">
+              <img src="" alt="Featured image preview" class="app-img app-image-preview app-hidden" id="featured-image-preview">
             <?php endif; ?>
           <?php else: ?>
-            <img src="" alt="Featured image preview" class="app-img" style="max-width: 400px; display: none;" id="featured-image-preview">
+            <img src="" alt="Featured image preview" class="app-img app-image-preview app-hidden" id="featured-image-preview">
           <?php endif; ?>
         </div>
-        <button type="button" class="app-btn app-btn-primary" onclick="window.appOpenImageLibrary({ imageType: 'featured', targetPreview: 'featured-image-preview', targetAltInput: 'featured-image-alt', targetUrlInput: 'featured-image-url' })">
+        <button type="button" class="app-btn app-btn-secondary" onclick="window.appOpenImageLibrary({ imageType: 'featured', targetPreview: 'featured-image-preview', targetAltInput: 'featured-image-alt', targetUrlInput: 'featured-image-url' })">
           Select Image
         </button>
         <input type="hidden" id="featured-image-alt" name="featured_image_alt" value="<?= e($input['featured_image_alt'] ?? '') ?>">
         <input type="hidden" id="featured-image-url" name="featured_image_url_uploaded" value="">
-        <small  style="display: block; margin-top: 0.5rem;">Click to upload a new image or choose from your library. Recommended size: 1200x630px.</small>
+        <small class="app-form-help">Click to upload a new image or choose from your library. Recommended size: 1200x630px.</small>
         <?php if (isset($errors['featured_image'])): ?>
           <div data-field-error><?= e($errors['featured_image']) ?></div>
         <?php endif; ?>
