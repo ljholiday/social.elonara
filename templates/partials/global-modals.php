@@ -73,6 +73,7 @@ $current_user_id = (int)($currentUser->id ?? 0);
           <input
             type="file"
             id="modal-file-input"
+            class="app-field"
             accept="image/jpeg,image/png,image/gif,image/webp"
             style="display: none;"
           >
