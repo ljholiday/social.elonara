@@ -29,14 +29,14 @@ $pageTitle = 'Set New Password';
                 <?php endif; ?>
 
                 <div class="app-form-group">
-                    <label for="password">New Password</label>
+                    <label class="app-form-label" for="password">New Password</label>
                     <input type="password" id="password" name="password"
                            minlength="8" required>
                     <small>Minimum 8 characters</small>
                 </div>
 
                 <div class="app-form-group">
-                    <label for="confirm_password">Confirm Password</label>
+                    <label class="app-form-label" for="confirm_password">Confirm Password</label>
                     <input type="password" id="confirm_password" name="confirm_password"
                            minlength="8" required>
                 </div>

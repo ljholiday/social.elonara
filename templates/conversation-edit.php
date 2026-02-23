@@ -24,9 +24,9 @@ $conversation = $conversation ?? null;
 
     <form method="post" action="/conversations/<?= e($conversation['slug'] ?? '') ?>/edit" class="app-form">
       <div >
-        <label  for="title">Title</label>
+        <label class="app-form-label" for="title">Title</label>
         <input
-          class="app-input<?= isset($errors['title']) ? ' is-invalid' : '' ?>"
+          class="app-field<?= isset($errors['title']) ? ' is-invalid' : '' ?>"
           type="text"
           id="title"
           name="title"
@@ -36,9 +36,9 @@ $conversation = $conversation ?? null;
       </div>
 
       <div >
-        <label  for="content">Content</label>
+        <label class="app-form-label" for="content">Content</label>
         <textarea
-          class="app-textarea<?= isset($errors['content']) ? ' is-invalid' : '' ?>"
+          class="app-field<?= isset($errors['content']) ? ' is-invalid' : '' ?>"
           id="content"
           name="content"
           rows="6"

@@ -143,15 +143,15 @@ function app_field_value(array $source, string $key): string
         <div class="app-form-group">
             <label class="app-form-label">RSVP</label>
             <div class="app-flex app-flex-wrap">
-                <label>
+                <label class="app-form-label">
                     <input type="radio" name="rsvp_status" value="yes" <?= $selectedStatus === 'yes' ? 'checked' : ''; ?> required>
                     <span class="app-btn app-btn-lg app-btn-primary">Yes, I'll be there</span>
                 </label>
-                <label>
+                <label class="app-form-label">
                     <input type="radio" name="rsvp_status" value="maybe" <?= $selectedStatus === 'maybe' ? 'checked' : ''; ?> required>
                     <span class="app-btn app-btn-lg app-btn-secondary">Maybe</span>
                 </label>
-                <label>
+                <label class="app-form-label">
                     <input type="radio" name="rsvp_status" value="no" <?= $selectedStatus === 'no' ? 'checked' : ''; ?> required>
                     <span class="app-btn app-btn-lg app-btn-danger">Can't make it</span>
                 </label>
@@ -167,7 +167,7 @@ function app_field_value(array $source, string $key): string
                     type="text"
                     id="guest_name"
                     name="guest_name"
-                    class="app-form-input"
+                    class="app-field"
                     value="<?= app_field_value($formValues, 'guest_name'); ?>"
                     <?= $selectedStatus === 'no' ? '' : 'required'; ?>
                 >
@@ -179,7 +179,7 @@ function app_field_value(array $source, string $key): string
                     type="tel"
                     id="guest_phone"
                     name="guest_phone"
-                    class="app-form-input"
+                    class="app-field"
                     value="<?= app_field_value($formValues, 'guest_phone'); ?>"
                     placeholder="(555) 123-4567"
                 >
@@ -193,11 +193,11 @@ function app_field_value(array $source, string $key): string
                 <div class="app-form-group">
                     <label class="app-form-label">Plus One</label>
                     <div class="app-flex app-gap-4 app-flex-wrap">
-                        <label class="app-flex">
+                        <label class="app-flex app-form-label">
                             <input type="radio" name="plus_one" value="0" <?= ((int)($formValues['plus_one'] ?? 0) === 0) ? 'checked' : ''; ?>>
                             <span>Just me</span>
                         </label>
-                        <label class="app-flex">
+                        <label class="app-flex app-form-label">
                             <input type="radio" name="plus_one" value="1" <?= ((int)($formValues['plus_one'] ?? 0) === 1) ? 'checked' : ''; ?>>
                             <span>I'm bringing someone</span>
                         </label>
@@ -210,7 +210,7 @@ function app_field_value(array $source, string $key): string
                         type="text"
                         id="plus_one_name"
                         name="plus_one_name"
-                        class="app-form-input"
+                        class="app-field"
                         value="<?= app_field_value($formValues, 'plus_one_name'); ?>"
                         placeholder="Guest name"
                     >
@@ -223,7 +223,7 @@ function app_field_value(array $source, string $key): string
                     type="text"
                     id="dietary_restrictions"
                     name="dietary_restrictions"
-                    class="app-form-input"
+                    class="app-field"
                     value="<?= app_field_value($formValues, 'dietary_restrictions'); ?>"
                     placeholder="Let the host know about allergies or preferences"
                 >
@@ -234,7 +234,7 @@ function app_field_value(array $source, string $key): string
                 <textarea
                     id="guest_notes"
                     name="guest_notes"
-                    class="app-form-textarea"
+                    class="app-field"
                     rows="4"
                     placeholder="Message the host (optional)"
                 ><?= app_field_value($formValues, 'guest_notes'); ?></textarea>

@@ -37,10 +37,10 @@ $input = $input ?? [];
       <?php endif; ?>
 
       <div >
-        <label  for="display-name">Display Name</label>
+        <label class="app-form-label" for="display-name">Display Name</label>
         <input
           type="text"
-          class="app-input<?= isset($errors['display_name']) ? ' is-invalid' : '' ?>"
+          class="app-field<?= isset($errors['display_name']) ? ' is-invalid' : '' ?>"
           id="display-name"
           name="display_name"
           value="<?= e($input['display_name'] ?? '') ?>"
@@ -55,9 +55,9 @@ $input = $input ?? [];
       </div>
 
       <div >
-        <label  for="bio">Bio</label>
+        <label class="app-form-label" for="bio">Bio</label>
         <textarea
-          class="app-textarea<?= isset($errors['bio']) ? ' is-invalid' : '' ?>"
+          class="app-field<?= isset($errors['bio']) ? ' is-invalid' : '' ?>"
           id="bio"
           name="bio"
           rows="4"
@@ -70,10 +70,10 @@ $input = $input ?? [];
       </div>
 
       <div >
-        <label >Avatar Source</label>
+        <label class="app-form-label">Avatar Source</label>
         <div >
           <?php $avatarPref = $u->avatar_preference ?? 'auto'; ?>
-          <label >
+          <label class="app-form-label">
             <input
               type="radio"
               name="avatar_preference"
@@ -82,7 +82,7 @@ $input = $input ?? [];
             >
             <span>Auto (use custom if available, otherwise Gravatar)</span>
           </label>
-          <label >
+          <label class="app-form-label">
             <input
               type="radio"
               name="avatar_preference"
@@ -91,7 +91,7 @@ $input = $input ?? [];
             >
             <span>Custom avatar only</span>
           </label>
-          <label >
+          <label class="app-form-label">
             <input
               type="radio"
               name="avatar_preference"
@@ -104,7 +104,7 @@ $input = $input ?? [];
       </div>
 
       <div >
-        <label >Avatar Image</label>
+        <label class="app-form-label">Avatar Image</label>
         <div  id="avatar-preview-container">
           <?php if (!empty($u->avatar_url)): ?>
             <?php
@@ -139,7 +139,7 @@ $input = $input ?? [];
       </div>
 
       <div >
-        <label >Cover Image</label>
+        <label class="app-form-label">Cover Image</label>
         <div  id="cover-preview-container">
           <?php if (!empty($u->cover_url)): ?>
             <?php
@@ -284,10 +284,10 @@ $input = $input ?? [];
           <?php endif; ?>
 
           <div >
-            <label  for="bluesky-identifier">Bluesky Handle or Email</label>
+            <label class="app-form-label" for="bluesky-identifier">Bluesky Handle or Email</label>
             <input
               type="text"
-              class="app-input"
+              class="app-field"
               id="bluesky-identifier"
               name="identifier"
               placeholder="user.bsky.social or email@example.com"
@@ -297,10 +297,10 @@ $input = $input ?? [];
           </div>
 
           <div >
-            <label  for="bluesky-password">App Password</label>
+            <label class="app-form-label" for="bluesky-password">App Password</label>
             <input
               type="password"
-              class="app-input"
+              class="app-field"
               id="bluesky-password"
               name="password"
               required

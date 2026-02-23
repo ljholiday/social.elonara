@@ -89,7 +89,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
                     } else {
                         ob_start();
                         ?>
-                        <select class="app-form-input"
+                        <select class="app-field"
                           onchange="changeMemberRole(<?= e((string)$memberId) ?>, this.value, <?= e((string)$communityId) ?>)">
                           <option value="member"<?= $role === 'member' ? ' selected' : '' ?>>Member</option>
                           <option value="moderator"<?= $role === 'moderator' ? ' selected' : '' ?>>Moderator</option>

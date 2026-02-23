@@ -90,10 +90,10 @@ $current_user_id = (int)($currentUser->id ?? 0);
           <div data-upload-preview style="display: none; margin-top: 2rem;">
             <img id="upload-preview-img" src="" alt="" style="max-width: 100%; max-height: 300px; border-radius: 8px; margin-bottom: 1rem;">
             <div >
-              <label  for="upload-alt-text">Image description (required)</label>
+              <label class="app-form-label" for="upload-alt-text">Image description (required)</label>
               <input
                 type="text"
-                class="app-input"
+                class="app-field"
                 id="upload-alt-text"
                 placeholder="Describe this image for accessibility"
                 style="max-width: 500px; margin: 0 auto;"

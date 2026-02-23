@@ -63,7 +63,7 @@ if (empty($entity_type) || empty($entity_id)) {
                     <input type="text"
                            id="confirm_name"
                            name="confirm_name"
-                           class="app-form-input"
+                           class="app-field"
                            placeholder="<?php echo htmlspecialchars($entity_name); ?>"
                            required
                            data-confirm-name-input="1">

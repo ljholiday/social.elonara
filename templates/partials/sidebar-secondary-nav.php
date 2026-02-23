@@ -16,7 +16,7 @@ $is_logged_in = $viewer !== null;
     <?php if ($is_logged_in): ?>
     <!-- Search Section -->
     <div class="app-search-box app-mb-4">
-        <input type="text" id="app-search-input" class="app-input" placeholder="Search..." autocomplete="off">
+        <input type="text" id="app-search-input" class="app-field" placeholder="Search..." autocomplete="off">
         <div id="app-search-results" class="app-search-results" style="display: none;"></div>
     </div>
     <?php endif; ?>

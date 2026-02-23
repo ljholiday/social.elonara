@@ -596,74 +596,55 @@ a:focus {
 }
 
 /* Buttons */
-.app-btn-banner {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.25rem 1.25rem;
-    width: 100%;
-    border: 0.125rem solid var(--app-primary);
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: var(--app-primary);
-    color: white;
-}
-
-
 .app-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-/*    padding: 0.75rem 1.25rem; */
     padding: 0.25rem 1.25rem;
-    border: 0.125rem solid var(--app-primary);
+    border: 0.125rem solid var(--app-border);
     border-radius: 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
+    line-height: 1.2;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
-    background: var(--app-primary);
-    color: white;
-    max-height: 2rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--app-surface);
+    color: var(--app-text);
 }
 
 .app-btn:hover,
 .app-btn:focus {
-    opacity: 0.9;
-    outline: 2px solid var(--app-primary);
-    outline-offset: 2px;
+    background: var(--app-background);
+    border-color: var(--app-primary);
+    color: var(--app-primary);
+    outline: none;
+    box-shadow: 0 0 0 0.1875rem rgba(102, 126, 234, 0.15);
 }
 
 .app-btn-primary {
-    background: var(--app-background);
-    color: var(--app-text);
+    background: var(--app-primary);
+    color: white;
+    border-color: var(--app-primary);
 }
 
-.app-btn-secondary {
-    background: var(--app-surface);
-    color: var(--app-text);
-    border: 0.125rem solid var(--app-border);
+.app-btn-primary:hover,
+.app-btn-primary:focus {
+    background: var(--app-primary-dark);
+    border-color: var(--app-primary-dark);
+    color: white;
+    box-shadow: 0 0 0 0.1875rem rgba(102, 126, 234, 0.2);
 }
 
 .app-btn-sm {
     padding: 0.25rem 0.5rem;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
 }
 
 .app-btn-lg {
-    padding: 0.875rem 2rem;
-    font-size: 1.125rem;
-}
-
-.admin-dashboard-btn {
-    padding: 0.3rem 0.85rem;
-    font-size: 0.8rem;
-    border-radius: 0.4rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
 }
 
 .app-btn-danger {
@@ -673,7 +654,28 @@ a:focus {
 }
 
 .app-btn-danger:hover {
+    background: var(--app-danger);
+    border-color: var(--app-danger);
+    color: white;
     opacity: 0.9;
+}
+
+.app-btn-secondary {
+    background: var(--app-surface);
+    color: var(--app-text);
+    border: 0.125rem solid var(--app-border);
+}
+
+.app-btn-secondary:hover,
+.app-btn-secondary:focus {
+    background: var(--app-background);
+    border-color: var(--app-border);
+    color: var(--app-text);
+    box-shadow: 0 0 0 0.1875rem rgba(0, 0, 0, 0.05);
+}
+
+.app-btn-banner {
+    width: 100%;
 }
 
 .app-btn-icon {
@@ -698,11 +700,10 @@ a:focus {
 @media (max-width: 768px) {
     
     .app-btn {
-        padding: 0.25rem 1.25rem;
+        padding: 0.4rem 0.85rem;
         border-radius: 0.5rem;
         font-size: 0.75rem;
         font-weight: 500;
-        max-height: 1.25rem;
     }
     .app-btn-sm {                                                                   
         padding: 0.25rem 0.5rem;                                                  
@@ -866,24 +867,6 @@ a:focus {
     color: var(--app-text);
 }
 
-.app-form-input, 
-.app-form-textarea, 
-.app-form-select {
-    width: 100%;
-    padding: 0.75rem;
-    border: 0.125rem solid var(--app-border);
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    background: var(--app-surface);
-}
-
-.app-form-input:focus, 
-.app-form-textarea:focus, 
-.app-form-select:focus {
-    outline: none;
-    border-color: var(--app-primary);
-    box-shadow: 0 0 0 0.1875rem rgba(102, 126, 234, 0.1);
-}
 
 /* Cards */
 .app-card {
@@ -1380,6 +1363,8 @@ a:focus {
 .app-modal-body {
     padding: 1rem;
     overflow-y: auto;
+    user-select: text;
+    cursor: text;
 }
 
 .app-modal-footer {
@@ -1464,12 +1449,6 @@ a:focus {
     margin-bottom: 0;
 }
 
-.app-form-row label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: var(--app-text);
-}
 
 .app-guest-fields {
     background: var(--app-background);
@@ -1487,8 +1466,7 @@ a:focus {
     flex: 1;
 }
 
-.app-input,
-.app-textarea {
+.app-field {
     width: 100%;
     padding: 0.75rem;
     border: 0.125rem solid var(--app-border);
@@ -1498,13 +1476,12 @@ a:focus {
     box-sizing: border-box;
 }
 
-.app-input:focus,
-.app-textarea:focus {
+.app-field:focus {
     outline: none;
     border-color: var(--app-primary);
 }
 
-.app-textarea {
+textarea.app-field {
     resize: vertical;
     min-height: 7.5rem;
 }
@@ -2415,12 +2392,6 @@ body.app-modal-open {
 .app-attachment-btn.files-selected:hover {
   background: var(--app-success);
   opacity: 0.9;
-}
-
-/* Error Modal - ensure text is selectable */
-.app-modal-body {
-  user-select: text;
-  cursor: text;
 }
 
 /* Conversation Replies */

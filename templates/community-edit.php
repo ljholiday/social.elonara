@@ -24,9 +24,9 @@ $community = $community ?? null;
 
     <form method="post" action="/communities/<?= e($community['slug'] ?? '') ?>/edit" class="app-form" enctype="multipart/form-data">
       <div >
-        <label  for="name">Name</label>
+        <label class="app-form-label" for="name">Name</label>
         <input
-          class="app-input<?= isset($errors['name']) ? ' is-invalid' : '' ?>"
+          class="app-field<?= isset($errors['name']) ? ' is-invalid' : '' ?>"
           type="text"
           id="name"
           name="name"
@@ -36,17 +36,17 @@ $community = $community ?? null;
       </div>
 
       <div >
-        <label  for="privacy">Privacy</label>
-        <select class="app-input" id="privacy" name="privacy">
+        <label class="app-form-label" for="privacy">Privacy</label>
+        <select class="app-field" id="privacy" name="privacy">
           <option value="public"<?= ($input['privacy'] ?? 'public') === 'public' ? ' selected' : '' ?>>Public</option>
           <option value="private"<?= ($input['privacy'] ?? 'public') === 'private' ? ' selected' : '' ?>>Private</option>
         </select>
       </div>
 
       <div >
-        <label  for="description">Description</label>
+        <label class="app-form-label" for="description">Description</label>
         <textarea
-          class="app-textarea"
+          class="app-field"
           id="description"
           name="description"
           rows="5"
@@ -54,7 +54,7 @@ $community = $community ?? null;
       </div>
 
       <div >
-        <label >Cover Image</label>
+        <label class="app-form-label">Cover Image</label>
         <div  id="cover-image-preview-container">
           <?php if (!empty($community['cover_image'])): ?>
             <?php

@@ -24,9 +24,9 @@ $currentQuery = $searchQuery !== '' ? ['q' => $searchQuery] : [];
 <div class="admin-card">
   <form method="get" action="/admin/events" style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;">
     <div style="flex:1 1 240px;">
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Search</label>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Search</label>
       <input
-        class="app-input"
+        class="app-field"
         name="q"
         placeholder="Event title, description, community, or host name"
         value="<?= htmlspecialchars($searchQuery); ?>"

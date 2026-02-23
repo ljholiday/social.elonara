@@ -63,12 +63,12 @@ $invitation = $invitation ?? null;
 
           <form method="post" action="/auth/login" class="app-form">
             <div >
-              <label  for="login-identifier">Email or Username</label>
+              <label class="app-form-label" for="login-identifier">Email or Username</label>
               <input
                 id="login-identifier"
                 name="identifier"
                 type="text"
-                class="app-input<?php echo isset($loginErrors['identifier']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($loginErrors['identifier']) ? ' is-invalid' : ''; ?>"
                 value="<?php echo e($loginInput['identifier']); ?>"
                 autocomplete="username"
                 required
@@ -79,12 +79,12 @@ $invitation = $invitation ?? null;
             </div>
 
             <div >
-              <label  for="login-password">Password</label>
+              <label class="app-form-label" for="login-password">Password</label>
               <input
                 id="login-password"
                 name="password"
                 type="password"
-                class="app-input<?php echo isset($loginErrors['password']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($loginErrors['password']) ? ' is-invalid' : ''; ?>"
                 autocomplete="current-password"
                 required
               >
@@ -94,7 +94,7 @@ $invitation = $invitation ?? null;
             </div>
 
             <div class="app-flex">
-              <label >
+              <label class="app-form-label">
                 <input type="checkbox" name="remember" value="1"<?php echo $loginInput['remember'] ? ' checked' : ''; ?>>
                 <span>Remember me</span>
               </label>
@@ -117,12 +117,12 @@ $invitation = $invitation ?? null;
         <div class="app-card-body">
           <form method="post" action="/auth/register" class="app-form">
             <div >
-              <label  for="register-display-name">Display Name</label>
+              <label class="app-form-label" for="register-display-name">Display Name</label>
               <input
                 id="register-display-name"
                 name="display_name"
                 type="text"
-                class="app-input<?php echo isset($registerErrors['display_name']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($registerErrors['display_name']) ? ' is-invalid' : ''; ?>"
                 value="<?php echo e($registerInput['display_name']); ?>"
                 autocomplete="name"
                 required
@@ -133,12 +133,12 @@ $invitation = $invitation ?? null;
             </div>
 
             <div >
-              <label  for="register-username">Username</label>
+              <label class="app-form-label" for="register-username">Username</label>
               <input
                 id="register-username"
                 name="username"
                 type="text"
-                class="app-input<?php echo isset($registerErrors['username']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($registerErrors['username']) ? ' is-invalid' : ''; ?>"
                 value="<?php echo e($registerInput['username']); ?>"
                 autocomplete="username"
                 required
@@ -152,12 +152,12 @@ $invitation = $invitation ?? null;
             </div>
 
             <div >
-              <label  for="register-email">Email</label>
+              <label class="app-form-label" for="register-email">Email</label>
               <input
                 id="register-email"
                 name="email"
                 type="email"
-                class="app-input<?php echo isset($registerErrors['email']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($registerErrors['email']) ? ' is-invalid' : ''; ?>"
                 value="<?php echo e($registerInput['email']); ?>"
                 autocomplete="email"
                 required
@@ -172,12 +172,12 @@ $invitation = $invitation ?? null;
             if ($showBlueskyField):
             ?>
             <div >
-              <label  for="register-bluesky-handle">Bluesky Handle (optional)</label>
+              <label class="app-form-label" for="register-bluesky-handle">Bluesky Handle (optional)</label>
               <input
                 id="register-bluesky-handle"
                 name="bluesky_handle"
                 type="text"
-                class="app-input<?php echo isset($registerErrors['bluesky_handle']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($registerErrors['bluesky_handle']) ? ' is-invalid' : ''; ?>"
                 value="<?php echo e($registerInput['bluesky_handle']); ?>"
                 placeholder="yourname.bsky.social"
               >
@@ -191,12 +191,12 @@ $invitation = $invitation ?? null;
             <?php endif; ?>
 
             <div >
-              <label  for="register-password">Password</label>
+              <label class="app-form-label" for="register-password">Password</label>
               <input
                 id="register-password"
                 name="password"
                 type="password"
-                class="app-input<?php echo isset($registerErrors['password']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($registerErrors['password']) ? ' is-invalid' : ''; ?>"
                 autocomplete="new-password"
                 required
               >
@@ -207,12 +207,12 @@ $invitation = $invitation ?? null;
             </div>
 
             <div >
-              <label  for="register-confirm-password">Confirm Password</label>
+              <label class="app-form-label" for="register-confirm-password">Confirm Password</label>
               <input
                 id="register-confirm-password"
                 name="confirm_password"
                 type="password"
-                class="app-input<?php echo isset($registerErrors['confirm_password']) ? ' is-invalid' : ''; ?>"
+                class="app-field<?php echo isset($registerErrors['confirm_password']) ? ' is-invalid' : ''; ?>"
                 autocomplete="new-password"
                 required
               >

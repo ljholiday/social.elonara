@@ -38,7 +38,7 @@ $pageTitle = 'Reset Password';
                     <?php endif; ?>
 
                     <div class="app-form-group">
-                        <label for="email">Email Address</label>
+                        <label class="app-form-label" for="email">Email Address</label>
                         <input type="email" id="email" name="email"
                                value="<?php echo htmlspecialchars($input['email'] ?? ''); ?>"
                                required>

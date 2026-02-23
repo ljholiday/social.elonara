@@ -22,12 +22,12 @@ $analyticsConfig = $analyticsConfig ?? [];
     <?php echo app_service('security.service')->nonceField('app_admin', '_admin_nonce', false); ?>
 
     <div style="margin-bottom:1rem;">
-      <label for="ga_tracking_id" style="display:block; font-weight:600; margin-bottom:0.35rem;">Google Analytics Tracking ID</label>
+      <label class="app-form-label" for="ga_tracking_id" style="display:block; font-weight:600; margin-bottom:0.35rem;">Google Analytics Tracking ID</label>
       <input
         type="text"
         id="ga_tracking_id"
         name="ga_tracking_id"
-        class="app-input"
+        class="app-field"
         value="<?= htmlspecialchars((string)($analyticsConfig['google_tracking_id'] ?? '')); ?>"
         placeholder="G-XXXXXXXXXX or UA-XXXXXXXXX"
         style="max-width: 400px;">
@@ -46,39 +46,39 @@ $analyticsConfig = $analyticsConfig ?? [];
 
   <div style="display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Host</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['host'] ?? '')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Host</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['host'] ?? '')); ?>" readonly>
     </div>
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Port</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['port'] ?? '')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Port</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['port'] ?? '')); ?>" readonly>
     </div>
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Auth Required</label>
-      <input class="app-input" value="<?= !empty($mailConfig['auth']) ? 'Yes' : 'No'; ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Auth Required</label>
+      <input class="app-field" value="<?= !empty($mailConfig['auth']) ? 'Yes' : 'No'; ?>" readonly>
     </div>
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Encryption</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['encryption'] ?? 'none')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Encryption</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['encryption'] ?? 'none')); ?>" readonly>
     </div>
   </div>
 
   <div style="display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin-top:1rem;">
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">From Address</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['from']['address'] ?? '')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">From Address</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['from']['address'] ?? '')); ?>" readonly>
     </div>
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">From Name</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['from']['name'] ?? '')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">From Name</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['from']['name'] ?? '')); ?>" readonly>
     </div>
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Reply-To Address</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['reply_to']['address'] ?? '')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Reply-To Address</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['reply_to']['address'] ?? '')); ?>" readonly>
     </div>
     <div>
-      <label style="display:block; font-weight:600; margin-bottom:0.35rem;">Reply-To Name</label>
-      <input class="app-input" value="<?= htmlspecialchars((string)($mailConfig['reply_to']['name'] ?? '')); ?>" readonly>
+      <label class="app-form-label" style="display:block; font-weight:600; margin-bottom:0.35rem;">Reply-To Name</label>
+      <input class="app-field" value="<?= htmlspecialchars((string)($mailConfig['reply_to']['name'] ?? '')); ?>" readonly>
     </div>
   </div>
 

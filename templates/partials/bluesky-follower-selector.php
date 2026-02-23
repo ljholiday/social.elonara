@@ -70,7 +70,7 @@ $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');
                         <input
                             type="text"
                             id="follower-search"
-                            class="app-form-input app-flex-1"
+                            class="app-field app-flex-1"
                             placeholder="Search followers by name or handle..."
                         >
                         <button

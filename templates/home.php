@@ -18,7 +18,7 @@ $conversations = $recent_conversations ?? [];
 
     <header>
 
-          <a href="https://elonara.com/how-to-elonara/" target="_blank" class="app-btn-banner " >Learn How To Elonara</a>
+          <a href="https://elonara.com/how-to-elonara/" target="_blank" class="app-btn app-btn-primary app-btn-banner">Learn How To Elonara</a>
 
     </header>
 
