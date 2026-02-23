@@ -375,7 +375,7 @@
 
             // Handle 413 (file too large) before trying to parse JSON
             if (response.status === 413) {
-                throw new Error('Image file is too large. Please choose a smaller file (max 10MB).');
+                throw new Error('Image file is too large. Please choose a smaller file (max 20MB).');
             }
 
             // Check if response is JSON before parsing
