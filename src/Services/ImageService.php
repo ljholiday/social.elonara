@@ -265,8 +265,28 @@ final class ImageService
         $webpPath = preg_replace('/\.(jpe?g|png|gif)$/i', '.webp', $originalPath);
         $quality = $this->config['quality']['webp'] ?? 85;
 
-        if (imagewebp($image, $webpPath, $quality)) {
+        $webpImage = $image;
+
+        if (function_exists('imageistruecolor') && !imageistruecolor($webpImage)) {
+            if (function_exists('imagepalettetotruecolor')) {
+                imagepalettetotruecolor($webpImage);
+            } else {
+                $converted = imagecreatetruecolor(imagesx($webpImage), imagesy($webpImage));
+                imagealphablending($converted, false);
+                imagesavealpha($converted, true);
+                $transparent = imagecolorallocatealpha($converted, 255, 255, 255, 127);
+                imagefilledrectangle($converted, 0, 0, imagesx($webpImage), imagesy($webpImage), $transparent);
+                imagecopy($converted, $webpImage, 0, 0, 0, 0, imagesx($webpImage), imagesy($webpImage));
+                $webpImage = $converted;
+            }
+        }
+
+        if (imagewebp($webpImage, $webpPath, $quality)) {
             chmod($webpPath, 0644);
+        }
+
+        if ($webpImage !== $image && (is_resource($webpImage) || $webpImage instanceof \GdImage)) {
+            imagedestroy($webpImage);
         }
     }
 

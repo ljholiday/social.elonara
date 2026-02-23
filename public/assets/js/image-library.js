@@ -429,12 +429,13 @@
             if (previewEl.tagName === 'IMG') {
                 previewEl.src = previewUrl;
                 previewEl.style.display = 'block';
+                previewEl.classList.remove('app-hidden');
             } else if (previewEl.tagName === 'DIV') {
                 const img = document.createElement('img');
                 img.id = targetPreview;
                 img.src = previewUrl;
                 img.alt = altText || '';
-                img.className = previewEl.className;
+                img.className = previewEl.className.replace(/\bapp-hidden\b/g, '').trim();
                 previewEl.parentNode.replaceChild(img, previewEl);
             }
         }
