@@ -398,9 +398,16 @@ final class ConversationController
             $errors['content'] = $contentValidation['errors'][0] ?? 'Reply content is required.';
         }
 
-        // Check for image upload
+        // Check for image from library or upload
+        $imageFromLibrary = trim((string)$request->input('reply_image_url', ''));
         $hasImage = !empty($_FILES['reply_image']) && !empty($_FILES['reply_image']['tmp_name']);
+        $hasLibraryImage = $imageFromLibrary !== '';
         if ($hasImage) {
+            $imageAlt = trim($input['image_alt']);
+            if ($imageAlt === '') {
+                $errors['image_alt'] = 'Image alt-text is required for accessibility.';
+            }
+        } elseif ($hasLibraryImage) {
             $imageAlt = trim($input['image_alt']);
             if ($imageAlt === '') {
                 $errors['image_alt'] = 'Image alt-text is required for accessibility.';
@@ -426,7 +433,10 @@ final class ConversationController
             'author_email' => isset($viewer->email) ? (string)$viewer->email : '',
         ];
 
-        if ($hasImage) {
+        if ($hasLibraryImage) {
+            $replyData['image_url'] = $imageFromLibrary;
+            $replyData['image_alt'] = $input['image_alt'];
+        } elseif ($hasImage) {
             $replyData['image'] = $_FILES['reply_image'];
             $replyData['image_alt'] = $input['image_alt'];
         }

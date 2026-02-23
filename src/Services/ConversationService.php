@@ -394,10 +394,17 @@ final class ConversationService
             $authorName = 'Anonymous';
         }
 
-        // Handle image upload
+        // Handle image - either from library URL or new upload
         $imageUrl = null;
         $imageAlt = null;
-        if ($this->imageService && !empty($data['image']) && !empty($data['image']['tmp_name'])) {
+
+        if (!empty($data['image_url'])) {
+            $imageUrl = $data['image_url'];
+            $imageAlt = trim((string)($data['image_alt'] ?? ''));
+            if ($imageAlt === '') {
+                throw new \RuntimeException('Image alt-text is required for accessibility.');
+            }
+        } elseif ($this->imageService && !empty($data['image']) && !empty($data['image']['tmp_name'])) {
             $imageAlt = trim((string)($data['image_alt'] ?? ''));
             if ($imageAlt === '') {
                 throw new \RuntimeException('Image alt-text is required for accessibility.');
