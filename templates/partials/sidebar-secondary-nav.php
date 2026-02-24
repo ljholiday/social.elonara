@@ -31,9 +31,11 @@ $is_logged_in = $viewer !== null;
                 Create Event
             </a>
 
+<!--
             <a href="/profile" class="app-btn app-btn-secondary app-btn-block">
                 My Profile
             </a>
+-->
 
             <a href="/" class="app-btn app-btn-secondary app-btn-block">
                 Dashboard
