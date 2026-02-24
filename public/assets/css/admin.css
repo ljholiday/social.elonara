@@ -1,5 +1,12 @@
 /* Admin Layout Styles */
 
+html.admin-page,
+body.admin-page {
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+}
+
 .admin-sidebar {
     width: 220px;
     padding: 1.5rem;

@@ -24,7 +24,7 @@ $csrfToken = $security->createNonce('app_admin');
 /** @var array<string,mixed> $statsRenderer */
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="admin-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@ $csrfToken = $security->createNonce('app_admin');
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/app.css', ENT_QUOTES, 'UTF-8'); ?>">
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/admin.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
-<body>
+<body class="admin-page">
 <div style="display:flex; align-items:flex-start;">
     <aside class="admin-sidebar">
         <h1 style="font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">
