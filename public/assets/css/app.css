@@ -89,6 +89,13 @@ body.app-page-form {
     overflow: auto;
 }
 
+html.app-page-scroll,
+body.app-page-scroll {
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+}
+
 h1 {
 }
 
