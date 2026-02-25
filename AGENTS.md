@@ -6,6 +6,7 @@ Project-specific rules belong in the project’s primary documentation.
 
 ## Orientation
 - Identify the project’s authoritative docs and source-of-truth files before editing.
+- Re-open and review this AGENTS.md when resuming work or before any commit to avoid missing important constraints.
 - Follow the project’s declared architecture, naming, and workflow conventions.
 - Prefer minimal, scoped changes and avoid refactors unless requested.
 
