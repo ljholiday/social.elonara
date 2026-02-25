@@ -27,7 +27,7 @@ $viewer = $currentUser;
 $userId = (int)($currentUser?->id ?? 0);
 $csrf_token = $security->createNonce('app_nonce', $userId);
 ?><!DOCTYPE html>
-<html lang="en" class="app-page-form">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@ $csrf_token = $security->createNonce('app_nonce', $userId);
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/app.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
-<body class="app-page-form">
+<body>
 
 <div class="app-page-form-centered">
     <?php include __DIR__ . '/../partials/main-nav.php'; ?>
