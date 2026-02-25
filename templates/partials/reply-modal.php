@@ -55,7 +55,7 @@ $shouldAutoOpen = $reply_errors !== [];
           </div>
           <div class="app-form-group">
             <label class="app-form-label" for="reply-content">Reply</label>
-            <textarea class="app-field<?= isset($reply_errors['content']) ? ' is-invalid' : '' ?>" id="reply-content" name="content" rows="4" required><?= e($reply_input['content'] ?? '') ?></textarea>
+            <textarea class="app-field app-field-textarea-lg<?= isset($reply_errors['content']) ? ' is-invalid' : '' ?>" id="reply-content" name="content" rows="4" required><?= e($reply_input['content'] ?? '') ?></textarea>
           </div>
           <div class="app-form-group">
             <label class="app-form-label">Image (optional)</label>

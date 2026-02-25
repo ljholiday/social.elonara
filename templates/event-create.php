@@ -278,7 +278,7 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
     <div >
       <label class="app-form-label" for="description">Description</label>
       <textarea
-        class="app-field"
+        class="app-field app-field-textarea-lg"
         id="description"
         name="description"
         rows="5"

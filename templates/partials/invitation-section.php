@@ -57,7 +57,7 @@ $share_url = $invite_url !== '' ? $invite_url : '/' . $entity_type . 's';
 
 			<div class="app-form-group">
 				<label class="app-form-label">Custom Message (Optional)</label>
-				<textarea class="app-field" id="custom-message" rows="3"
+				<textarea class="app-field app-field-textarea-lg" id="custom-message" rows="3"
 						  placeholder="Add a personal message to include when sharing..."></textarea>
 				<div >
 					<button type="button" class="app-btn" data-invitation-copy="with-message">
@@ -82,7 +82,7 @@ $share_url = $invite_url !== '' ? $invite_url : '/' . $entity_type . 's';
 			<label class="app-form-label" for="invitation-message">
 				Personal Message (Optional)
 			</label>
-			<textarea class="app-field" id="invitation-message" rows="3"
+			<textarea class="app-field app-field-textarea-lg" id="invitation-message" rows="3"
 					  placeholder="Add a personal message to your invitation..."></textarea>
 		</div>
 

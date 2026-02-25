@@ -38,7 +38,7 @@ $conversation = $conversation ?? null;
       <div >
         <label class="app-form-label" for="content">Content</label>
         <textarea
-          class="app-field<?= isset($errors['content']) ? ' is-invalid' : '' ?>"
+          class="app-field app-field-textarea-lg<?= isset($errors['content']) ? ' is-invalid' : '' ?>"
           id="content"
           name="content"
           rows="6"

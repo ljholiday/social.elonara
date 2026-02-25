@@ -1284,6 +1284,10 @@ a:focus {
         max-width: 100%;
     }
 
+    textarea.app-field-textarea-lg {
+        min-height: 22vh;
+    }
+
     .app-section {
         padding: 0.25rem;
         margin-bottom: 0.25rem;
@@ -1506,6 +1510,11 @@ a:focus {
 textarea.app-field {
     resize: vertical;
     min-height: 7.5rem;
+}
+
+textarea.app-field-textarea-lg {
+    resize: vertical;
+    min-height: 40vh;
 }
 
 /* File Upload Section */
