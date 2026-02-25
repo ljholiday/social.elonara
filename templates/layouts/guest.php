@@ -22,7 +22,7 @@ $fullTitle = $page_title === $appName ? $appName : $page_title . ' - ' . $appNam
 $security = app_service('security.service');
 $csrf_token = $security->createNonce('app_nonce');
 ?><!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="app-page-form">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,7 @@ $csrf_token = $security->createNonce('app_nonce');
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="<?= htmlspecialchars($assetBase . '/css/app.css', ENT_QUOTES, 'UTF-8'); ?>">
 </head>
-<body >
+<body class="app-page-form">
 
 <div >
     <main class="app-main" role="main">
