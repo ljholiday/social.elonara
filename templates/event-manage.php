@@ -21,7 +21,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
   data-event-action-nonce="<?= htmlspecialchars($eventActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
   <?php if ($status === 404 || empty($event)): ?>
     <div class="app-text-center">
-      <h1 class="app-heading">Event not found</h1>
+      <h1 class="app-heading app-heading-lg">Event not found</h1>
       <p class="app-text-muted">Either this event does not exist or you do not have permission to manage it.</p>
       <p class="app-mt-4">
         <a class="app-btn" href="/events">Back to events</a>
@@ -29,7 +29,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
     </div>
   <?php elseif ($status === 403): ?>
     <div class="app-text-center">
-      <h1 class="app-heading">Access denied</h1>
+      <h1 class="app-heading app-heading-lg">Access denied</h1>
       <p class="app-text-muted">You do not have permission to manage this event.</p>
       <p class="app-mt-4">
         <a class="app-btn" href="/events">Back to events</a>

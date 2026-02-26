@@ -5,10 +5,10 @@ $conversation = $conversation ?? null;
 ?>
 <section class="app-section">
   <?php if (!$conversation): ?>
-    <h1 class="app-heading">Conversation not found</h1>
+    <h1 class="app-heading app-heading-lg">Conversation not found</h1>
     <p class="app-text-muted">We couldn’t find that conversation.</p>
   <?php else: ?>
-    <h1 class="app-heading">Edit Conversation</h1>
+    <h1 class="app-heading app-heading-lg">Edit Conversation</h1>
     <p class="app-text-muted">Editing <strong><?= e($conversation['title'] ?? '') ?></strong></p>
 
     <?php if ($errors): ?>

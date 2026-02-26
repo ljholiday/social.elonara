@@ -8,7 +8,7 @@ body.admin-page {
 }
 
 .admin-sidebar {
-    width: 220px;
+    width: 11.7333rem;
     padding: 1.5rem;
     background: #10162f;
     color: #fff;
@@ -41,8 +41,8 @@ body.admin-page {
 
 .admin-card {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 0.64rem;
     padding: 1.5rem;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 0.4267rem 1.28rem rgba(15, 23, 42, 0.08);
     margin-bottom: 1.5rem;
 }

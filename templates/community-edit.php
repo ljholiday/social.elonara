@@ -5,10 +5,10 @@ $community = $community ?? null;
 ?>
 <section class="app-section">
   <?php if (!$community): ?>
-    <h1 class="app-heading">Community not found</h1>
+    <h1 class="app-heading app-heading-lg">Community not found</h1>
     <p class="app-text-muted">We couldn’t find that community.</p>
   <?php else: ?>
-    <h1 class="app-heading">Edit Community</h1>
+    <h1 class="app-heading app-heading-lg">Edit Community</h1>
     <p class="app-text-muted">Editing <strong><?= e($community['title'] ?? '') ?></strong></p>
 
     <?php if ($errors): ?>

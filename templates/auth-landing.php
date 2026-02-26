@@ -45,7 +45,7 @@ $invitation = $invitation ?? null;
     <div class="app-grid app-gap-4 app-grid-2">
       <div class="app-card<?php echo $active === 'login' ? ' is-active' : ''; ?>">
         <div class="app-card-header">
-          <h1 class="app-heading">Sign in to <?php echo e($appName); ?></h1>
+          <h1 class="app-heading app-heading-lg">Sign in to <?php echo e($appName); ?></h1>
 
           <div class="app-text-muted app-text-sm">
               <a target="_blank" href="https://elonara.com">About</a> -- 
@@ -112,7 +112,7 @@ $invitation = $invitation ?? null;
 
       <div class="app-card<?php echo $active === 'register' ? ' is-active' : ''; ?>">
         <div class="app-card-header">
-          <h2 class="app-heading">Create an account</h2>
+          <h2 class="app-heading app-heading-md">Create an account</h2>
         </div>
         <div class="app-card-body">
           <form method="post" action="/auth/register" class="app-form">

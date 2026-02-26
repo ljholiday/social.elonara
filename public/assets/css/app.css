@@ -23,7 +23,7 @@
 /* Dev trick. Gives every container a green border */
 /*
 * {
-    border: solid .5px green;
+    border: solid 0.0267rem green;
 }
 */
 
@@ -103,8 +103,8 @@ p {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
     unicode-bidi: isolate;
 }
 
@@ -140,7 +140,7 @@ a:focus {
     padding: var(--app-space-sm);
     overflow: hidden;
     /* Make main content narrower */
-    max-width: 1000px;
+    max-width: 53.3333rem;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -280,9 +280,9 @@ a:focus {
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     body {
-        font-size: 14px;
+        font-size: 1rem;
     }
     
     .app-page-two-column {
@@ -494,7 +494,7 @@ a:focus {
 }
 
 /* Responsive adjustments for centered form layout */
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     .app-page-form-centered {
         max-width: 100%;
         padding: 0.75rem;
@@ -545,10 +545,10 @@ a:focus {
     line-height: 1.2;
 }
 
-.app-heading-xl { font-size: 2.5rem; }
-.app-heading-lg { font-size: 2rem; }
-.app-heading-md { font-size: 1.5rem; }
-.app-heading-sm { font-size: 1.25rem; }
+.app-heading-xl { font-size: 2rem; }
+.app-heading-lg { font-size: 1.5rem; }
+.app-heading-md { font-size: 1.25rem; }
+.app-heading-sm { font-size: 1.125rem; }
 
 .app-text-default { color: var(--app-text); }
 .app-text-primary { color: var(--app-primary); }
@@ -718,7 +718,7 @@ a:focus {
 }
 
 /* Mobile adjustments */                                                        
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     
     .app-btn {
         padding: 0.4rem 0.85rem;
@@ -742,12 +742,12 @@ a:focus {
 .admin-user-card {
     background: #fff;
     border-radius: 0.75rem;
-    border: 1px solid var(--app-border);
+    border: 0.0533rem solid var(--app-border);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 0.5333rem 1.28rem rgba(15, 23, 42, 0.06);
     width: 100%;
 }
 
@@ -768,7 +768,7 @@ a:focus {
     background: #eef2fb;
     color: #4a5470;
     padding: 0.15rem 0.5rem;
-    border-radius: 999px;
+    border-radius: 53.28rem;
 }
 
 .admin-user-meta {
@@ -875,6 +875,11 @@ a:focus {
     color: var(--app-visibility-private);
 }
 
+.app-badge-title {
+    margin-left: 0.75rem;
+    font-size: 0.8rem;
+}
+
 
 /* Forms */
 .app-form-group {
@@ -935,7 +940,7 @@ a:focus {
 }
 
 .app-card-desc {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     color: var(--app-text);
     margin-bottom: 1rem;
     line-height: 1.5;
@@ -1238,7 +1243,7 @@ a:focus {
 }
 
 /* Stats mobile stacking */
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
   .app-stats-row {
     flex-direction: column;
     align-items: flex-start;
@@ -1272,7 +1277,7 @@ a:focus {
 
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     .app-page,
     .app-page-form {
         padding: 0.25rem;
@@ -1660,7 +1665,7 @@ body.app-modal-open {
 }
 
 .app-activity-description {
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin-bottom: 0.25rem;
 }
 
@@ -1789,7 +1794,7 @@ body.app-modal-open {
     gap: 0.35rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     .app-card-item {
         flex-direction: column;
         gap: 1rem;
@@ -1940,7 +1945,7 @@ body.app-modal-open {
 
 /* Danger Zone Component */
 .app-danger-zone {
-    border: 2px solid var(--app-danger);
+    border: 0.1067rem solid var(--app-danger);
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-top: 3rem;
@@ -1957,8 +1962,8 @@ body.app-modal-open {
 }
 
 .app-entity-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.1067rem);
+    box-shadow: 0 0.2133rem 0.64rem rgba(0, 0, 0, 0.1);
 }
 
 .app-conversations-list.app-is-loading {
@@ -1985,7 +1990,7 @@ body.app-modal-open {
     to { transform: rotate(360deg); }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     .app-conversations-nav {
         gap: 0.25rem;
     }
@@ -2087,7 +2092,7 @@ body.app-modal-open {
   clear: both;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
   .app-avatar-row {
     flex-direction: column;
     align-items: center;
@@ -2114,7 +2119,7 @@ body.app-modal-open {
   border-color: var(--app-danger) !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
   .app-date-time-grid {
     grid-template-columns: 1fr;
   }
@@ -2216,7 +2221,7 @@ body.app-modal-open {
   line-height: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
   .app-mobile-menu-toggle {
     display: flex;
   }
@@ -2434,7 +2439,7 @@ body.app-modal-open {
 
 .app-reply {
   padding: 1.25rem;
-  border: 1px solid var(--app-border);
+  border: 0.0533rem solid var(--app-border);
   border-radius: 0.5rem;
   background: var(--app-surface);
   transition: all 0.2s ease;
@@ -2442,7 +2447,7 @@ body.app-modal-open {
 
 .app-reply:hover {
   border-color: var(--app-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.1067rem 0.4267rem rgba(0, 0, 0, 0.05);
 }
 
 .app-reply-header {
@@ -2451,7 +2456,7 @@ body.app-modal-open {
   justify-content: space-between;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--app-border);
+  border-bottom: 0.0533rem solid var(--app-border);
 }
 
 /* ========================================
@@ -2465,7 +2470,7 @@ body.app-modal-open {
   align-items: start;
   padding: 0.75rem;
   margin: var(--app-space-lg) 0;
-  border: 1px solid var(--app-border);
+  border: 0.0533rem solid var(--app-border);
   border-radius: var(--app-radius-md);
   overflow: hidden;
   background: var(--app-surface);
@@ -2474,7 +2479,7 @@ body.app-modal-open {
 
 .app-embed:hover {
   border-color: var(--app-primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2133rem 0.64rem rgba(0, 0, 0, 0.1);
 }
 
 .app-embed:hover .app-embed-image {
@@ -2506,7 +2511,7 @@ body.app-modal-open {
 .app-embed-rich .app-embed-meta {
   padding: var(--app-space-md);
   background: var(--app-background);
-  border-top: 1px solid var(--app-border);
+  border-top: 0.0533rem solid var(--app-border);
 }
 
 /* Link preview cards */
@@ -2517,7 +2522,7 @@ body.app-modal-open {
 .app-embed-image-wrapper {
   display: block;
   flex-shrink: 0;
-  width: 200px;
+  width: 10.6667rem;
   height: auto;
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -2565,7 +2570,7 @@ body.app-modal-open {
 
 .app-embed-description {
   color: var(--app-text-muted);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5;
   margin-top: 0.375rem;
   margin-bottom: var(--app-space-sm);
@@ -2600,7 +2605,7 @@ body.app-modal-open {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
   .app-embed {
     grid-template-columns: 1fr;
   }
@@ -2611,7 +2616,7 @@ body.app-modal-open {
 
   .app-embed-image-wrapper {
     width: 100%;
-    max-height: 200px;
+    max-height: 10.6667rem;
     aspect-ratio: 16 / 9;
   }
 
@@ -2620,7 +2625,7 @@ body.app-modal-open {
   }
 
   .app-embed-description {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .app-embed-content {
@@ -2633,7 +2638,7 @@ body.app-modal-open {
    ======================================== */
 
 .app-bluesky-follower-modal .app-modal-content {
-  max-width: 600px;
+  max-width: 32rem;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -2684,8 +2689,8 @@ body.app-modal-open {
 }
 
 .app-follower-avatar {
-  width: 48px;
-  height: 48px;
+  width: 2.56rem;
+  height: 2.56rem;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
@@ -2730,9 +2735,9 @@ body.app-modal-open {
 
 .app-spinner {
   display: inline-block;
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--app-border);
+  width: 1.7067rem;
+  height: 1.7067rem;
+  border: 0.16rem solid var(--app-border);
   border-top-color: var(--app-primary);
   border-radius: 50%;
   animation: app-spin 0.8s linear infinite;
@@ -2759,7 +2764,7 @@ body.app-modal-open {
 /* Large modal variant */
 .app-modal-lg .app-modal-content {
   width: 50rem;
-  max-width: 800px;
+  max-width: 42.6667rem;
 }
 
 /* =============================================================================
@@ -2776,14 +2781,14 @@ body.app-modal-open {
 }
 
 .app-image-preview {
-    max-width: 400px;
+    max-width: 21.3333rem;
 }
 
 /* Profile cover image responsive */
 .app-profile-cover {
     position: relative;
     width: 100%;
-    height: 240px;
+    height: 12.8rem;
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -2798,7 +2803,7 @@ body.app-modal-open {
 /* Reply images responsive */
 .app-reply-image {
     width: 100%;
-    max-width: 800px;
+    max-width: 42.6667rem;
     margin: 0 0 1rem 0;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -2892,9 +2897,9 @@ body.app-modal-open {
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
+@media (max-width: 40.96rem) {
     .app-profile-cover {
-        height: 160px;
+        height: 8.5333rem;
     }
 
     .app-reply-image {
@@ -2903,20 +2908,20 @@ body.app-modal-open {
 
     /* Smaller avatar sizes on mobile */
     .app-avatar-lg {
-        width: 80px;
-        height: 80px;
+        width: 4.2667rem;
+        height: 4.2667rem;
     }
 
     .app-profile-avatar {
-        width: 96px;
-        height: 96px;
+        width: 5.12rem;
+        height: 5.12rem;
     }
 }
 
 /* Tablet adjustments */
-@media (min-width: 641px) and (max-width: 1024px) {
+@media (min-width: 34.1867rem) and (max-width: 54.6133rem) {
     .app-profile-cover {
-        height: 200px;
+        height: 10.6667rem;
     }
 }
 

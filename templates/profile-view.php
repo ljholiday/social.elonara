@@ -88,7 +88,7 @@ $activity = $recent_activity ?? [];
       </div>
 
       <div class="app-profile-identity">
-        <h1 class="app-heading"><?= e($u->display_name ?? $u->username) ?></h1>
+        <h1 class="app-heading app-heading-lg"><?= e($u->display_name ?? $u->username) ?></h1>
         <p class="app-text-muted">@<?= e($u->username) ?></p>
 
         <?php if (!empty($u->bio)): ?>

@@ -3,7 +3,7 @@ $errors = $errors ?? [];
 $input = $input ?? ['name' => '', 'description' => '', 'privacy' => 'public'];
 ?>
 <section class="app-section">
-  <h1 class="app-heading">Create Community</h1>
+  <h1 class="app-heading app-heading-lg">Create Community</h1>
 
   <?php if ($errors): ?>
     <div class="app-alert app-alert-error app-mb-4">

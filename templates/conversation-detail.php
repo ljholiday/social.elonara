@@ -1,16 +1,16 @@
 <section class="app-section">
   <?php if (empty($conversation)): ?>
-    <h1 class="app-heading">Conversation not found</h1>
+    <h1 class="app-heading app-heading-lg">Conversation not found</h1>
     <p class="app-text-muted">We couldn’t find that conversation.</p>
   <?php else: $c = (object)$conversation; ?>
     <?php $contextLabelHtml = $context_label_html ?? ''; ?>
-    <h1 class="app-heading">
+    <h1 class="app-heading app-heading-lg">
       <?= $contextLabelHtml !== '' ? $contextLabelHtml : e($c->title ?? '') ?>
       <?php
         $badge = app_visibility_badge($c->privacy ?? $c->community_privacy ?? null);
         if (!empty($badge['label'])):
       ?>
-        <span class="<?= e($badge['class']) ?>" style="margin-left:0.75rem; font-size:0.8rem;">
+        <span class="app-badge app-badge-title <?= e($badge['class']) ?>">
           <?= e($badge['label']) ?>
         </span>
       <?php endif; ?>

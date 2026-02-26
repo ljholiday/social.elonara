@@ -7,7 +7,7 @@ $filter = $filter ?? 'all';
 $past_events = $past_events ?? [];
 ?>
 <section class="app-section">
-  <h1 class="app-heading">Upcoming Events</h1>
+  <h1 class="app-heading app-heading-lg">Upcoming Events</h1>
 
   <?php
   $card_path = __DIR__ . '/partials/entity-card.php';

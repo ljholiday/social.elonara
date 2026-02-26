@@ -7,7 +7,7 @@ $circle = $circle ?? 'all';
 $pagination = $pagination ?? ['page' => 1, 'per_page' => 20, 'has_more' => false, 'next_page' => null];
 ?>
 <section class="app-section">
-  <h1 class="app-heading">Conversations</h1>
+  <h1 class="app-heading app-heading-lg">Conversations</h1>
 
   <?php if (!empty($conversations)): ?>
     <div id="app-convo-list" >

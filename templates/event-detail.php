@@ -1,6 +1,6 @@
 <section class="app-section">
   <?php if (empty($event)): ?>
-    <h1 class="app-heading">Event not found</h1>
+    <h1 class="app-heading app-heading-lg">Event not found</h1>
     <p class="app-text-muted">We couldn’t find that event.</p>
   <?php else: $e = (object)$event; ?>
     <?php
@@ -26,13 +26,13 @@
       </figure>
     <?php endif; ?>
     <header class="app-mb-4">
-      <h1 class="app-heading">
+      <h1 class="app-heading app-heading-lg">
         <?= $contextLabelHtml !== '' ? $contextLabelHtml : e($e->title ?? '') ?>
         <?php
           $badge = app_visibility_badge($e->privacy ?? null, $e->community_privacy ?? null);
           if (!empty($badge['label'])):
         ?>
-          <span class="<?= e($badge['class']) ?>" style="margin-left:0.75rem; font-size:0.8rem;">
+          <span class="app-badge app-badge-title <?= e($badge['class']) ?>">
             <?= e($badge['label']) ?>
           </span>
         <?php endif; ?>

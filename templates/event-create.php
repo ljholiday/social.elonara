@@ -77,7 +77,7 @@ $showMonthlyDate = ($recurrenceType === 'monthly' && $monthlyType === 'date') ||
 $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekday') || isset($errors['monthly_week']) || isset($errors['monthly_weekday']);
 ?>
 <section class="app-section">
-  <h1 class="app-heading">Create Event</h1>
+  <h1 class="app-heading app-heading-lg">Create Event</h1>
 
   <?php if ($contextLabel !== '' || $contextLabelHtml !== ''): ?>
     <p class="app-text-muted">This event will be created in 

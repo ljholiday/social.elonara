@@ -19,7 +19,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
   data-community-action-nonce="<?= htmlspecialchars($communityActionNonce, ENT_QUOTES, 'UTF-8'); ?>">
   <?php if ($statusCode === 404 || empty($community)): ?>
     <div class="app-text-center">
-      <h1 class="app-heading">Community not found</h1>
+      <h1 class="app-heading app-heading-lg">Community not found</h1>
       <p class="app-text-muted">We couldn’t find that community or it may have been removed.</p>
       <p class="app-mt-4">
         <a class="app-btn" href="/communities">Back to communities</a>
@@ -27,7 +27,7 @@ $blueskyActionNonce = $securityService->createNonce('app_bluesky_action', $viewe
     </div>
   <?php elseif ($statusCode === 403): ?>
     <div class="app-text-center">
-      <h1 class="app-heading">Access denied</h1>
+      <h1 class="app-heading app-heading-lg">Access denied</h1>
       <p class="app-text-muted">You do not have permission to manage this community.</p>
       <p class="app-mt-4">
         <a class="app-btn" href="/communities">Back to communities</a>

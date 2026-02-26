@@ -15,7 +15,7 @@ $input = $input ?? [];
 
 <section class="app-section">
   <?php if ($u): ?>
-    <h1 class="app-heading">Edit Profile</h1>
+    <h1 class="app-heading app-heading-lg">Edit Profile</h1>
 
     <div id="profile-success"></div>
 

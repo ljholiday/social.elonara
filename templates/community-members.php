@@ -15,7 +15,7 @@ $members = $members ?? [];
   <?php if (!$community): ?>
     <p class="app-text-muted">Community not found.</p>
   <?php else: ?>
-    <h1 class="app-heading">Members</h1>
+    <h1 class="app-heading app-heading-lg">Members</h1>
     <p class="app-text-muted">Members of <?= e($community['title']) ?></p>
 
     <?php if (empty($members)): ?>

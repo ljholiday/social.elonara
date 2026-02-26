@@ -5,7 +5,7 @@ $status = $status ?? (empty($community) ? 404 : 200);
 ?>
 <section class="app-section">
   <?php if ($status === 404 || empty($community)): ?>
-    <h1 class="app-heading">Community not found</h1>
+    <h1 class="app-heading app-heading-lg">Community not found</h1>
     <p class="app-text-muted">We couldn't find that community or you do not have access.</p>
   <?php else:
     $c = (object)$community;
@@ -24,13 +24,13 @@ $status = $status ?? (empty($community) ? 404 : 200);
       </figure>
     <?php endif; ?>
     <header class="app-mb-4">
-      <h1 class="app-heading">
+      <h1 class="app-heading app-heading-lg">
         <?= e($c->title ?? '') ?>
         <?php
           $badge = app_visibility_badge($c->privacy ?? null);
           if (!empty($badge['label'])):
         ?>
-          <span class="<?= e($badge['class']) ?>" style="margin-left:0.75rem; font-size:0.8rem;">
+        <span class="app-badge app-badge-title <?= e($badge['class']) ?>">
             <?= e($badge['label']) ?>
           </span>
         <?php endif; ?>

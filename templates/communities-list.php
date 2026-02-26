@@ -5,7 +5,7 @@
 $circle = $circle ?? 'all';
 ?>
 <section class="app-section">
-  <h1 class="app-heading">Communities</h1>
+  <h1 class="app-heading app-heading-lg">Communities</h1>
 
   <?php
   $card_path = __DIR__ . '/partials/entity-card.php';

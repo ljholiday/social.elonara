@@ -75,10 +75,10 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
 ?>
 <section class="app-section">
   <?php if (!$event): ?>
-    <h1 class="app-heading">Event not found</h1>
+    <h1 class="app-heading app-heading-lg">Event not found</h1>
     <p class="app-text-muted">We couldn’t find that event.</p>
   <?php else: ?>
-    <h1 class="app-heading">Edit Event</h1>
+    <h1 class="app-heading app-heading-lg">Edit Event</h1>
     <p class="app-text-muted">Editing <strong><?= e($event['title'] ?? '') ?></strong></p>
 
     <?php if ($errors): ?>

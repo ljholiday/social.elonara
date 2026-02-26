@@ -20,7 +20,7 @@ $events = $events ?? [];
   <?php else: ?>
     <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
       <div>
-        <h1 class="app-heading">Events</h1>
+        <h1 class="app-heading app-heading-lg">Events</h1>
         <p class="app-text-muted">Events in <?= e($community['title']) ?></p>
       </div>
       <?php if (!empty($canCreateEvent) && $canCreateEvent): ?>
