@@ -8,16 +8,21 @@
  * @var string $fullTitle - Full page title with app name
  * @var string $page_description - Optional page description
  * @var string $assetBase - Base path for assets
+ * @var string|null $canonical_url - Optional absolute canonical URL override
  */
 
 declare(strict_types=1);
 
 $appUrl = rtrim((string)app_config('app.url', 'http://localhost'), '/');
-$currentUrl = $appUrl . ($_SERVER['REQUEST_URI'] ?? '/');
+$requestUri = (string)($_SERVER['REQUEST_URI'] ?? '/');
+$requestPath = (string)(parse_url($requestUri, PHP_URL_PATH) ?? '/');
+$currentUrl = $appUrl . $requestUri;
+$canonicalUrl = $canonical_url ?? ($appUrl . $requestPath);
 ?>
     <?php if ($page_description): ?>
     <meta name="description" content="<?= htmlspecialchars($page_description, ENT_QUOTES, 'UTF-8'); ?>">
     <?php endif; ?>
+    <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
