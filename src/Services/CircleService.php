@@ -134,11 +134,11 @@ final class CircleService
      */
     public function getCommunityScope(int $viewerId, string $circle): ?array
     {
-        if ($viewerId <= 0) {
-            return [];
-        }
-
         $circle = strtolower($circle);
+
+        if ($viewerId <= 0) {
+            return $circle === 'all' ? null : [];
+        }
 
         if ($circle === 'all') {
             return null;
