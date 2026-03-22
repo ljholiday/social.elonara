@@ -2,12 +2,26 @@
 /** @var array<int,array<string,mixed>> $conversations */
 /** @var string $circle */
 /** @var array $pagination */
+/** @var bool $is_guest */
 
 $circle = $circle ?? 'all';
 $pagination = $pagination ?? ['page' => 1, 'per_page' => 20, 'has_more' => false, 'next_page' => null];
+$is_guest = $is_guest ?? false;
 ?>
 <section class="app-section">
   <h1 class="app-heading app-heading-lg">Conversations</h1>
+
+  <?php if ($is_guest && $circle !== 'all'): ?>
+    <div class="app-card app-mb-4">
+      <div class="app-card-body app-text-center">
+        <p class="app-text-muted"><?= htmlspecialchars(ucfirst($circle), ENT_QUOTES, 'UTF-8'); ?> circle conversations are only available after you sign in.</p>
+        <div class="app-flex app-flex-wrap">
+          <a class="app-btn app-btn-primary" href="/auth">Sign In or Register</a>
+          <a class="app-btn" href="/conversations?circle=all">Browse Public Conversations</a>
+        </div>
+      </div>
+    </div>
+  <?php endif; ?>
 
   <?php if (!empty($conversations)): ?>
     <div id="app-convo-list" >

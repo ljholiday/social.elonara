@@ -32,18 +32,27 @@ final class ConversationApiController
         $request = $this->request();
         $nonce = (string)$request->input('nonce', '');
 
-        $viewerId = $this->auth->currentUserId();
-        if ($viewerId === null || $viewerId <= 0) {
-            return $this->error('User not authenticated', 401);
-        }
-
-        if (!$this->verifyNonce($nonce, 'app_nonce', $viewerId)) {
+        $viewerId = (int)($this->auth->currentUserId() ?? 0);
+        if ($viewerId > 0 && !$this->verifyNonce($nonce, 'app_nonce', $viewerId)) {
             return $this->error('Security verification failed', 403);
         }
 
         $circle = $this->normalizeCircle($request->input('circle'));
         $filter = $this->normalizeFilter($request->input('filter'));
         $page = max(1, (int)$request->input('page', 1));
+
+        if ($viewerId <= 0 && $circle !== 'all') {
+            return $this->success([
+                'html' => $this->renderGuestCircleNotice($circle),
+                'meta' => [
+                    'count' => 0,
+                    'page' => 1,
+                    'has_more' => false,
+                    'circle' => $circle,
+                    'filter' => '',
+                ],
+            ]);
+        }
 
         $context = $this->circles->buildContext($viewerId);
         $allowedUsers = $this->circles->resolveUsersForCircle($context, $circle);
@@ -144,6 +153,17 @@ final class ConversationApiController
     {
         $filter = strtolower((string)$filter);
         return in_array($filter, self::VALID_FILTERS, true) ? $filter : '';
+    }
+
+    private function renderGuestCircleNotice(string $circle): string
+    {
+        $circleLabel = ucfirst($circle);
+        return '<div class="app-card"><div class="app-card-body app-text-center">'
+            . '<p class="app-text-muted">' . htmlspecialchars($circleLabel, ENT_QUOTES, 'UTF-8')
+            . ' circle conversations are only available after you sign in.</p>'
+            . '<div class="app-flex app-flex-wrap"><a class="app-btn app-btn-primary" href="/auth">Sign In or Register</a>'
+            . '<a class="app-btn" href="/conversations?circle=all">Browse Public Conversations</a></div>'
+            . '</div></div>';
     }
 
     private function verifyNonce(string $nonce, string $action, int $userId = 0): bool

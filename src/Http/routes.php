@@ -1436,6 +1436,7 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
     $router->get('/conversations', static function (Request $request) {
         $view = app_service('controller.conversations')->index();
         $circle = $view['circle'] ?? 'all';
+        $page = max(1, (int)$request->query('page', 1));
 
         ob_start();
         $viewer = app_service('auth.service')->getCurrentUser();
@@ -1451,6 +1452,9 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
                 ['title' => 'Trusted', 'url' => '/conversations?circle=trusted', 'active' => $circle === 'trusted'],
                 ['title' => 'Extended', 'url' => '/conversations?circle=extended', 'active' => $circle === 'extended'],
             ],
+            'is_guest' => $viewer === null,
+            'canonical_url' => app_url('/conversations'),
+            'robots_meta' => ($circle === 'all' && $page === 1 && $viewer === null) ? 'index,follow' : 'noindex,follow',
             'sidebar_content' => $sidebar,
         ]), 'two-column');
         return true;

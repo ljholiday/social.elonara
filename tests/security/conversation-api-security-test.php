@@ -41,16 +41,6 @@ try {
         throw new RuntimeException('Auth service did not report a logged-in user.');
     }
 
-    $slug = $conversationService->create([
-        'title' => 'Security Test Conversation ' . $suffix,
-        'content' => 'Testing circle security hardening.',
-    ]);
-    $conversation = $conversationService->getBySlugOrId($slug);
-    if ($conversation === null || !isset($conversation['id'])) {
-        throw new RuntimeException('Failed to create test conversation.');
-    }
-    $conversationId = (int)$conversation['id'];
-
     $viewer = $auth->getCurrentUser();
     $viewerEmail = is_object($viewer) && isset($viewer->email) ? (string)$viewer->email : '';
     $viewerName = is_object($viewer) && isset($viewer->display_name) ? (string)$viewer->display_name : '';
@@ -68,6 +58,18 @@ try {
         throw new RuntimeException('Failed to create test community.');
     }
     $communityId = (int)$community['id'];
+
+    $slug = $conversationService->create([
+        'title' => 'Security Test Conversation ' . $suffix,
+        'content' => 'Testing circle security hardening.',
+        'community_id' => $communityId,
+        'privacy' => 'public',
+    ]);
+    $conversation = $conversationService->getBySlugOrId($slug);
+    if ($conversation === null || !isset($conversation['id'])) {
+        throw new RuntimeException('Failed to create test conversation.');
+    }
+    $conversationId = (int)$conversation['id'];
 
     $resetGlobals = static function (): void {
         $_POST = [];

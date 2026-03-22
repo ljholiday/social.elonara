@@ -144,6 +144,10 @@ final class ConversationService
         $communityId = isset($data['community_id']) ? (int)$data['community_id'] : 0;
         $eventId = isset($data['event_id']) ? (int)$data['event_id'] : 0;
 
+        if ($communityId <= 0 && $eventId <= 0) {
+            throw new \RuntimeException('Conversation must belong to a community or event.');
+        }
+
         $stmt = $pdo->prepare(
             "INSERT INTO conversations (
                 title,
