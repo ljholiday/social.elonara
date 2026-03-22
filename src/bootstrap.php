@@ -611,7 +611,8 @@ if (!function_exists('app_container')) {
                     $c->get('conversation.service'),
                     $c->get('authorization.service'),
                     $c->get('community.service'),
-                    $c->get('image.service')
+                    $c->get('image.service'),
+                    $c->get('circle.service')
                 );
             }, false);
 

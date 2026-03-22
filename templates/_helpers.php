@@ -114,6 +114,9 @@ function app_render(string $template_path, array $data = [], string $layout = 'p
     $page_title = $data['page_title'] ?? (string)app_config('app.name', 'Elonara Social');
     $page_description = $data['page_description'] ?? '';
     $current_path = $_SERVER['REQUEST_URI'] ?? '/';
+    $canonical_url = $data['canonical_url'] ?? app_url((string)(parse_url($current_path, PHP_URL_PATH) ?? '/'));
+    $robots_meta = $data['robots_meta'] ?? 'noindex,follow';
+    $structured_data = $data['structured_data'] ?? [];
     $breadcrumbs = $data['breadcrumbs'] ?? [];
     $nav_items = $data['nav_items'] ?? [];
 

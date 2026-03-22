@@ -12,6 +12,7 @@ use App\Services\ConversationService;
 use App\Services\AuthorizationService;
 use App\Services\CommunityService;
 use App\Services\ImageService;
+use App\Services\CircleService;
 use App\Support\ContextBuilder;
 use App\Support\ContextLabel;
 use App\Support\RecurrenceFormatter;
@@ -32,7 +33,8 @@ final class EventController
         private ConversationService $conversations,
         private AuthorizationService $authz,
         private CommunityService $communities,
-        private ImageService $images
+        private ImageService $images,
+        private CircleService $circles
     ) {
     }
 
@@ -50,8 +52,8 @@ final class EventController
             $events = $viewerId > 0 ? $this->events->listMineUpcoming($viewerId, $viewerEmail) : [];
             $pastEvents = $viewerId > 0 ? $this->events->listMinePast($viewerId, $viewerEmail) : [];
         } else {
-            $events = $this->events->listUpcoming();
-            $pastEvents = $this->events->listPast();
+            $events = $this->events->listPublicUpcoming();
+            $pastEvents = $this->events->listPublicPast();
         }
 
         $events = array_map(function (array $event): array {
@@ -82,15 +84,27 @@ final class EventController
     }
 
     /**
-     * @return array{event: array<string, mixed>|null}
+     * @return array{event: array<string, mixed>|null, status:int}
      */
     public function show(string $slugOrId): array
     {
         $event = $this->events->getBySlugOrId($slugOrId);
-        $contextPath = $event !== null ? ContextBuilder::event($event, $this->communities) : [];
+        if ($event === null || !$this->canViewEvent($event)) {
+            return [
+                'event' => null,
+                'status' => 404,
+                'context_path' => [],
+                'context_label' => '',
+                'context_label_html' => '',
+                'recurrence_summary' => '',
+            ];
+        }
+
+        $contextPath = ContextBuilder::event($event, $this->communities);
 
         return [
             'event' => $event,
+            'status' => 200,
             'context_path' => $contextPath,
             'context_label' => $contextPath !== [] ? ContextLabel::renderPlain($contextPath) : '',
             'context_label_html' => $contextPath !== [] ? ContextLabel::render($contextPath) : '',
@@ -511,18 +525,25 @@ final class EventController
     public function conversations(string $slugOrId): array
     {
         $event = $this->events->getBySlugOrId($slugOrId);
-        if ($event === null) {
+        if ($event === null || !$this->canViewEvent($event)) {
             return [
                 'event' => null,
                 'conversations' => [],
                 'canCreateConversation' => false,
+                'status' => 404,
             ];
         }
 
         $eventId = (int)($event['id'] ?? 0);
         $conversations = $eventId > 0 ? $this->conversations->listByEvent($eventId) : [];
         $viewerId = (int)($this->auth->currentUserId() ?? 0);
+        $memberCommunities = $this->circles->memberCommunities($viewerId);
         $canCreate = $this->authz->canCreateConversationInEvent($event, $viewerId);
+
+        $conversations = array_values(array_filter(
+            $conversations,
+            fn(array $conversation): bool => $this->conversations->canViewerAccess($conversation, $viewerId, $memberCommunities)
+        ));
 
         $conversations = array_map(function (array $conversation): array {
             $path = ContextBuilder::conversation($conversation, $this->communities, $this->events);
@@ -538,6 +559,7 @@ final class EventController
             'event' => $event,
             'conversations' => $conversations,
             'canCreateConversation' => $canCreate,
+            'status' => 200,
         ];
     }
 
@@ -652,6 +674,13 @@ final class EventController
         /** @var Request $request */
         $request = app_service('http.request');
         return $request;
+    }
+
+    private function canViewEvent(array $event): bool
+    {
+        $viewerId = (int)($this->auth->currentUserId() ?? 0);
+        $memberCommunities = $this->circles->memberCommunities($viewerId);
+        return $this->authz->canViewEvent($event, $viewerId, $memberCommunities);
     }
 
     private function normalizeFilter(?string $filter): string

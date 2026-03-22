@@ -7,13 +7,73 @@ use App\Http\Request;
 // Load template helpers
 require_once dirname(__DIR__, 2) . '/templates/_helpers.php';
 
+$xmlEscape = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES | ENT_XML1, 'UTF-8');
+$sitemapUrl = static fn(string $path): string => app_url($path);
+$renderSitemapIndex = static function (array $paths) use ($xmlEscape, $sitemapUrl): void {
+    header('Content-Type: application/xml; charset=UTF-8');
+    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    echo "<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+    foreach ($paths as $path) {
+        echo "  <sitemap><loc>" . $xmlEscape($sitemapUrl($path)) . "</loc></sitemap>\n";
+    }
+    echo "</sitemapindex>";
+};
+$renderUrlSet = static function (array $entries) use ($xmlEscape): void {
+    header('Content-Type: application/xml; charset=UTF-8');
+    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+    foreach ($entries as $entry) {
+        $loc = (string)($entry['loc'] ?? '');
+        if ($loc === '') {
+            continue;
+        }
+        echo "  <url>\n";
+        echo "    <loc>" . $xmlEscape($loc) . "</loc>\n";
+        if (!empty($entry['lastmod'])) {
+            echo "    <lastmod>" . $xmlEscape((string)$entry['lastmod']) . "</lastmod>\n";
+        }
+        echo "  </url>\n";
+    }
+    echo "</urlset>";
+};
+$normalizeLastmod = static function (?string $value): ?string {
+    if ($value === null || trim($value) === '') {
+        return null;
+    }
+    $timestamp = strtotime($value);
+    return $timestamp === false ? null : gmdate('c', $timestamp);
+};
+$buildBreadcrumb = static function (array $items): array {
+    $position = 1;
+    $list = [];
+    foreach ($items as $item) {
+        $name = trim((string)($item['name'] ?? ''));
+        $url = trim((string)($item['url'] ?? ''));
+        if ($name === '' || $url === '') {
+            continue;
+        }
+        $list[] = [
+            '@type' => 'ListItem',
+            'position' => $position++,
+            'name' => $name,
+            'item' => $url,
+        ];
+    }
+
+    return [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => $list,
+    ];
+};
+
 /**
  * Application routes
  *
  * @param Router $router
  * @return void
  */
-return static function (Router $router): void {
+return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet, $normalizeLastmod, $buildBreadcrumb): void {
     // Health check
     $router->get('/health', static function (Request $request) {
         $statusCode = 200;
@@ -40,6 +100,57 @@ return static function (Router $router): void {
         return true;
     });
 
+    $router->get('/robots.txt', static function (Request $request) {
+        header('Content-Type: text/plain; charset=UTF-8');
+        echo "User-agent: *\n";
+        echo "Disallow: /admin\n";
+        echo "Disallow: /api\n";
+        echo "Disallow: /auth\n";
+        echo "Disallow: /login\n";
+        echo "Disallow: /register\n";
+        echo "Disallow: /reset-password\n";
+        echo "Disallow: /logout\n";
+        echo "Disallow: /profile/edit\n";
+        echo "Disallow: /events/create\n";
+        echo "Disallow: /communities/create\n";
+        echo "Disallow: /rsvp/\n";
+        echo "Disallow: /invitation/accept\n";
+        echo 'Sitemap: ' . app_url('/sitemap.xml') . "\n";
+        return true;
+    });
+
+    $router->get('/sitemap.xml', static function (Request $request) use ($renderSitemapIndex) {
+        $renderSitemapIndex([
+            '/sitemaps/events.xml',
+            '/sitemaps/communities.xml',
+        ]);
+        return true;
+    });
+
+    $router->get('/sitemaps/events.xml', static function (Request $request) use ($renderUrlSet, $normalizeLastmod) {
+        $events = app_service('event.service')->listPublicSitemapEntries();
+        $entries = array_map(static function (array $event) use ($normalizeLastmod): array {
+            return [
+                'loc' => app_url('/events/' . (string)($event['slug'] ?? '')),
+                'lastmod' => $normalizeLastmod((string)($event['updated_at'] ?? $event['created_at'] ?? $event['event_date'] ?? '')),
+            ];
+        }, $events);
+        $renderUrlSet($entries);
+        return true;
+    });
+
+    $router->get('/sitemaps/communities.xml', static function (Request $request) use ($renderUrlSet, $normalizeLastmod) {
+        $communities = app_service('community.service')->listPublicSitemapEntries();
+        $entries = array_map(static function (array $community) use ($normalizeLastmod): array {
+            return [
+                'loc' => app_url('/communities/' . (string)($community['slug'] ?? '')),
+                'lastmod' => $normalizeLastmod((string)($community['updated_at'] ?? $community['created_at'] ?? '')),
+            ];
+        }, $communities);
+        $renderUrlSet($entries);
+        return true;
+    });
+
     // Auth redirects
     $router->any('/login', static function (Request $request) {
         header('Location: /auth');
@@ -55,8 +166,23 @@ return static function (Router $router): void {
     $router->get('/', static function (Request $request) {
         $authService = app_service('auth.service');
         if (!$authService->isLoggedIn()) {
-            header('Location: /auth');
-            exit;
+            $view = app_service('controller.home')->publicLanding();
+            app_render('public-home.php', [
+                'page_title' => 'Community Events and Trusted Conversations',
+                'page_description' => 'Discover public events and communities on Elonara, a social network built for real-world gatherings and meaningful conversation.',
+                'featured_events' => $view['featured_events'],
+                'featured_communities' => $view['featured_communities'],
+                'robots_meta' => 'index,follow',
+                'structured_data' => [
+                    [
+                        '@context' => 'https://schema.org',
+                        '@type' => 'WebSite',
+                        'name' => (string)app_config('app.name', 'Elonara Social'),
+                        'url' => app_url('/'),
+                    ],
+                ],
+            ], 'page');
+            return true;
         }
 
         $view = app_service('controller.home')->dashboard();
@@ -75,6 +201,7 @@ return static function (Router $router): void {
             'recent_conversations' => $view['recent_conversations'],
             'nav_items' => [],
             'sidebar_content' => $sidebar,
+            'robots_meta' => 'noindex,follow',
         ], 'two-column');
         return true;
     });
@@ -363,6 +490,8 @@ return static function (Router $router): void {
             'recent_activity' => $result['recent_activity'],
             'error' => $result['error'] ?? null,
             'success' => isset($_GET['updated']) ? 'Profile updated successfully!' : null,
+            'canonical_url' => $result['user'] ? app_url('/profile/' . (string)$result['user']['id']) : app_url('/profile/' . $username),
+            'robots_meta' => 'noindex,follow',
             'nav_items' => $tabs,
             'sidebar_content' => $sidebar
         ], 'two-column');
@@ -886,6 +1015,8 @@ return static function (Router $router): void {
     $router->get('/events', static function (Request $request) {
         $view = app_service('controller.events')->index();
         $filter = $view['filter'] ?? 'all';
+        $page = max(1, (int)$request->query('page', 1));
+        $robotsMeta = ($filter === 'all' && $page === 1) ? 'index,follow' : 'noindex,follow';
 
         ob_start();
         $viewer = app_service('auth.service')->getCurrentUser();
@@ -899,7 +1030,18 @@ return static function (Router $router): void {
                 ['title' => 'All', 'url' => '/events?filter=all', 'active' => $filter === 'all'],
                 ['title' => 'My Events', 'url' => '/events?filter=my', 'active' => $filter === 'my'],
             ],
+            'canonical_url' => app_url('/events'),
+            'robots_meta' => $robotsMeta,
             'sidebar_content' => $sidebar,
+            'structured_data' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'CollectionPage',
+                    'name' => 'Public Events',
+                    'url' => app_url('/events'),
+                    'description' => 'Browse upcoming public events and gatherings.',
+                ],
+            ],
         ]), 'two-column');
         return true;
     });
@@ -985,12 +1127,20 @@ return static function (Router $router): void {
         exit;
     });
 
-    $router->get('/events/{slug}', static function (Request $request, string $slug) {
+    $router->get('/events/{slug}', static function (Request $request, string $slug) use ($buildBreadcrumb) {
         $view = app_service('controller.events')->show($slug);
+        $status = (int)($view['status'] ?? ($view['event'] === null ? 404 : 200));
+        if ($status !== 200) {
+            http_response_code($status);
+        }
         $eventTitle = $view['event']['title'] ?? 'Event';
         $eventDescription = !empty($view['event']['description'])
             ? substr(strip_tags($view['event']['description']), 0, 160)
             : 'View event details, RSVP, and connect with attendees';
+        $isIndexable = $status === 200
+            && !empty($view['event'])
+            && strtolower((string)($view['event']['privacy'] ?? 'public')) === 'public'
+            && strtolower((string)($view['event']['community_privacy'] ?? 'public')) === 'public';
 
         ob_start();
         $viewer = app_service('auth.service')->getCurrentUser();
@@ -1003,14 +1153,42 @@ return static function (Router $router): void {
         app_render('event-detail.php', array_merge($view, [
             'page_title' => $eventTitle,
             'page_description' => $eventDescription,
+            'canonical_url' => !empty($view['event']) ? app_url('/events/' . (string)($view['event']['slug'] ?? $slug)) : app_url('/events/' . $slug),
+            'robots_meta' => $isIndexable ? 'index,follow' : 'noindex,follow',
             'nav_items' => $tabs,
             'sidebar_content' => $sidebar,
+            'structured_data' => $isIndexable ? [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Event',
+                    'name' => (string)($view['event']['title'] ?? ''),
+                    'description' => (string)($view['event']['description'] ?? ''),
+                    'startDate' => !empty($view['event']['event_date']) ? date(DATE_ATOM, strtotime((string)$view['event']['event_date'])) : null,
+                    'endDate' => !empty($view['event']['end_date']) ? date(DATE_ATOM, strtotime((string)$view['event']['end_date'])) : null,
+                    'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+                    'eventStatus' => 'https://schema.org/EventScheduled',
+                    'url' => app_url('/events/' . (string)($view['event']['slug'] ?? $slug)),
+                    'location' => !empty($view['event']['location']) ? [
+                        '@type' => 'Place',
+                        'name' => (string)$view['event']['location'],
+                    ] : null,
+                ],
+                $buildBreadcrumb([
+                    ['name' => 'Home', 'url' => app_url('/')],
+                    ['name' => 'Events', 'url' => app_url('/events')],
+                    ['name' => (string)($view['event']['title'] ?? $eventTitle), 'url' => app_url('/events/' . (string)($view['event']['slug'] ?? $slug))],
+                ]),
+            ] : [],
         ]), 'two-column');
         return true;
     });
 
     $router->get('/events/{slug}/conversations', static function (Request $request, string $slug) {
         $view = app_service('controller.events')->conversations($slug);
+        $status = (int)($view['status'] ?? ($view['event'] === null ? 404 : 200));
+        if ($status !== 200) {
+            http_response_code($status);
+        }
         $eventTitle = $view['event']['title'] ?? 'Event';
 
         ob_start();
@@ -1023,6 +1201,7 @@ return static function (Router $router): void {
 
         app_render('event-conversations.php', array_merge($view, [
             'page_title' => 'Conversations - ' . $eventTitle,
+            'robots_meta' => 'noindex,follow',
             'nav_items' => $tabs,
             'sidebar_content' => $sidebar,
         ]), 'two-column');
@@ -1033,6 +1212,7 @@ return static function (Router $router): void {
     $router->get('/communities', static function (Request $request) {
         $view = app_service('controller.communities')->index();
         $circle = $view['circle'] ?? 'all';
+        $page = max(1, (int)$request->query('page', 1));
 
         ob_start();
         $viewer = app_service('auth.service')->getCurrentUser();
@@ -1048,7 +1228,18 @@ return static function (Router $router): void {
                 ['title' => 'Trusted', 'url' => '/communities?circle=trusted', 'active' => $circle === 'trusted'],
                 ['title' => 'Extended', 'url' => '/communities?circle=extended', 'active' => $circle === 'extended'],
             ],
+            'canonical_url' => app_url('/communities'),
+            'robots_meta' => ($circle === 'all' && $page === 1 && $viewer === null) ? 'index,follow' : 'noindex,follow',
             'sidebar_content' => $sidebar,
+            'structured_data' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'CollectionPage',
+                    'name' => 'Public Communities',
+                    'url' => app_url('/communities'),
+                    'description' => 'Discover public communities and the events they host.',
+                ],
+            ],
         ]), 'two-column');
         return true;
     });
@@ -1134,7 +1325,7 @@ return static function (Router $router): void {
         exit;
     });
 
-    $router->get('/communities/{slug}', static function (Request $request, string $slug) {
+    $router->get('/communities/{slug}', static function (Request $request, string $slug) use ($buildBreadcrumb) {
         $view = app_service('controller.communities')->show($slug);
         $status = (int)($view['status'] ?? ($view['community'] === null ? 404 : 200));
         if ($status !== 200) {
@@ -1144,6 +1335,9 @@ return static function (Router $router): void {
         $communityDescription = !empty($view['community']['description'])
             ? substr(strip_tags($view['community']['description']), 0, 160)
             : 'Join this community to connect with members and participate in events';
+        $isIndexable = $status === 200
+            && !empty($view['community'])
+            && strtolower((string)($view['community']['privacy'] ?? 'public')) === 'public';
 
         ob_start();
         $viewer = app_service('auth.service')->getCurrentUser();
@@ -1156,8 +1350,24 @@ return static function (Router $router): void {
         app_render('community-detail.php', array_merge($view, [
             'page_title' => $communityTitle,
             'page_description' => $communityDescription,
+            'canonical_url' => !empty($view['community']) ? app_url('/communities/' . (string)($view['community']['slug'] ?? $slug)) : app_url('/communities/' . $slug),
+            'robots_meta' => $isIndexable ? 'index,follow' : 'noindex,follow',
             'nav_items' => $tabs,
             'sidebar_content' => $sidebar,
+            'structured_data' => $isIndexable ? [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'WebPage',
+                    'name' => $communityTitle,
+                    'description' => $communityDescription,
+                    'url' => app_url('/communities/' . (string)($view['community']['slug'] ?? $slug)),
+                ],
+                $buildBreadcrumb([
+                    ['name' => 'Home', 'url' => app_url('/')],
+                    ['name' => 'Communities', 'url' => app_url('/communities')],
+                    ['name' => $communityTitle, 'url' => app_url('/communities/' . (string)($view['community']['slug'] ?? $slug))],
+                ]),
+            ] : [],
         ]), 'two-column');
         return true;
     });

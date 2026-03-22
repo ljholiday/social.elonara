@@ -99,6 +99,38 @@ final class CommunityService
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * List public, active communities for anonymous visitors and search engines.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public function listPublicRecent(int $limit = 20): array
+    {
+        $sql = "SELECT
+                    id,
+                    name AS title,
+                    slug,
+                    description,
+                    created_at,
+                    updated_at,
+                    privacy,
+                    member_count,
+                    event_count,
+                    featured_image,
+                    featured_image_alt
+                FROM communities
+                WHERE privacy = 'public'
+                  AND is_active = 1
+                ORDER BY COALESCE(updated_at, created_at, id) DESC
+                LIMIT :lim";
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return array_map(fn(array $community): array => $this->withCoverImageFields($community), $rows);
+    }
+
     public function countAll(): int
     {
         $stmt = $this->db->pdo()->query('SELECT COUNT(*) FROM communities');
@@ -286,7 +318,7 @@ final class CommunityService
 
         if (ctype_digit($slugOrId)) {
             $stmt = $pdo->prepare(
-                "SELECT id, name AS title, slug, description, created_at, privacy, member_count, event_count, creator_id,
+                "SELECT id, name AS title, slug, description, created_at, updated_at, privacy, member_count, event_count, creator_id,
                         featured_image, featured_image_alt
                  FROM communities
                  WHERE id = :id
@@ -295,7 +327,7 @@ final class CommunityService
             $stmt->execute([':id' => (int)$slugOrId]);
         } else {
             $stmt = $pdo->prepare(
-                "SELECT id, name AS title, slug, description, created_at, privacy, member_count, event_count, creator_id,
+                "SELECT id, name AS title, slug, description, created_at, updated_at, privacy, member_count, event_count, creator_id,
                         featured_image, featured_image_alt
                  FROM communities
                  WHERE slug = :slug
@@ -306,6 +338,27 @@ final class CommunityService
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row !== false ? $this->withCoverImageFields($row) : null;
+    }
+
+    /**
+     * Public sitemap candidates for communities.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public function listPublicSitemapEntries(int $limit = 1000): array
+    {
+        $sql = "SELECT slug, updated_at, created_at
+                FROM communities
+                WHERE privacy = 'public'
+                  AND is_active = 1
+                ORDER BY COALESCE(updated_at, created_at, id) DESC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

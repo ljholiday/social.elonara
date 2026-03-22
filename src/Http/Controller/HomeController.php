@@ -92,4 +92,28 @@ final class HomeController
             'recent_conversations' => $recentConversations,
         ];
     }
+
+    /**
+     * @return array{
+     *   featured_events: array<int, array<string,mixed>>,
+     *   featured_communities: array<int, array<string,mixed>>
+     * }
+     */
+    public function publicLanding(): array
+    {
+        $events = array_map(function (array $event): array {
+            $path = ContextBuilder::event($event, $this->communities);
+            $plain = ContextLabel::renderPlain($path);
+            $html = ContextLabel::render($path);
+            $event['context_path'] = $path;
+            $event['context_label'] = $plain !== '' ? $plain : (string)($event['title'] ?? '');
+            $event['context_label_html'] = $html !== '' ? $html : htmlspecialchars((string)($event['title'] ?? ''), ENT_QUOTES, 'UTF-8');
+            return $event;
+        }, $this->events->listPublicUpcoming(6));
+
+        return [
+            'featured_events' => $events,
+            'featured_communities' => $this->communities->listPublicRecent(6),
+        ];
+    }
 }

@@ -71,6 +71,33 @@ final class EventService
     }
 
     /**
+     * List public upcoming events that are safe for anonymous visitors and search engines.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function listPublicUpcoming(int $limit = 20): array
+    {
+        $sql = "SELECT e.id, e.title, e.event_date, e.end_date, e.location, e.slug, e.description, e.privacy,
+                       e.featured_image, e.featured_image_alt, e.community_id, e.updated_at,
+                       com.name AS community_name, com.slug AS community_slug, com.privacy AS community_privacy
+                FROM events e
+                LEFT JOIN communities com ON e.community_id = com.id
+                WHERE e.event_status = 'active'
+                  AND e.status = 'active'
+                  AND COALESCE(e.end_date, e.event_date) >= CURDATE()
+                  AND e.privacy = 'public'
+                  AND (e.community_id IS NULL OR (com.is_active = 1 AND com.privacy = 'public'))
+                ORDER BY e.event_date ASC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * List past events, most recent first.
      *
      * @param int $limit Max rows to return.
@@ -83,6 +110,33 @@ final class EventService
                 FROM events
                 WHERE COALESCE(end_date, event_date) < CURDATE()
                 ORDER BY event_date DESC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * List public past events that are safe for anonymous visitors and search engines.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function listPublicPast(int $limit = 20): array
+    {
+        $sql = "SELECT e.id, e.title, e.event_date, e.end_date, e.location, e.slug, e.description, e.privacy,
+                       e.featured_image, e.featured_image_alt, e.community_id, e.updated_at,
+                       com.name AS community_name, com.slug AS community_slug, com.privacy AS community_privacy
+                FROM events e
+                LEFT JOIN communities com ON e.community_id = com.id
+                WHERE e.event_status = 'active'
+                  AND e.status = 'active'
+                  AND COALESCE(e.end_date, e.event_date) < CURDATE()
+                  AND e.privacy = 'public'
+                  AND (e.community_id IS NULL OR (com.is_active = 1 AND com.privacy = 'public'))
+                ORDER BY e.event_date DESC
                 LIMIT :lim";
 
         $stmt = $this->db->pdo()->prepare($sql);
@@ -301,8 +355,8 @@ final class EventService
         if (ctype_digit($slugOrId)) {
             $stmt = $pdo->prepare(
                 "SELECT e.id, e.title, e.event_date, e.end_date, e.location, e.slug, e.description, e.author_id, e.event_status, e.privacy, e.guest_limit, e.community_id,
-                        e.featured_image, e.featured_image_alt,
-                        com.name AS community_name, com.slug AS community_slug
+                        e.featured_image, e.featured_image_alt, e.updated_at, e.created_at,
+                        com.name AS community_name, com.slug AS community_slug, com.privacy AS community_privacy
                  FROM events e
                  LEFT JOIN communities com ON e.community_id = com.id
                  WHERE e.id = :id
@@ -312,8 +366,8 @@ final class EventService
         } else {
             $stmt = $pdo->prepare(
                 "SELECT e.id, e.title, e.event_date, e.end_date, e.location, e.slug, e.description, e.author_id, e.event_status, e.privacy, e.guest_limit, e.community_id,
-                        e.featured_image, e.featured_image_alt,
-                        com.name AS community_name, com.slug AS community_slug
+                        e.featured_image, e.featured_image_alt, e.updated_at, e.created_at,
+                        com.name AS community_name, com.slug AS community_slug, com.privacy AS community_privacy
                  FROM events e
                  LEFT JOIN communities com ON e.community_id = com.id
                  WHERE e.slug = :slug
@@ -324,6 +378,31 @@ final class EventService
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row !== false ? $row : null;
+    }
+
+    /**
+     * Public sitemap candidates for events.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function listPublicSitemapEntries(int $limit = 1000): array
+    {
+        $sql = "SELECT e.slug, e.updated_at, e.created_at, e.event_date, e.end_date
+                FROM events e
+                LEFT JOIN communities com ON e.community_id = com.id
+                WHERE e.event_status = 'active'
+                  AND e.status = 'active'
+                  AND COALESCE(e.end_date, e.event_date) >= CURDATE()
+                  AND e.privacy = 'public'
+                  AND (e.community_id IS NULL OR (com.is_active = 1 AND com.privacy = 'public'))
+                ORDER BY COALESCE(e.updated_at, e.created_at) DESC
+                LIMIT :lim";
+
+        $stmt = $this->db->pdo()->prepare($sql);
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

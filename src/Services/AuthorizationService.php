@@ -291,6 +291,38 @@ final class AuthorizationService
     }
 
     /**
+     * Check if user can view an event.
+     *
+     * Rules:
+     * - Public standalone events: anyone
+     * - Events in private communities: members only
+     * - Private events: author or community members only
+     *
+     * @param array<string,mixed> $event
+     * @param array<int> $memberCommunities
+     */
+    public function canViewEvent(array $event, int $viewerId, array $memberCommunities): bool
+    {
+        $authorId = (int)($event['author_id'] ?? 0);
+        if ($viewerId > 0 && $authorId === $viewerId) {
+            return true;
+        }
+
+        $communityId = (int)($event['community_id'] ?? 0);
+        $communityPrivacy = strtolower((string)($event['community_privacy'] ?? 'public'));
+        if ($communityId > 0 && in_array($communityId, $memberCommunities, true)) {
+            return true;
+        }
+
+        if ($communityId > 0 && $communityPrivacy !== 'public') {
+            return false;
+        }
+
+        $privacy = strtolower((string)($event['privacy'] ?? 'public'));
+        return $privacy === 'public';
+    }
+
+    /**
      * Check if user can create events in a community
      *
      * Rules:
