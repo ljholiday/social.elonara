@@ -1298,6 +1298,16 @@ a:focus {
         margin-bottom: 0.25rem;
     }
 
+    .app-section > .app-card,
+    .app-section > .app-grid > .app-card {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .app-section > .app-grid {
+        gap: 0.5rem;
+    }
+
     .app-header {
         margin-bottom: 0.25rem;
         padding: 0;
