@@ -167,12 +167,17 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
         $authService = app_service('auth.service');
         if (!$authService->isLoggedIn()) {
             $view = app_service('controller.home')->publicLanding();
+            ob_start();
+            $viewer = app_service('auth.service')->getCurrentUser();
+            include dirname(__DIR__, 2) . '/templates/partials/sidebar-secondary-nav.php';
+            $sidebar = ob_get_clean();
             app_render('public-home.php', [
                 'page_title' => 'Community Events and Trusted Conversations',
                 'page_description' => 'Discover public events and communities on Elonara, a social network built for real-world gatherings and meaningful conversation.',
                 'featured_events' => $view['featured_events'],
                 'featured_communities' => $view['featured_communities'],
                 'robots_meta' => 'index,follow',
+                'sidebar_content' => $sidebar,
                 'structured_data' => [
                     [
                         '@context' => 'https://schema.org',
@@ -181,7 +186,7 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
                         'url' => app_url('/'),
                     ],
                 ],
-            ], 'page');
+            ], 'two-column');
             return true;
         }
 
@@ -1452,6 +1457,7 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
                 ['title' => 'Trusted', 'url' => '/conversations?circle=trusted', 'active' => $circle === 'trusted'],
                 ['title' => 'Extended', 'url' => '/conversations?circle=extended', 'active' => $circle === 'extended'],
             ],
+            'secondary_nav_attributes' => ['data-conversations-nav' => 'true'],
             'is_guest' => $viewer === null,
             'canonical_url' => app_url('/conversations'),
             'robots_meta' => ($circle === 'all' && $page === 1 && $viewer === null) ? 'index,follow' : 'noindex,follow',
@@ -1462,7 +1468,7 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
 
     $router->get('/conversations/create', static function (Request $request) {
         $view = app_service('controller.conversations')->create();
-        app_render('conversation-create.php', array_merge($view, ['page_title' => 'New Conversation']), 'form');
+        app_render('conversation-create.php', array_merge($view, ['page_title' => 'Start Conversation']), 'form');
         return true;
     });
 
@@ -1472,7 +1478,7 @@ return static function (Router $router) use ($renderSitemapIndex, $renderUrlSet,
             header('Location: ' . $result['redirect']);
             exit;
         }
-        app_render('conversation-create.php', array_merge($result, ['page_title' => 'New Conversation']), 'form');
+        app_render('conversation-create.php', array_merge($result, ['page_title' => 'Start Conversation']), 'form');
         return true;
     });
 

@@ -23,6 +23,8 @@ $sidebar_content = $sidebar_content ?? '';
 $current_path = $current_path ?? $_SERVER['REQUEST_URI'] ?? '/';
 $breadcrumbs = $breadcrumbs ?? [];
 $nav_items = $nav_items ?? [];
+$show_page_header = (bool)($show_page_header ?? false);
+$secondary_nav_attributes = $secondary_nav_attributes ?? [];
 $fullTitle = $page_title === $appName ? $appName : $page_title . ' - ' . $appName;
 
 $security = app_service('security.service');
@@ -66,8 +68,20 @@ $csrf_token = $security->createNonce('app_nonce', $userId);
     <div class="app-main">
         <?php include __DIR__ . '/../partials/main-nav.php'; ?>
 
+        <?php if ($show_page_header): ?>
+        <div class="app-header">
+            <h1 class="app-heading app-heading-lg app-text-primary"><?= htmlspecialchars($page_title); ?></h1>
+            <?php if ($page_description): ?>
+                <p class="app-text-muted"><?= htmlspecialchars($page_description); ?></p>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
         <?php if ($nav_items): ?>
-        <div class="app-nav" data-conversations-nav>
+        <div class="app-nav"
+            <?php foreach ($secondary_nav_attributes as $attr => $value): ?>
+                <?= htmlspecialchars((string)$attr, ENT_QUOTES, 'UTF-8'); ?>="<?= htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8'); ?>"
+            <?php endforeach; ?>>
             <?php foreach ($nav_items as $nav_item): ?>
                 <?php if (!empty($nav_item['type']) && $nav_item['type'] === 'button'): ?>
                     <button type="button"

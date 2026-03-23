@@ -3,12 +3,10 @@ $errors = $errors ?? [];
 $input = $input ?? ['title' => '', 'content' => ''];
 $conversation = $conversation ?? null;
 ?>
-<section class="app-section">
   <?php if (!$conversation): ?>
-    <h1 class="app-heading app-heading-lg">Conversation not found</h1>
+    <h2 class="app-heading app-heading-md">Conversation not found</h2>
     <p class="app-text-muted">We couldn’t find that conversation.</p>
   <?php else: ?>
-    <h1 class="app-heading app-heading-lg">Edit Conversation</h1>
     <p class="app-text-muted">Editing <strong><?= e($conversation['title'] ?? '') ?></strong></p>
 
     <?php if ($errors): ?>
@@ -60,4 +58,3 @@ $conversation = $conversation ?? null;
       </form>
     </div>
   <?php endif; ?>
-</section>

@@ -6,8 +6,6 @@ $contextLabel = (string)($context['label'] ?? '');
 $contextLabelHtml = (string)($context['label_html'] ?? '');
 $contextAllowed = (bool)($context['allowed'] ?? false);
 ?>
-<section class="app-section">
-  <h1 class="app-heading app-heading-lg">Start Conversation</h1>
 
   <?php if ($contextLabel !== '' || $contextLabelHtml !== ''): ?>
     <p class="app-text-muted">This conversation will be posted in 
@@ -72,4 +70,3 @@ $contextAllowed = (bool)($context['allowed'] ?? false);
       <a class="app-btn" href="/conversations">Cancel</a>
     </div>
   </form>
-</section>

@@ -73,12 +73,10 @@ $showRecurrenceMonthly = $recurrenceType === 'monthly' || isset($errors['monthly
 $showMonthlyDate = ($recurrenceType === 'monthly' && $monthlyType === 'date') || isset($errors['monthly_day_number']);
 $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekday') || isset($errors['monthly_week']) || isset($errors['monthly_weekday']);
 ?>
-<section class="app-section">
   <?php if (!$event): ?>
-    <h1 class="app-heading app-heading-lg">Event not found</h1>
+    <h2 class="app-heading app-heading-md">Event not found</h2>
     <p class="app-text-muted">We couldn’t find that event.</p>
   <?php else: ?>
-    <h1 class="app-heading app-heading-lg">Edit Event</h1>
     <p class="app-text-muted">Editing <strong><?= e($event['title'] ?? '') ?></strong></p>
 
     <?php if ($errors): ?>
@@ -317,7 +315,6 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
     </div>
 
   <?php endif; ?>
-</section>
 
 <?php if ($event): ?>
 <?php

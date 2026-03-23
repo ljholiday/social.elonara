@@ -76,8 +76,6 @@ $showRecurrenceMonthly = $recurrenceType === 'monthly' || isset($errors['monthly
 $showMonthlyDate = ($recurrenceType === 'monthly' && $monthlyType === 'date') || isset($errors['monthly_day_number']);
 $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekday') || isset($errors['monthly_week']) || isset($errors['monthly_weekday']);
 ?>
-<section class="app-section">
-  <h1 class="app-heading app-heading-lg">Create Event</h1>
 
   <?php if ($contextLabel !== '' || $contextLabelHtml !== ''): ?>
     <p class="app-text-muted">This event will be created in 
@@ -309,7 +307,6 @@ $showMonthlyWeekday = ($recurrenceType === 'monthly' && $monthlyType === 'weekda
       <a class="app-btn" href="/events">Cancel</a>
     </div>
   </form>
-</section>
 
 <?php
 $assetBase = rtrim((string)app_config('asset_url', '/assets'), '/');

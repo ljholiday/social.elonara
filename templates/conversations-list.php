@@ -24,7 +24,7 @@ $is_guest = $is_guest ?? false;
   <?php endif; ?>
 
   <?php if (!empty($conversations)): ?>
-    <div id="app-convo-list" >
+    <div id="app-convo-list" class="app-grid">
       <?php foreach ($conversations as $row):
         $slug = (string)($row['slug'] ?? '');
         if ($slug === '') {
@@ -93,7 +93,7 @@ $is_guest = $is_guest ?? false;
       <?php endforeach; ?>
     </div>
   <?php else: ?>
-    <div id="app-convo-list">
+    <div id="app-convo-list" class="app-grid">
       <div class="app-card">
         <div class="app-card-body app-text-center">
           <p class="app-text-muted">No conversations found. Start a discussion and connect with your community!</p>

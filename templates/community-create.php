@@ -2,8 +2,6 @@
 $errors = $errors ?? [];
 $input = $input ?? ['name' => '', 'description' => '', 'privacy' => 'public'];
 ?>
-<section class="app-section">
-  <h1 class="app-heading app-heading-lg">Create Community</h1>
 
   <?php if ($errors): ?>
     <div class="app-alert app-alert-error app-mb-4">
@@ -71,4 +69,3 @@ $input = $input ?? ['name' => '', 'description' => '', 'privacy' => 'public'];
       <a class="app-btn" href="/communities">Cancel</a>
     </div>
   </form>
-</section>

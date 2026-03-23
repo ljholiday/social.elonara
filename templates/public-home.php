@@ -7,20 +7,15 @@ $featured_communities = $featured_communities ?? [];
 ?>
 
 <section class="app-section app-mb-4">
-  <div class="app-card">
-    <div class="app-card-body">
-      <p class="app-text-muted app-mb-2">Public on Elonara</p>
-      <h2 class="app-heading app-heading-lg app-mb-4">Find communities, plan gatherings, and keep the conversation going.</h2>
-      <p class="app-text-muted app-mb-4">
-        Elonara helps groups organize real-world events and build trusted communities around shared interests.
-        Browse public spaces first, then sign in when you are ready to participate.
-      </p>
-      <div class="app-flex app-flex-wrap">
-        <a class="app-btn app-btn-primary" href="/events">Browse Events</a>
-        <a class="app-btn" href="/communities">Browse Communities</a>
-        <a class="app-btn" href="/auth">Sign In or Register</a>
-      </div>
-    </div>
+  <h1 class="app-heading app-heading-lg">Community Events and Trusted Conversations</h1>
+  <p class="app-text-muted app-mb-4">
+    Elonara helps groups organize real-world events and build trusted communities around shared interests.
+    Browse public spaces first, then sign in when you are ready to participate.
+  </p>
+  <div class="app-flex app-flex-wrap">
+    <a class="app-btn app-btn-primary" href="/events">Browse Events</a>
+    <a class="app-btn" href="/communities">Browse Communities</a>
+    <a class="app-btn" href="/auth">Sign In or Register</a>
   </div>
 </section>
 
