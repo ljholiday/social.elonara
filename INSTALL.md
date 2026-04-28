@@ -152,8 +152,10 @@ If you see file permission errors:
 ```bash
 # Reset permissions
 sudo chown -R www-data:www-data /path/to/social_elonara
-sudo chmod -R 755 /path/to/social_elonara
-sudo chmod 775 uploads/
+sudo find /path/to/social_elonara -type d -exec chmod 755 {} +
+sudo find /path/to/social_elonara -type f -exec chmod 644 {} +
+sudo chmod +x /path/to/social_elonara/install.sh
+sudo chmod 775 /path/to/social_elonara/public/uploads/
 ```
 
 ### Missing Tables

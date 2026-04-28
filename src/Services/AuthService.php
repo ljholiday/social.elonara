@@ -988,6 +988,11 @@ final class AuthService
 
     private function getSiteUrl(): string
     {
+        $configuredUrl = rtrim((string)app_config('app.url', ''), '/');
+        if ($configuredUrl !== '') {
+            return $configuredUrl;
+        }
+
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         return $protocol . '://' . $host;
