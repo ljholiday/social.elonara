@@ -8,3 +8,8 @@
   RewriteRule ^ index.php [L]
 </IfModule>
 
+<IfModule mod_headers.c>
+  Header unset X-Frame-Options
+  Header always unset X-Frame-Options
+  Header always set Content-Security-Policy "frame-ancestors 'self' https://world.elonn.com;"
+</IfModule>
