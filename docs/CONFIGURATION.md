@@ -203,19 +203,23 @@ $db = new Database($dbConfig);
 
 ### Local Development Setup
 
-1. Copy config sample:
+1. Copy the local config example:
    ```bash
-   cp config/config.sample.php config/config.php
+   cp config/config.local.example.php config/config.php
    ```
 
 2. Edit `config/config.php`:
    ```php
    'environment' => 'local',
+   'app' => [
+       'domain' => 'social.elonara.local',
+       'url' => 'https://social.elonara.local',
+   ],
    'database' => [
        'host' => '127.0.0.1',
        'name' => 'social_elonara',
-       'username' => 'root',
-       'password' => 'root',
+       'username' => 'social_elonara',
+       'password' => 'change_me',
    ],
    'mail' => [
        'host' => '127.0.0.1',

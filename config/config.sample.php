@@ -216,7 +216,7 @@ return [
         'local' => [
             'app' => [
                 'domain' => 'social.elonara.local',
-                'url' => 'http://social.elonara.local',
+                'url' => 'https://social.elonara.local',
                 'support_email' => 'support@social.elonara.local',
                 'noreply_email' => 'noreply@social.elonara.local',
                 'debug' => true,

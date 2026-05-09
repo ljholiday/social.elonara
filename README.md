@@ -73,9 +73,9 @@ Elonara Social is a PHP-based web application designed to help communities organ
    MAIL_USERNAME=
    MAIL_PASSWORD=
    MAIL_ENCRYPTION=
-   MAIL_FROM_ADDRESS=no-reply@elonara.local
+   MAIL_FROM_ADDRESS=no-reply@social.elonara.local
    MAIL_FROM_NAME="Elonara Social"
-   MAIL_REPLY_TO_ADDRESS=support@elonara.local
+   MAIL_REPLY_TO_ADDRESS=support@social.elonara.local
    MAIL_REPLY_TO_NAME="Elonara Social Support"
    ```
 

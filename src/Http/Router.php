@@ -64,9 +64,10 @@ final class Router
     {
         $path = $request->path();
         $method = $request->method();
+        $matchMethod = $method === 'HEAD' ? 'GET' : $method;
 
         foreach ($this->routes as $route) {
-            if ($route['method'] !== '*' && $route['method'] !== $method) {
+            if ($route['method'] !== '*' && $route['method'] !== $matchMethod) {
                 continue;
             }
 
