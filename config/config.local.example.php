@@ -2,8 +2,8 @@
 /**
  * Elonara Social - Local Development Configuration Example
  *
- * Copy to config/config.php for social.elonara.local.
- * Keep config/config.php uncommitted.
+ * Legacy local reference. Prefer copying .env.example to .env and using the
+ * committed config/config.php normalizer.
  *
  * Mailpit defaults:
  * - SMTP: 127.0.0.1:1025

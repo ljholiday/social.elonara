@@ -203,26 +203,20 @@ $db = new Database($dbConfig);
 
 ### Local Development Setup
 
-1. Copy the local config example:
+1. Copy the environment example:
    ```bash
-   cp config/config.local.example.php config/config.php
+   cp .env.example .env
    ```
 
-2. Edit `config/config.php`:
-   ```php
-   'environment' => 'local',
-   'app' => [
-       'domain' => 'social.elonara.local',
-       'url' => 'https://social.elonara.local',
-   ],
-   'database' => [
-       'host' => '127.0.0.1',
-       'name' => 'social_elonara',
-       'username' => 'social_elonara',
-       'password' => 'change_me',
-   ],
-   'mail' => [
-       'host' => '127.0.0.1',
+2. Edit `.env`:
+   ```env
+   APP_ENV=local
+   APP_DOMAIN=social.elonara.local
+   APP_URL=https://social.elonara.local
+   DB_DATABASE=social_elonara
+   DB_USERNAME=social_elonara
+   DB_PASSWORD=change_me
+   MAIL_HOST=127.0.0.1
        'port' => 1025,  // MailPit
        'auth' => false,
    ],
@@ -307,31 +301,31 @@ Same as production, but use:
 
 ## Environment Variables (Optional)
 
-While `config/config.php` is the primary source, you can still override settings via environment variables if needed:
+`config/config.php` normalizes values loaded from `.env` or the server environment:
 
 ```bash
 # In .env file or server environment
 DB_HOST=127.0.0.1
-DB_NAME=social_elonara
-DB_USERNAME=root
-DB_PASSWORD=root
+DB_DATABASE=social_elonara
+DB_USERNAME=social_elonara
+DB_PASSWORD=change_me
 MAIL_HOST=smtp.example.com
 ```
 
-The application will prefer config file values, but environment variables can override them.
+Application code should consume `app_config()` values rather than reading environment variables directly.
 
 ## Troubleshooting
 
 ### "Missing config/config.php" Error
 
-**Solution:** Copy the sample file:
+**Solution:** Restore the committed config file:
 ```bash
-cp config/config.sample.php config/config.php
+git checkout -- config/config.php
 ```
 
 ### Database Connection Failed
 
-1. Verify credentials in `config/config.php` → `database` section
+1. Verify credentials in `.env`
 2. Test connection:
    ```bash
    php -r "require 'src/bootstrap.php'; \$db = app_service('database.connection'); echo 'Connected!' . PHP_EOL;"
@@ -339,7 +333,7 @@ cp config/config.sample.php config/config.php
 
 ### Mail Not Sending
 
-1. Check `config/config.php` → `mail` section
+1. Check mail values in `.env`
 2. For local dev, ensure MailPit is running:
    ```bash
    mailpit
@@ -349,21 +343,21 @@ cp config/config.sample.php config/config.php
 
 ### Environment Not Detected
 
-Check the `environment` value in `config/config.php`:
+Check the normalized `environment` value:
 ```bash
 php -r "require 'src/bootstrap.php'; echo 'Environment: ' . app_env() . PHP_EOL;"
 ```
 
 ## Security Best Practices
 
-1. **Never commit `config/config.php`** to version control (it's gitignored)
+1. **Never commit `.env`** to version control
 2. **Use strong database passwords** in production
 3. **Don't share security salts** between environments
 4. **Keep `config.sample.php` generic** - no real credentials
 5. **Set proper file permissions** on production:
    ```bash
-   chmod 600 config/config.php
-   chown www-data:www-data config/config.php
+   chmod 600 .env
+   chown www-data:www-data .env
    ```
 
 ## Migration Checklist

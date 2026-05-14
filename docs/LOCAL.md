@@ -5,11 +5,10 @@ Use `social.elonara.local` for local development so cookies, OAuth redirects, an
 ## Config
 
 ```bash
-cp config/config.local.example.php config/config.php
-cp .env.local.example .env
+cp .env.example .env
 ```
 
-Edit `config/config.php` for your local database password. `config/config.php` and `.env` are intentionally ignored by git.
+Edit `.env` for your local database password. `.env` is intentionally ignored by git. `config/config.php` is committed and normalizes `.env` values into application config arrays.
 
 ## Database
 
@@ -30,7 +29,7 @@ GRANT ALL PRIVILEGES ON social_elonara.* TO 'social_elonara'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-If `config/config.php` uses a different password, use that password in both `CREATE USER` / `ALTER USER` statements.
+If `.env` uses a different password, use that password in both `CREATE USER` / `ALTER USER` statements.
 
 On Debian/MariaDB, run it through an admin account, for example:
 

@@ -4,17 +4,12 @@
  *
  * This is the SINGLE SOURCE OF TRUTH for all application configuration.
  *
- * SETUP INSTRUCTIONS:
- * 1. Copy this file to config/config.php
- * 2. Set 'environment' to your deployment type (local, staging, or production)
- * 3. Update database credentials for your environment
- * 4. Update mail settings for your environment
- * 5. Optionally customize other settings as needed
+ * Legacy sample retained for reference. The committed config/config.php reads
+ * deployment values from .env and returns normalized application config arrays.
  *
  * SECURITY:
- * - config/config.php is gitignored and should NEVER be committed
- * - This .sample.php file is tracked in git as a template
- * - Security salts are auto-generated if not provided
+ * - .env is gitignored and should NEVER be committed
+ * - Security salts are stored outside .env in config/security_salts.php when generated
  */
 
 declare(strict_types=1);
