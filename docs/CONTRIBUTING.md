@@ -191,7 +191,6 @@ During review:
 
 ## 9. Support & Questions
 
-- **Environment issues**: check the sibling `../vivalatable-docs/` repository for historical context and runbooks.
 - **New contributors**: start with small fixes in `templates/` or `tests/` to get familiar with the framework.
 - **Contact**: open a draft PR or discussion thread summarizing the challenge and proposed approach.
 
